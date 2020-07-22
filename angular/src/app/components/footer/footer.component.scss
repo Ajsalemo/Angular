@@ -1,0 +1,32 @@
+// SASS imports
+@import '_mixins';
+@import '_variables';
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  &-mat-toolbar {
+    @include fontSizeAndWeight(0.9rem, 200);
+    background-color: $header-footer-background;
+    justify-content: space-between;
+  }
+  &-settings-icon {
+    @include fontSizeAndWeight(1.3rem);
+    @include fadeInOut;
+    color: #b7b6b6;
+    &:hover {
+      color: #fff;
+      @include fadeInOut;
+    }
+  }
+  &-photo-link {
+    color: $white-text;
+    text-decoration: none;
+  }
+  &-todo-text {
+    color: $white-text;
+    @include fontSizeAndWeight(1rem)
+  }
+}

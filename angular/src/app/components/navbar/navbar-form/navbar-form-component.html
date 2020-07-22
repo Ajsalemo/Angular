@@ -1,0 +1,45 @@
+<form
+  class="navbar-form"
+  [formGroup]="searchGroup"
+  (ngSubmit)="submitForm(searchGroup.value)"
+>
+  <button
+    mat-icon-button
+    aria-label="Search button"
+    type="submit"
+    [disabled]="!searchGroup.valid"
+  >
+    <mat-icon [ngClass]="{'navbar-form-submit-disabled': !searchGroup.valid}"
+      >search</mat-icon
+    >
+  </button>
+  <mat-form-field
+    class="navbar-full-width navbar-form-select-field"
+    [ngClass]="{'navbar-form-select-field-show': searchGroup.value.search}"
+  >
+    <input matInput formControlName="search" type="text" />
+  </mat-form-field>
+  <mat-form-field
+    class="navbar-form-select-dropdown navbar-form-select-field"
+    [ngClass]="{'navbar-form-select-field-show': searchGroup.value.search}"
+  >
+    <!-- ngClass dynamically adds the class if there is no search engine provider is selected -->
+    <mat-select
+      formControlName="selectDropdown"
+      [ngClass]="{'navbar-form-placeholder': !searchGroup.value.selectDropdown}"
+    >
+      <mat-option
+        class="navbar-form-select-dropdown-option"
+        *ngFor="let searchEngine of searchEngines"
+        [value]="searchEngine.provider"
+        ><img
+          [lazyLoad]="searchEngine.icon"
+          [defaultImage]="searchEngine.loadingGif"
+          alt=""
+          height="16"
+        />
+        {{ searchEngine.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</form>

@@ -1,0 +1,78 @@
+<img
+  src="../../../assets/images/searchengine-loader.gif"
+  alt="Loading indicator"
+  *ngIf="!weatherObject"
+  class="weather-component-loading-indicator"
+/>
+<div
+  *ngIf="weatherObject"
+  [matMenuTriggerFor]="menu"
+  class="weather-component-parent-div"
+>
+  <div class="weather-component-sub-div">
+    <img
+      src="https://openweathermap.org/img/w/{{
+        weatherObject.list[0].weather[0].icon
+      }}.png"
+      alt="Current weather icon"
+      class="weather-component-image"
+    />
+    <span class="weather-component-temp-font"
+      >{{ roundCurrentTemperature(weatherObject.list[0].main.temp) }}&deg;</span
+    >
+  </div>
+  <span class="weather-component-location-font">{{
+    weatherObject.city.name
+  }}</span>
+</div>
+<!-- Weather menu -->
+<mat-menu #menu="matMenu" class="weather-component-menu">
+  <div *ngIf="weatherObject">
+    <div class="weather-component-menu-loc-div">
+      <span class="weather-component-menu-loc-name">{{
+        weatherObject.city.name
+      }}</span>
+      <span class="weather-component-description-font">{{
+        weatherObject.list[0].weather[0].description
+      }}</span>
+    </div>
+    <div class="weather-component-menu-weather-current-div">
+      <img
+        src="https://openweathermap.org/img/w/{{
+          weatherObject.list[0].weather[0].icon
+        }}.png"
+        alt="Current weather icon"
+        class="weather-component-menu-weather-image"
+      />
+      <span class="weather-component-menu-temperature"
+        >{{
+          roundCurrentTemperature(weatherObject.list[0].main.temp)
+        }}&deg;</span
+      >
+    </div>
+    <div *ngIf="weatherObject" class="weather-component-sub-div">
+      <div
+        *ngFor="let forecast of fiveDayForecast"
+        class="weather-component-parent-forecast-loop-div"
+      >
+        <span class="weather-component-forecast-day-font">{{
+          forecast.forecastDay
+        }}</span>
+        <div class="weather-component-menu-fiveday-forecast-div">
+          <img
+            src="https://openweathermap.org/img/w/{{
+              forecast.fiveDayForecast.weather[0].icon
+            }}.png"
+            alt="Current weather icon"
+            class="weather-component-menu-fiveday-icon"
+          />
+          <span class="weather-component-menu-fiveday-temp">
+            {{
+              roundCurrentTemperature(forecast.fiveDayForecast.main.temp)
+            }}&deg;
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>

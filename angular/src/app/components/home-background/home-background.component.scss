@@ -1,0 +1,22 @@
+// SASS imports
+@import '_variables';
+@import '_mixins';
+
+.home {
+  &-background {
+    background-position: center;
+    // This sets the tint over the background image
+    background-color: rgba(129, 129, 129, 0.5);
+    background-blend-mode: multiply;
+  }
+  &-username-time {
+    @include fontSizeAndWeight(10rem);
+    line-height: 5.4rem;
+    color: $white-text;
+  }
+  &-username-div-wrapper {
+    padding-top: 4rem;
+    text-align: center;
+  }
+}
+  

@@ -1,0 +1,12 @@
+<button mat-button [matMenuTriggerFor]="menu" class="navbar-links-parent-text">
+  {{ navbarMenuText }}
+</button>
+<mat-menu #menu="matMenu" class="navbar-links-menu">
+  <a mat-menu-item class="navbar-links-menu-item" href="#"
+    ><fa-icon [icon]="faChrome" class="navbar-links-menu-icons"></fa-icon>Chrome
+    tab</a
+  >
+  <a mat-menu-item class="navbar-links-menu-item" href="#">
+    <fa-icon [icon]="faTh" class="navbar-links-menu-icons"></fa-icon>Apps
+  </a>
+</mat-menu>

@@ -1,0 +1,8 @@
+// SASS imports
+@import "_mixins";
+
+.clock {
+  &-username-text {
+    @include loginAndGenericDisplay(3.7rem, 400);
+  }
+}

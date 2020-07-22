@@ -1,0 +1,37 @@
+@import '_variables';
+
+// Mixins
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Fonts
+@mixin fontSizeAndWeight($fontSize: initial, $fontWeight: initial) {
+  font-size: $fontSize !important;
+  font-weight: $fontWeight;
+}
+
+// Fades
+@mixin fadeInOut {
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+// Shared component styles
+@mixin dropdownBaseStyles($fontSize, $fontWeight, $menu-item-text-color) {
+  background-color: $main-theme-background;
+  color: $menu-item-text-color;
+  @include fontSizeAndWeight($fontSize, $fontWeight);
+}
+
+@mixin weatherImageDisplay($height) {
+  height: $height;
+  border-radius: 50%;
+}
+
+@mixin loginAndGenericDisplay($fontSize: initial, $fontWeight: initial) {
+  @include fontSizeAndWeight($fontSize, $fontWeight);
+    margin: 0;
+    color: $white-text;
+}

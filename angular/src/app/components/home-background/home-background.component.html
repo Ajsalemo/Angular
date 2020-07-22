@@ -1,0 +1,20 @@
+<component-navbar></component-navbar>
+<mat-grid-list
+  class="home-background"
+  cols="1"
+  [defaultImage]="defaultImage"
+  [lazyLoad]="backgroundImageToDisplay"
+  rowHeight="100vh"
+>
+  <mat-grid-tile>
+    <div class="home-username-div-wrapper">
+      <span class="home-username-time"
+        ><login-component></login-component
+      ></span>
+    </div>
+  </mat-grid-tile>
+  <component-footer
+    [authorToDisplay]="authorToDisplay"
+    [photoURL]="photoURL"
+  ></component-footer>
+</mat-grid-list>

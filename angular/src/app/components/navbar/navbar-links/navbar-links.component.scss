@@ -1,0 +1,28 @@
+@import "_mixins";
+@import "_variables";
+
+.navbar-links {
+  &-parent-text {
+    color: $white-text;
+    @include fontSizeAndWeight(1rem);
+  }
+  &-menu {
+    background-color: $main-theme-background;
+    &-div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    &-item {
+      @include dropdownBaseStyles(0.8rem, 200, #d0cbcb);
+      padding: 0 5.5rem 0 0.7rem !important;
+      &:hover {
+        color: $white-text;
+      }
+    }
+    &-icons {
+      color: #d0cbcb;
+      padding-right: 0.7rem;
+    }
+  }
+}

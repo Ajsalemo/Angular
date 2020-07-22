@@ -1,0 +1,22 @@
+// SASS imports
+@import '_mixins';
+@import '_variables';
+
+.navbar {
+  &-wrapper-p {
+    margin: 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+  }
+  &-spacer {
+    flex: 1 1 auto;
+  }
+  &-mat-toolbar {
+    background-color: $header-footer-background;
+  }
+  &-link-span {
+    @include fontSizeAndWeight(1rem, 200);
+  }
+}

@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  angular:
+    container_name: angular-container
+    build: .
+    ports:
+      - "8080:8080"

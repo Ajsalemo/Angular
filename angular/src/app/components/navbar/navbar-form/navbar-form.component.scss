@@ -1,0 +1,65 @@
+// SASS imports
+@import "_mixins";
+@import "_variables";
+
+.navbar-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  &-placeholder {
+    background: url('../../../../assets/images/google.svg') no-repeat;
+    height: 1rem;
+  }
+  &-full-width {
+    width: 100%;
+  }
+  &-submit-disabled {
+    color: red;
+  }
+  &:hover {
+    .navbar-form-select-field {
+      opacity: 0.6;
+      @include fadeInOut;
+    }
+  }
+  &:focus-within {
+    .navbar-form-select-field {
+      opacity: 1 !important;
+      @include fadeInOut;
+    }
+  }
+  &-select-field {
+    opacity: 0;
+    @include fadeInOut;
+  }
+  &-select-field-show {
+    opacity: 1 !important;
+    @include fadeInOut;
+  }
+  &-select-dropdown {
+    width: 2rem;
+    &-option {
+      background-color: $main-theme-background;
+      color: $white-text;
+      @include fontSizeAndWeight(0.8rem, 200);
+      &:hover {
+        background-color: rgb(44, 39, 41);
+      }
+      &:active {
+        background-color: $main-theme-background;
+      }
+    }
+    &-label {
+      @extend .navbar-form-select-dropdown-option;
+      @include fontSizeAndWeight(1.1rem, 200);
+    }
+  }
+}
+
+// Overriding the default class for selected mat-option components
+.mat-selected {
+  background-color: $main-theme-background !important;
+  color: $white-text !important;
+}
+
+

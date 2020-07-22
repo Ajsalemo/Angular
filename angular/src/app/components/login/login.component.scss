@@ -1,0 +1,8 @@
+// SASS imports
+@import "_mixins";
+
+.login {
+  &-welcome-display {
+    @include loginAndGenericDisplay(3.7rem, 400);
+  }
+}

@@ -1,0 +1,88 @@
+@import "_variables";
+@import "_mixins";
+
+.weather-component {
+  &-image {
+    @include weatherImageDisplay(1.8rem);
+  }
+  &-loading-indicator {
+    height: 1.8rem;
+    padding: 0.5rem 0.5rem 0 0;
+  }
+  &-parent-div {
+    text-align: right;
+    padding: 0.5rem 0.5rem 0 0;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &-parent-forecast-loop-div {
+    text-align: center;
+  }
+  &-sub-div {
+    display: flex;
+  }
+  &-temp-font {
+    @include fontSizeAndWeight(1.5rem, 200);
+    color: $white-text;
+    padding-left: 0.4rem;
+  }
+  &-location-font {
+    @include fontSizeAndWeight(0.8rem, 200);
+    color: $white-text;
+  }
+  &-description-font {
+    color: #808080;
+  }
+  &-forecast-day-font {
+    @extend .weather-component-description-font;
+    @include fontSizeAndWeight(0.8rem, 200);
+  }
+  &-menu {
+    background-color: $main-theme-background;
+    padding: 0 1rem;
+    &-loc-div {
+      display: flex;
+      flex-direction: column;
+      color: $white-text;
+      text-align: left;
+    }
+    &-weather-current-div {
+      border-bottom: 1px solid #808080;
+    }
+    &-loc-name {
+      @include fontSizeAndWeight(1.2rem, 200);
+    }
+    &-weather-image {
+      margin-top: 1rem;
+      @include weatherImageDisplay(2.8rem);
+    }
+    &-temperature {
+      color: $white-text;
+      padding-left: 0.7rem;
+      @include fontSizeAndWeight(3.8rem, 400);
+    }
+    &-fiveday {
+      &-temp {
+        color: $white-text;
+        @include fontSizeAndWeight(0.7rem, 200);
+      }
+      &-icon {
+        height: 1.5rem;
+      }
+      &-forecast-div {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        @include fadeInOut;
+        &:hover {
+          background-color: #797979;
+          cursor: pointer;
+          border-radius: 10%;
+          @include fadeInOut;
+        }
+      }
+    }
+  }
+}
