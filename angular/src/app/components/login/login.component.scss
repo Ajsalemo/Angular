@@ -4,5 +4,26 @@
 .login {
   &-welcome-display {
     @include loginAndGenericDisplay(3.7rem, 400);
+    text-align: center;
+  }
+  &-form-group {
+    width: 50rem;
+  }
+  &-stepper {
+    background-color: transparent;
+    &-input {
+      @include fontSizeAndWeight(4rem, 200);
+      text-align: center !important;
+    }
   }
 }
+
+.mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+.mat-form-field-infix {
+  padding: 0 !important;
+}
+
+

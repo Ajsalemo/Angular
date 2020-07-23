@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatStepperModule } from '@angular/material/stepper';
+
 @NgModule({
   imports: [
     MatToolbarModule,
@@ -17,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatFormFieldModule,
     MatSelectModule,
     MatMenuModule,
+    MatStepperModule,
   ],
   exports: [
     MatToolbarModule,
@@ -27,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatFormFieldModule,
     MatSelectModule,
     MatMenuModule,
+    MatStepperModule,
   ],
 })
 export class MaterialModule {}

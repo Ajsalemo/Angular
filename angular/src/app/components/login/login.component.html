@@ -1,1 +1,50 @@
-<h1 class="login-welcome-display">Hello, what's your name?</h1>
+<mat-horizontal-stepper [linear]="true" #stepper class="login-stepper">
+  <mat-step [stepControl]="loginGroupOne">
+    <form
+      [formGroup]="loginGroupOne"
+      (ngSubmit)="submitLoginFormOne()"
+      #logingroupone="ngForm"
+    >
+      <mat-form-field class="login-form-group">
+        <h1 class="login-welcome-display">Hello, what's your name?</h1>
+        <input
+          matInput
+          formControlName="name"
+          required
+          class="login-stepper-input"
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="loginGroupTwo">
+    <form
+      [formGroup]="loginGroupTwo"
+      (ngSubmit)="submitLoginFormTwo()"
+      #logingrouptwo="ngForm"
+    >
+      <mat-form-field class="login-form-group">
+        <h1 class="login-welcome-display">What's your email?</h1>
+        <input
+          matInput
+          formControlName="email"
+          class="login-stepper-input"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button
+          mat-button
+          type="submit"
+          (click)="logingroupone.ngSubmit.emit(); logingrouptwo.ngSubmit.emit()"
+        >
+          Submit
+        </button>
+        <button mat-button matStepperPrevious>Previous</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
