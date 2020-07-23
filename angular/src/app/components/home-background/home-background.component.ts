@@ -24,6 +24,7 @@ export class HomeBackgroundComponent implements OnInit {
   authorToDisplay: string = '';
   photoURL: string = '';
   backgroundImageToDisplay: string = '';
+  currentUser = localStorage.getItem('user');
   // This method rotates the daily image based on day of the week
   // This method will eventually include 7 images, one used as a fall back
   rotatingDailyImage(): void {
@@ -46,6 +47,7 @@ export class HomeBackgroundComponent implements OnInit {
   }
   // On intialization execute the 'rotatingDailyImage' to set the image metaData
   ngOnInit(): void {
+    console.log(this.currentUser)
     this.rotatingDailyImage();
   }
 }

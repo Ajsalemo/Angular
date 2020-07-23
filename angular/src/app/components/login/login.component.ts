@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'login-component',
@@ -8,6 +10,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
+  constructor(private authService: AuthService, private router: Router) {}
+  username: string = '';
+  userEmail: string = '';
+
   loginGroupOne = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -17,18 +23,24 @@ export class LoginComponent {
   });
 
   loginGroupTwo = new FormGroup({
-    email: new FormControl('', [
+    password: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(255),
     ]),
   });
 
-  submitLoginFormOne() {
-    console.log(this.loginGroupOne.value)
+  submitLoginFormOne(data: { name: string }) {
+    this.username = data.name;
   }
 
-  submitLoginFormTwo() {
-    console.log(this.loginGroupTwo.value)
+  submitLoginFormTwo(data: { password: string }) {
+    this.userEmail = data.password;
+    this.authService
+      .validate(this.username, this.userEmail)
+      .then((response) => {
+        this.authService.setUserInfo({ user: response['user'] });
+        this.router.navigate(['main']);
+      });
   }
 }

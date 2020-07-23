@@ -2,7 +2,7 @@
   <mat-step [stepControl]="loginGroupOne">
     <form
       [formGroup]="loginGroupOne"
-      (ngSubmit)="submitLoginFormOne()"
+      (ngSubmit)="submitLoginFormOne(loginGroupOne.value)"
       #logingroupone="ngForm"
     >
       <mat-form-field class="login-form-group">
@@ -22,14 +22,14 @@
   <mat-step [stepControl]="loginGroupTwo">
     <form
       [formGroup]="loginGroupTwo"
-      (ngSubmit)="submitLoginFormTwo()"
+      (ngSubmit)="submitLoginFormTwo(loginGroupTwo.value)"
       #logingrouptwo="ngForm"
     >
       <mat-form-field class="login-form-group">
         <h1 class="login-welcome-display">What's your email?</h1>
         <input
           matInput
-          formControlName="email"
+          formControlName="password"
           class="login-stepper-input"
           required
         />
