@@ -1,20 +1,27 @@
 {
-  "name": "express",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./compiled-js/app.js",
   "dependencies": {
+    "@types/express": "^4.17.7",
+    "@types/express-session": "^1.17.0",
+    "@types/morgan": "^1.9.1",
+    "@types/passport": "^1.0.4",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "typescript": "^3.9.7"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node ./compiled-js/app.js",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC"

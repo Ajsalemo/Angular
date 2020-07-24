@@ -11,6 +11,7 @@ services:
   
   postgres:
     image: postgres:latest
+    env_file: "./../express/.env"
     
   node:
     container_name: node-container

@@ -1,21 +1,21 @@
-const express = require("express");
-const session = require("express-session");
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
+import express = require("express");
+import session = require("express-session");
+import passport = require("passport");
+import bodyParser = require("body-parser");
+import morgan = require("morgan");
 
 // Set the stategy to 'Local'
 const LocalStrategy = require("passport-local").Strategy;
 
 // Initialize express
-const app = new express();
+const app = express();
 
 // Set the port
 const port = process.env.PORT || 3000;
 
 // Currently the username and password is hardcoded
 passport.use(
-  new LocalStrategy(function (username, password, done) {
+  new LocalStrategy((username: string, password: string, done: any): void => {
     if (username === "admin" && password === "admin@admin.com") {
       return done(null, username);
     } else {
@@ -25,26 +25,27 @@ passport.use(
 );
 
 // Serialize and deserialize the user
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user: string, done: any): void => {
   if (user) done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser((user: string, done: any): void => {
   done(null, user);
 });
 
 app.use(session({ secret: "anything", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 // Function to process authentication
 const auth = () => {
-  return (req, res, next) => {
-    passport.authenticate("local", (error, user, info) => {
+  return (req: any, res: any, next: any) => {
+    passport.authenticate("local", (error: string, user: any, info: any) => {
       if (error) res.status(400).json({ message: error });
-      req.login(user, function (error) {
+      req.login(user, (error: string) => {
         if (error) return next(error);
         next();
       });
@@ -52,7 +53,7 @@ const auth = () => {
   };
 };
 
-app.post("/authenticate", auth(), (req, res) => {
+app.post("/authenticate", auth(), (req: any, res: any) => {
   res.status(200).json({ user: req.user });
 });
 

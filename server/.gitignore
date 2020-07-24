@@ -49,3 +49,6 @@ env
 # System Files
 .DS_Store
 Thumbs.db
+
+# Sequelize config/postgres
+config/config.json
