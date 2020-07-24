@@ -11,10 +11,10 @@ services:
   
   postgres:
     image: postgres:latest
-    env_file: "./../express/.env"
+    env_file: "./../server/.env"
     
   node:
     container_name: node-container
-    build: ./../express/
+    build: ./../server/
     ports:
       - "3000:3000"

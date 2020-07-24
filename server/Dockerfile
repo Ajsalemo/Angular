@@ -9,10 +9,11 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-# If you are building your code for production
+
 
 # Bundle app source
 COPY . .
 
 EXPOSE 3000
+WORKDIR /usr/src/app/compiled-js/
 CMD [ "node", "app.js" ]
