@@ -53,7 +53,7 @@ const auth = () => {
 };
 
 app.post("/authenticate", auth(), (req, res) => {
-  res.status(200).json({ statusCode: 200, user: req.user });
+  res.status(200).json({ user: req.user });
 });
 
 app.listen(port, () => {

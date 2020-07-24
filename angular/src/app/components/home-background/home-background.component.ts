@@ -47,7 +47,6 @@ export class HomeBackgroundComponent implements OnInit {
   }
   // On intialization execute the 'rotatingDailyImage' to set the image metaData
   ngOnInit(): void {
-    console.log(this.currentUser)
     this.rotatingDailyImage();
   }
 }

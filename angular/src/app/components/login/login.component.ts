@@ -34,13 +34,19 @@ export class LoginComponent {
     this.username = data.name;
   }
 
+  redirectTo(uri: string) {
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate([uri]));
+  }
+
   submitLoginFormTwo(data: { password: string }) {
     this.userEmail = data.password;
     this.authService
       .validate(this.username, this.userEmail)
       .then((response) => {
         this.authService.setUserInfo({ user: response['user'] });
-        this.router.navigate(['main']);
+        this.redirectTo('');
       });
   }
 }
