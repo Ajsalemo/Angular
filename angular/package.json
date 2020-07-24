@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "concurrently \"ng serve --proxy-config proxy.config.json\" \"cd ../express && npm start\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,6 +26,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "moment": "^2.27.0",
     "ng-lazyload-image": "^8.0.1",

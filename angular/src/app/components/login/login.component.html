@@ -1,6 +1,10 @@
 <mat-horizontal-stepper [linear]="true" #stepper class="login-stepper">
   <mat-step [stepControl]="loginGroupOne">
-    <form [formGroup]="loginGroupOne" (ngSubmit)="submitLoginFormOne(loginGroupOne.value)">
+    <form
+      [formGroup]="loginGroupOne"
+      (ngSubmit)="submitLoginFormOne(loginGroupOne.value)"
+      #logingroupone="ngForm"
+    >
       <mat-form-field class="login-form-group">
         <h1 class="login-welcome-display">Hello, what's your name?</h1>
         <input
@@ -16,9 +20,13 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="loginGroupTwo">
-    <form [formGroup]="loginGroupTwo" (ngSubmit)="submitLoginFormTwo(loginGroupTwo.value)">
+    <form
+      [formGroup]="loginGroupTwo"
+      (ngSubmit)="submitLoginFormTwo(loginGroupTwo.value)"
+      #logingrouptwo="ngForm"
+    >
       <mat-form-field class="login-form-group">
-        <h1 class="login-welcome-display">What's your email?</h1>
+        <h1 class="login-welcome-display">What's your email, {{ username }}?</h1>
         <input
           matInput
           formControlName="password"

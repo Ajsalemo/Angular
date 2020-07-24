@@ -4,7 +4,6 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-// const { auth, isLoggedIn } = require("../passport-auth");
 // Set the stategy to 'Local'
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -44,17 +43,17 @@ app.use(morgan("dev"));
 const auth = () => {
   return (req, res, next) => {
     passport.authenticate("local", (error, user, info) => {
-      if (error) res.status(400).json({ statusCode: 200, message: error });
+      if (error) res.status(400).json({ message: error });
       req.login(user, function (error) {
         if (error) return next(error);
-        res.status(200).json({ success: "You are now logged in" });
+        next();
       });
     })(req, res, next);
   };
 };
 
 app.post("/authenticate", auth(), (req, res) => {
-  res.status(200);
+  res.status(200).json({ user: req.user });
 });
 
 app.listen(port, () => {

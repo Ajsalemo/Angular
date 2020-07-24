@@ -6,3 +6,14 @@ services:
     build: .
     ports:
       - "8080:8080"
+    links:
+      - node
+  
+  postgres:
+    image: postgres:latest
+    
+  node:
+    container_name: node-container
+    build: ./../express/
+    ports:
+      - "3000:3000"
