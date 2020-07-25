@@ -12,8 +12,11 @@ var app = express();
 // Set the port
 var port = process.env.PORT || 3000;
 // Currently the username and password is hardcoded
-passport.use(new LocalStrategy(function (username, password, done) {
-    if (username === "admin" && password === "admin@admin.com") {
+passport.use(new LocalStrategy({
+    usernameField: "email",
+    passwordField: "password",
+}, function (username, password, done) {
+    if (username === "admin@admin.com" && password === "admin") {
         return done(null, username);
     }
     else {

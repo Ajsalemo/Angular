@@ -11,9 +11,11 @@ export class AuthService {
     localStorage.setItem('user', user['user']);
   }
 
-  validate(username: string, password: string) {
+  validate(email: string, password: string) {
+    console.log(email)
+    console.log(password)
     return this.http
-      .post('/api/authenticate', { username: username, password: password })
+      .post('/api/authenticate', { email: email, password: password })
       .toPromise();
   }
 }

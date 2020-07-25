@@ -23,15 +23,36 @@
     <form
       [formGroup]="loginGroupTwo"
       (ngSubmit)="submitLoginFormTwo(loginGroupTwo.value)"
-      #logingrouptwo="ngForm"
     >
       <mat-form-field class="login-form-group">
-        <h1 class="login-welcome-display">What's your email, {{ username }}?</h1>
+        <h1 class="login-welcome-display">
+          What's your email, {{ username }}?
+        </h1>
+        <input
+          matInput
+          formControlName="email"
+          class="login-stepper-input"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="loginGroupThree">
+    <form
+      [formGroup]="loginGroupThree"
+      (ngSubmit)="submitLoginFormThree(loginGroupThree.value)"
+    >
+      <mat-form-field class="login-form-group">
+        <h1 class="login-welcome-display">What's your password?</h1>
         <input
           matInput
           formControlName="password"
-          class="login-stepper-input"
+          type="password"
           required
+          class="login-stepper-input"
         />
       </mat-form-field>
       <div>

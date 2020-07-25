@@ -15,13 +15,19 @@ const port = process.env.PORT || 3000;
 
 // Currently the username and password is hardcoded
 passport.use(
-  new LocalStrategy((username: string, password: string, done: any): void => {
-    if (username === "admin" && password === "admin@admin.com") {
-      return done(null, username);
-    } else {
-      return done("unauthorized access", false);
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    (username: string, password: string, done: any): void => {
+      if (username === "admin@admin.com" && password === "admin") {
+        return done(null, username);
+      } else {
+        return done("unauthorized access", false);
+      }
     }
-  })
+  )
 );
 
 // Serialize and deserialize the user

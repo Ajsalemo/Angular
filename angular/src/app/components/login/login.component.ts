@@ -13,6 +13,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
   username: string = '';
   userEmail: string = '';
+  userPassword: string = '';
 
   loginGroupOne = new FormGroup({
     name: new FormControl('', [
@@ -23,6 +24,14 @@ export class LoginComponent {
   });
 
   loginGroupTwo = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(255),
+    ]),
+  });
+
+  loginGroupThree = new FormGroup({
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
@@ -34,19 +43,16 @@ export class LoginComponent {
     this.username = data.name;
   }
 
-  redirectTo(uri: string) {
-    this.router
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate([uri]));
+  submitLoginFormTwo(data: { email: string }) {
+    this.userEmail = data.email;
   }
 
-  submitLoginFormTwo(data: { password: string }) {
-    this.userEmail = data.password;
+  submitLoginFormThree(data: { password: string }) {
+    this.userPassword = data.password;
     this.authService
-      .validate(this.username, this.userEmail)
+      .validate(this.userEmail, this.userPassword)
       .then((response) => {
         this.authService.setUserInfo({ user: response['user'] });
-        this.redirectTo('');
       });
   }
 }
