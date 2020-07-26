@@ -9,7 +9,6 @@ import { SearchEngineService } from '../../../../services/search-engines.service
   providers: [SearchEngineService],
 })
 export class NavbarFormComponent implements OnInit {
-  constructor(private searchEnginesService: SearchEngineService) {}
   searchEngines: {
     id: number;
     name: string;
@@ -17,6 +16,8 @@ export class NavbarFormComponent implements OnInit {
     icon: string;
     loadingGif: string;
   }[];
+
+  constructor(private searchEnginesService: SearchEngineService) {}
 
   searchEnginesFunction(): void {
     this.searchEngines = this.searchEnginesService.getSearchEngines();

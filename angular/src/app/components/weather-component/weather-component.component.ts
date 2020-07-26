@@ -10,10 +10,6 @@ import * as moment from 'moment';
   encapsulation: ViewEncapsulation.None,
 })
 export class WeatherComponent implements OnInit {
-  constructor(
-    private openWeatherApiService: OpenWeatherApiService,
-    private locationService: LocationService
-  ) {}
   // Set the users latitude and longitude
   userLocationLat: string = '';
   userLocationLng: string = '';
@@ -22,6 +18,10 @@ export class WeatherComponent implements OnInit {
   weatherObject: any;
   fiveDayForecast: any[] = [];
 
+  constructor(
+    private openWeatherApiService: OpenWeatherApiService,
+    private locationService: LocationService
+  ) {}
   roundCurrentTemperature(temp: string) {
     return Math.round(parseInt(temp));
   }

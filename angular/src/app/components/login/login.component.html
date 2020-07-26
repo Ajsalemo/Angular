@@ -1,11 +1,18 @@
-<mat-horizontal-stepper [linear]="true" #stepper class="login-stepper">
+<mat-horizontal-stepper
+  [linear]="true"
+  #stepper
+  class="login-stepper"
+  [@.disabled]="true"
+>
   <mat-step [stepControl]="loginGroupOne">
     <form
       [formGroup]="loginGroupOne"
       (ngSubmit)="submitLoginFormOne(loginGroupOne.value)"
       #logingroupone="ngForm"
     >
-      <mat-form-field class="login-form-group">
+      <mat-form-field
+        class="login-form-group login-fadein-animation"
+      >
         <h1 class="login-welcome-display">Hello, what's your name?</h1>
         <input
           matInput
@@ -24,7 +31,10 @@
       [formGroup]="loginGroupTwo"
       (ngSubmit)="submitLoginFormTwo(loginGroupTwo.value)"
     >
-      <mat-form-field class="login-form-group">
+      <mat-form-field
+        class="login-form-group"
+        [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 1 }"
+      >
         <h1 class="login-welcome-display">
           What's your email, {{ username }}?
         </h1>
@@ -45,7 +55,10 @@
       [formGroup]="loginGroupThree"
       (ngSubmit)="submitLoginFormThree(loginGroupThree.value)"
     >
-      <mat-form-field class="login-form-group">
+      <mat-form-field
+        class="login-form-group login-fadein-animation"
+        [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 2 }"
+      >
         <h1 class="login-welcome-display">What's your password?</h1>
         <input
           matInput

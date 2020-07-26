@@ -17,6 +17,55 @@
       border-bottom: 3px solid #fff;
     }
   }
+
+  // Fade in animation when transitioning the step forms
+  &-fadein-animation {
+    -webkit-animation: fadein 3s linear forwards;
+    animation: fadein 3s linear forwards;
+    opacity: 0;
+  }
+
+  @-webkit-keyframes fadein {
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadein {
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &-fadeout-animation {
+    -webkit-animation: fadeout 3s linear forwards;
+    animation: fadeout 3s linear forwards;
+    opacity: 1;
+  }
+
+  @-webkit-keyframes fadeout {
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeout {
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
 .mat-horizontal-stepper-header-container {
@@ -26,5 +75,3 @@
 .mat-form-field-infix {
   padding: 0 !important;
 }
-
-

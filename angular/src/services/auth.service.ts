@@ -8,6 +8,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   setUserInfo(user: object) {
+    console.log(user)
     localStorage.setItem('user', user['user']);
   }
 

@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -10,10 +9,12 @@ import { AuthService } from '../../../services/auth.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  loadCompleted: boolean = false;
   username: string = '';
   userEmail: string = '';
   userPassword: string = '';
+
+  constructor(private authService: AuthService) {}
 
   loginGroupOne = new FormGroup({
     name: new FormControl('', [
@@ -34,25 +35,23 @@ export class LoginComponent {
   loginGroupThree = new FormGroup({
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(255),
+      Validators.minLength(6),
+      Validators.maxLength(40),
     ]),
   });
 
-  submitLoginFormOne(data: { name: string }) {
+  submitLoginFormOne(data: { name: string }): void {
     this.username = data.name;
   }
 
-  submitLoginFormTwo(data: { email: string }) {
+  submitLoginFormTwo(data: { email: string }): void {
     this.userEmail = data.email;
   }
 
-  submitLoginFormThree(data: { password: string }) {
+  submitLoginFormThree(data: { password: string }): void {
     this.userPassword = data.password;
-    this.authService
-      .validate(this.userEmail, this.userPassword)
-      .then((response) => {
-        this.authService.setUserInfo({ user: response['user'] });
-      });
+    this.authService.validate(this.userEmail, this.userPassword).then(() => {
+      this.authService.setUserInfo({ user: this.username });
+    });
   }
 }

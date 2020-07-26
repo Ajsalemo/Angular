@@ -1,4 +1,4 @@
-@import '_variables';
+@import "_variables";
 
 // Mixins
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@
   -ms-transition: 0.5s;
   -moz-transition: 0.5s;
   -webkit-transition: 0.5s;
-  transition: 0.5s;
+  transition: 0.5s ease-in-out all;
 }
 
 // Shared component styles
@@ -32,6 +32,6 @@
 
 @mixin loginAndGenericDisplay($fontSize: initial, $fontWeight: initial) {
   @include fontSizeAndWeight($fontSize, $fontWeight);
-    margin: 0;
-    color: $white-text;
+  margin: 0;
+  color: $white-text;
 }
