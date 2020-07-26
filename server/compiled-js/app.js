@@ -1,10 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
+require("dotenv").config();
 var express = require("express");
 var session = require("express-session");
 var passport = require("passport");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
+var models = require("../models");
 // Set the stategy to 'Local'
 var LocalStrategy = require("passport-local").Strategy;
 // Initialize express
@@ -14,7 +16,7 @@ var port = process.env.PORT || 3000;
 // Currently the username and password is hardcoded
 passport.use(new LocalStrategy({
     usernameField: "email",
-    passwordField: "password",
+    passwordField: "password"
 }, function (username, password, done) {
     if (username === "admin@admin.com" && password === "admin") {
         return done(null, username);
@@ -54,6 +56,13 @@ var auth = function () {
 app.post("/authenticate", auth(), function (req, res) {
     res.status(200).json({ user: req.user });
 });
-app.listen(port, function () {
-    console.log("Server is listening on port: " + port);
+models.sequelize
+    .sync({ force: true })
+    .then(function () {
+    console.log("Postgres has started and synced");
+    app.listen(port, function () {
+        console.log("Server is listening on port: " + port);
+    });
+})["catch"](function (err) {
+    console.log(err, "Something went wrong with the Database Update!");
 });

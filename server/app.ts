@@ -1,9 +1,11 @@
+require("dotenv").config();
+
 import express = require("express");
 import session = require("express-session");
 import passport = require("passport");
 import bodyParser = require("body-parser");
 import morgan = require("morgan");
-
+import models from "./models";
 // Set the stategy to 'Local'
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -63,6 +65,15 @@ app.post("/authenticate", auth(), (req: any, res: any) => {
   res.status(200).json({ user: req.user });
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port: ${port}`);
-});
+// Create and sync the database through Sequelize
+models.sequelize
+  .sync({ force: true })
+  .then(() => {
+    console.log("Postgres has started and synced");
+    app.listen(port, () => {
+      console.log(`Server is listening on port: ${port}`);
+    });
+  })
+  .catch((err: string) => {
+    console.log(err, "Something went wrong with the Database Update!");
+  });

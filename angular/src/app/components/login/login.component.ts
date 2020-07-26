@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 
@@ -9,7 +9,6 @@ import { AuthService } from '../../../services/auth.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
-  loadCompleted: boolean = false;
   username: string = '';
   userEmail: string = '';
   userPassword: string = '';
