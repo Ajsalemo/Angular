@@ -47,7 +47,7 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 // Function to process authentication
-const auth = () => {
+const auth = (): any => {
   return (req: any, res: any, next: any) => {
     passport.authenticate("local", (error: string, user: any, info: any) => {
       if (error) res.status(400).json({ message: error });
