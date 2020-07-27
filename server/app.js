@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const models = require("./models");
 const auth = require("./config/auth");
+const findEmailAccount = require("./config/accounts");
 
 // Initialize express
 const app = express();
@@ -33,17 +34,12 @@ app.use(morgan("dev"));
 // Load the local-signup strategy from passport
 require("./config/passport")(passport, models.User);
 
-
 // API routes
-app.post("/authenticate", auth(passport), (req, res, error) => {
+app.post("/authenticate", auth(passport), (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
-app.get("/account/:email", (req, res) => {
-  console.log("This works");
-  console.log(req.params)
-  res.status(200).json({ email: req.params });
-});
+app.get("/account/:email", findEmailAccount(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize

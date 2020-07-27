@@ -50,13 +50,15 @@ export class LoginComponent {
 
   submitLoginFormTwo(data: { email: string }): void {
     this.userEmail = data.email;
+    // On the second step of the form, check if the email account already exists
+    // This boolean will dictate the path of the step forms next step
     this.accountService.checkIfEmailExists(this.userEmail).then((res: any) => {
-      console.log(res.email.email)
-      if (res.email.email === this.userEmail) {
+      if (res.user === null || !res.user) {
+        this.emailInUse = false;
+      } else if (res.user.email === this.userEmail) {
         this.emailInUse = true;
       }
-      console.log(this.emailInUse)
-    })
+    });
   }
 
   submitLoginFormThree(data: { password: string }): void {

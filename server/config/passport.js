@@ -13,25 +13,29 @@ module.exports = (passport, user) => {
         passReqToCallback: true, // allows us to pass back the entire request to the callback
       },
       (req, email, password, done) => {
+        // Hash the password provided by the user
         const generateHash = (password) =>
           bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-
+        // Find the user by email sent in the POST request
         User.findOne({
           where: {
             email: email,
           },
         }).then((user) => {
+          // If the user is find, return done to move on to the next action
           if (user) {
             return done(null, false);
           } else {
+            // Else, if so no user, create them
+            // Hash the password by passing it to the generateHash function
             const userPassword = generateHash(password);
-
+            // Putting the form information into a named object
             const data = {
               email: email,
               password: userPassword,
               firstname: req.body.name,
             };
-            console.log('made it here')
+            // Create the instance of the new user for Postgres
             User.create(data).then((newUser, _) => {
               if (!newUser) {
                 return done(null, false);
