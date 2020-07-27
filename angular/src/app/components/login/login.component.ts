@@ -63,7 +63,7 @@ export class LoginComponent {
 
   submitLoginFormThree(data: { password: string }): void {
     this.userPassword = data.password;
-    this.authService.validate(this.userEmail, this.userPassword).then(() => {
+    this.authService.signUp(this.userEmail, this.userPassword).then(() => {
       this.authService.setUserInfo({ user: this.username });
     });
   }

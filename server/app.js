@@ -35,7 +35,7 @@ app.use(morgan("dev"));
 require("./config/passport")(passport, models.User);
 
 // API routes
-app.post("/authenticate", auth(passport), (req, res) => {
+app.post("/signup", auth(passport), (req, res) => {
   res.status(200).json({ user: req.user });
 });
 

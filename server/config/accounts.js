@@ -8,15 +8,9 @@ module.exports = (user) => {
         email: req.params.email,
       },
     }).then((user) => {
-      // If user doesn't exist, send back a HTTP 400
-      // TODO - change this for better handling of a non-exsitent email
-    //   if (!user) {
-    //     console.log("User did not exist:" + user);
-    //     res.sendStatus(400);
-    //   }
-      // If the user does exist then send back a HTTP 200 and the email found
+      // Whether or not a user exists, send back the user object
+      // Logic is used to compare the response returned from Postgres to check if this email is already in use
       if (user || !user) {
-        console.log("User exists:" + user);
         res.status(200).json({ user: user });
       }
     });

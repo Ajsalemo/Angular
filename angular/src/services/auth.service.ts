@@ -8,15 +8,12 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   setUserInfo(user: object) {
-    console.log(user)
     localStorage.setItem('user', user['user']);
   }
 
-  validate(email: string, password: string) {
-    console.log(email)
-    console.log(password)
+  signUp(email: string, password: string) {
     return this.http
-      .post('/api/authenticate', { email: email, password: password })
+      .post('/api/signup', { email: email, password: password })
       .toPromise();
   }
 }

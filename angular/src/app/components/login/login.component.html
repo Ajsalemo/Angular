@@ -33,9 +33,9 @@
         class="login-form-group"
         [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 1 }"
       >
-        <h1 class="login-welcome-display">
+        <h2 class="login-welcome-display">
           What's your email, {{ username }}?
-        </h1>
+        </h2>
         <input
           matInput
           formControlName="email"
@@ -57,7 +57,15 @@
         class="login-form-group login-fadein-animation"
         [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 2 }"
       >
-        <h1 class="login-welcome-display">What's your password?</h1>
+        <!-- Show either of the following display texts - depending on if the email is already in use or not -->
+        <h2 class="login-welcome-display" *ngIf="emailInUse; else noAccount">
+          What's your password?
+        </h2>
+        <ng-template #noAccount
+          ><h2 class="login-welcome-display">
+            Please choose your password.
+          </h2></ng-template
+        >
         <input
           matInput
           formControlName="password"
