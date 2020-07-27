@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { AccountService } from '../../../services/findaccount.service';
 
 @Component({
   selector: 'login-component',
@@ -12,8 +13,12 @@ export class LoginComponent {
   username: string = '';
   userEmail: string = '';
   userPassword: string = '';
+  emailInUse: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private accountService: AccountService
+  ) {}
 
   loginGroupOne = new FormGroup({
     name: new FormControl('', [
@@ -45,6 +50,13 @@ export class LoginComponent {
 
   submitLoginFormTwo(data: { email: string }): void {
     this.userEmail = data.email;
+    this.accountService.checkIfEmailExists(this.userEmail).then((res: any) => {
+      console.log(res.email.email)
+      if (res.email.email === this.userEmail) {
+        this.emailInUse = true;
+      }
+      console.log(this.emailInUse)
+    })
   }
 
   submitLoginFormThree(data: { password: string }): void {

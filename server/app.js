@@ -33,9 +33,16 @@ app.use(morgan("dev"));
 // Load the local-signup strategy from passport
 require("./config/passport")(passport, models.User);
 
+
+// API routes
 app.post("/authenticate", auth(passport), (req, res, error) => {
-  if (error) return res.status(400);
   res.status(200).json({ user: req.user });
+});
+
+app.get("/account/:email", (req, res) => {
+  console.log("This works");
+  console.log(req.params)
+  res.status(200).json({ email: req.params });
 });
 
 // Create and sync the database through Sequelize
