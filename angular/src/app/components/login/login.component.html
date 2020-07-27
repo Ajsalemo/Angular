@@ -43,6 +43,7 @@
           required
         />
       </mat-form-field>
+      <app-loading-indicator loading="loading"></app-loading-indicator>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
@@ -51,7 +52,11 @@
   <mat-step [stepControl]="loginGroupThree">
     <form
       [formGroup]="loginGroupThree"
-      (ngSubmit)="submitLoginFormThree(loginGroupThree.value)"
+      (ngSubmit)="
+        emailInUse
+          ? submitLoginForm(loginGroupThree.value)
+          : submitSignUpForm(loginGroupThree.value)
+      "
     >
       <mat-form-field
         class="login-form-group login-fadein-animation"
@@ -74,6 +79,7 @@
           class="login-stepper-input"
         />
       </mat-form-field>
+      <app-loading-indicator loading="loading"></app-loading-indicator>
       <div>
         <button mat-button (click)="stepper.reset()">Reset</button>
         <button mat-button type="submit">

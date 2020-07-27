@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OpenWeatherApiService } from '../services/openweatherapi.service';
 import { WeatherComponent } from './components/weather-component/weather-component.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { LoginComponent } from './components/login/login.component';
     NavbarLinksComponent,
     WeatherComponent,
     LoginComponent,
+    LoadingIndicatorComponent,
   ],
   imports: [
     BrowserModule,

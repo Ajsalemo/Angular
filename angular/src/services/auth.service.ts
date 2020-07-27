@@ -16,4 +16,10 @@ export class AuthService {
       .post('/api/signup', { email: email, password: password })
       .toPromise();
   }
+
+  signIn(email: string, password: string) {
+    return this.http
+      .post('/api/signin', { email: email, password: password })
+      .toPromise();
+  }
 }
