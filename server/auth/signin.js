@@ -25,13 +25,13 @@ module.exports = (passport, user) => {
           .then((user) => {
             // If the user is find, return done to move on to the next action
             if (!user) {
-              console.log("User does not exist.");
               return done(null, false);
             }
 
             if (!isValidPassword(user.password, password)) {
-              console.log("Incorrect password.");
-              return done(null, false);
+              return done(null, false, {
+                message: "Invalid password or username."
+              });
             }
 
             const userObject = user.get();

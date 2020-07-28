@@ -14,7 +14,7 @@ export class LoginComponent {
   userEmail: string = '';
   userPassword: string = '';
   emailInUse: boolean = false;
-  loading: boolean = false;
+  loading: boolean;
 
   constructor(
     private authService: AuthService,

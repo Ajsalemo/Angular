@@ -22,9 +22,11 @@ module.exports = (passport, user) => {
             email: email,
           },
         }).then((user) => {
-          // If the user is find, return done to move on to the next action
+          // If the user is found, return done to move on to the next action
           if (user) {
-            return done(null, false);
+            return done(null, false, {
+              message: "Email is already in use."
+            });
           } else {
             // Else, if so no user, create them
             // Hash the password by passing it to the generateHash function
