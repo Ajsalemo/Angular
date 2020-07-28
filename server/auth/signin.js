@@ -23,15 +23,22 @@ module.exports = (passport, user) => {
           },
         })
           .then((user) => {
-            // If the user is find, return done to move on to the next action
+            // If the user is found, return done to move on to the next action
             if (!user) {
               return done(null, false);
             }
 
             if (!isValidPassword(user.password, password)) {
-              return done(null, false, {
-                message: "Invalid password or username."
-              });
+              console.log(password);
+              if (password.length < 6) {
+                return done(null, false, {
+                  message: "Password must be atleast 6 characters.",
+                });
+              } else {
+                return done(null, false, {
+                  message: "Invalid password or username.",
+                });
+              }
             }
 
             const userObject = user.get();
