@@ -7,7 +7,7 @@
     text-align: center;
   }
   &-form-group {
-    width: 50rem;
+    width: 55rem;
   }
   &-stepper {
     background-color: transparent;
@@ -16,6 +16,14 @@
       text-align: center !important;
       border-bottom: 3px solid #fff;
     }
+  }
+  &-error-message {
+    @include fontSizeAndWeight(1.2rem, 400);
+    display: flex;
+    padding-top: 1rem;
+    height: 1.2rem;
+    justify-content: center;
+    color: #fff;
   }
   // Fade in animation when transitioning the step forms
   &-fadein-animation {
@@ -67,12 +75,11 @@
   }
 }
 
-.mat-horizontal-stepper-header-container {
+.mat-horizontal-stepper-header-container,
+.mat-form-field-underline {
   display: none !important;
 }
 
 .mat-form-field-infix {
   padding: 0 !important;
 }
-
-

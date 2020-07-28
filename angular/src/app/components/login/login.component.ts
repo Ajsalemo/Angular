@@ -15,6 +15,7 @@ export class LoginComponent {
   userPassword: string = '';
   emailInUse: boolean = false;
   loading: boolean;
+  errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
@@ -51,36 +52,54 @@ export class LoginComponent {
 
   submitLoginFormTwo(data: { email: string }): void {
     this.loading = true;
-    console.log(this.loading)
+    console.log(this.loading);
     this.userEmail = data.email;
     // On the second step of the form, check if the email account already exists
     // This boolean will dictate the path of the step forms next step
-    this.accountService.checkIfEmailExists(this.userEmail).then((res: any) => {
-      if (res.user === null || !res.user) {
-        this.emailInUse = false;
-      } else if (res.user.email === this.userEmail) {
-        this.emailInUse = true;
-      }
-      this.loading = false;
-      console.log(this.loading)
-    });
+    this.accountService
+      .checkIfEmailExists(this.userEmail)
+      .then((res: any) => {
+        if (res.user === null || !res.user) {
+          this.emailInUse = false;
+        } else if (res.user.email === this.userEmail) {
+          this.emailInUse = true;
+        }
+        this.loading = false;
+        console.log(this.loading);
+      })
+      .catch((err: any) => {
+        console.log(err);
+        this.errorMessage = err.error.message;
+      });
   }
 
   submitLoginForm(data: { password: string }): void {
     this.userPassword = data.password;
-    console.log('Login form called / Loading')
-    this.authService.signIn(this.userEmail, this.userPassword).then(() => {
-      this.authService.setUserInfo({ user: this.username });
-      console.log('Login form called / Done loading')
-    });
+    console.log('Login form called / Loading');
+    this.authService
+      .signIn(this.userEmail, this.userPassword)
+      .then(() => {
+        this.authService.setUserInfo({ user: this.username });
+        console.log('Login form called / Done loading');
+      })
+      .catch((err: any) => {
+        console.log(err);
+        this.errorMessage = err.error.message;
+      });
   }
 
   submitSignUpForm(data: { password: string }): void {
     this.userPassword = data.password;
-    console.log('Submit form called / Loading')
-    this.authService.signUp(this.userEmail, this.userPassword).then(() => {
-      this.authService.setUserInfo({ user: this.username });
-      console.log('Submit form called / Done loading')
-    });
+    console.log('Submit form called / Loading');
+    this.authService
+      .signUp(this.userEmail, this.userPassword)
+      .then(() => {
+        this.authService.setUserInfo({ user: this.username });
+        console.log('Submit form called / Done loading');
+      })
+      .catch((err: any) => {
+        console.log(err);
+        this.errorMessage = err.error.message;
+      });
   }
 }
