@@ -1,7 +1,7 @@
 // Function to process authentication
-const auth = (passport) => {
+const auth = (passport, authType) => {
   return (req, res, next) => {
-    passport.authenticate("local-signup", (error, user, _) => {
+    passport.authenticate(authType, (error, user, _) => {
       if (error) res.status(400).json({ message: error });
       req.login(user, (error) => {
         if (error) return next(error);

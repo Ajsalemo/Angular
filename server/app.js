@@ -6,8 +6,8 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const models = require("./models");
-const auth = require("./config/auth");
-const findEmailAccount = require("./config/accounts");
+const auth = require("./auth/auth");
+const findEmailAccount = require("./auth/accounts");
 
 // Initialize express
 const app = express();
@@ -32,10 +32,16 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 // Load the local-signup strategy from passport
-require("./config/passport")(passport, models.User);
+require("./auth/signup")(passport, models.User);
+// Load the local-signin strategy from passport
+require("./auth/signin")(passport, models.User);
 
 // API routes
-app.post("/signup", auth(passport), (req, res) => {
+app.post("/signup", auth(passport, "local-signup"), (req, res) => {
+  res.status(200).json({ user: req.user });
+});
+
+app.post("/signin", auth(passport, "local-signin"), (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
