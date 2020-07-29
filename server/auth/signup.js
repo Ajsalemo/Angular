@@ -35,7 +35,7 @@ module.exports = (passport, user) => {
             const data = {
               email: email,
               password: userPassword,
-              firstname: req.body.name,
+              username: req.body.username,
             };
             // Create the instance of the new user for Postgres
             User.create(data).then((newUser, _) => {

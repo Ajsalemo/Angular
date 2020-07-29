@@ -25,6 +25,11 @@
     justify-content: center;
     color: #fff;
   }
+  &-loading-image {
+    height: 3rem;
+    display: flex;
+    margin: 0 auto;
+  }
   // Fade in animation when transitioning the step forms
   &-fadein-animation {
     -webkit-animation: fadein 3s linear forwards;

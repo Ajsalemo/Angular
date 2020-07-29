@@ -11,9 +11,9 @@ export class AuthService {
     localStorage.setItem('user', user['user']);
   }
 
-  signUp(email: string, password: string) {
+  signUp(email: string, password: string, username: string) {
     return this.http
-      .post('/api/signup', { email: email, password: password })
+      .post('/api/signup', { email: email, password: password, username: username })
       .toPromise();
   }
 

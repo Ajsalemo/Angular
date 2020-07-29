@@ -33,9 +33,14 @@
         class="login-form-group"
         [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 1 }"
       >
-        <h2 class="login-welcome-display">
+        <h2 *ngIf="!loading" class="login-welcome-display">
           What's your email, {{ username }}?
         </h2>
+        <img
+          *ngIf="loading"
+          class="login-loading-image"
+          src="../../../assets//images/searchengine-loader.gif"
+        />
         <input
           matInput
           formControlName="email"
@@ -43,9 +48,8 @@
           required
         />
       </mat-form-field>
-      <!-- <app-loading-indicator loading="loading"></app-loading-indicator> -->
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext [disabled]="loading">Next</button>
       </div>
     </form>
   </mat-step>
@@ -80,7 +84,6 @@
         />
         <span class="login-error-message">{{ errorMessage }}</span>
       </mat-form-field>
-      <!-- <app-loading-indicator loading="loading"></app-loading-indicator> -->
       <div>
         <button mat-button (click)="stepper.reset()">Reset</button>
         <button mat-button type="submit">

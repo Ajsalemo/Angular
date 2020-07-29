@@ -38,6 +38,7 @@ require("./auth/signin")(passport, models.User);
 
 // API routes
 app.post("/signup", auth(passport, "local-signup"), (req, res) => {
+  console.log(req.body)
   res.status(200).json({ user: req.user });
 });
 
@@ -49,7 +50,7 @@ app.get("/account/:email", findEmailAccount(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     console.log("Postgres has started and synced");
     app.listen(port, () => {

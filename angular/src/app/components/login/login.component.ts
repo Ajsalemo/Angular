@@ -14,7 +14,7 @@ export class LoginComponent {
   userEmail: string = '';
   userPassword: string = '';
   emailInUse: boolean = false;
-  loading: boolean;
+  loading: boolean = false;
   errorMessage: string = '';
 
   constructor(
@@ -61,14 +61,14 @@ export class LoginComponent {
       .then((res: any) => {
         if (res.user === null || !res.user) {
           this.emailInUse = false;
+          this.loading = false;
         } else if (res.user.email === this.userEmail) {
           this.emailInUse = true;
+          this.loading = false;
         }
-        this.loading = false;
-        console.log(this.loading);
       })
       .catch((err: any) => {
-        console.log(err);
+        this.loading = false;
         this.errorMessage = err.error.message;
       });
   }
@@ -83,7 +83,6 @@ export class LoginComponent {
         console.log('Login form called / Done loading');
       })
       .catch((err: any) => {
-        console.log(err);
         this.errorMessage = err.error.message;
       });
   }
@@ -92,13 +91,12 @@ export class LoginComponent {
     this.userPassword = data.password;
     console.log('Submit form called / Loading');
     this.authService
-      .signUp(this.userEmail, this.userPassword)
+      .signUp(this.userEmail, this.userPassword, this.username)
       .then(() => {
         this.authService.setUserInfo({ user: this.username });
         console.log('Submit form called / Done loading');
       })
       .catch((err: any) => {
-        console.log(err);
         this.errorMessage = err.error.message;
       });
   }
