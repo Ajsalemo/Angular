@@ -16,6 +16,7 @@ export class LoginComponent {
   emailInUse: boolean = false;
   loading: boolean = false;
   errorMessage: string = '';
+  hidePassword: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -35,6 +36,7 @@ export class LoginComponent {
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(255),
+      Validators.email,
     ]),
   });
 
@@ -46,13 +48,17 @@ export class LoginComponent {
     ]),
   });
 
+  // Getter for the email field
+  get emailField() {
+    return this.loginGroupTwo.controls;
+  }
+
   submitLoginFormOne(data: { name: string }): void {
     this.username = data.name;
   }
 
   submitLoginFormTwo(data: { email: string }): void {
     this.loading = true;
-    console.log(this.loading);
     this.userEmail = data.email;
     // On the second step of the form, check if the email account already exists
     // This boolean will dictate the path of the step forms next step
@@ -75,29 +81,30 @@ export class LoginComponent {
 
   submitLoginForm(data: { password: string }): void {
     this.userPassword = data.password;
-    console.log('Login form called / Loading');
     this.authService
       .signIn(this.userEmail, this.userPassword)
       .then(() => {
         this.authService.setUserInfo({ user: this.username });
-        console.log('Login form called / Done loading');
+        this.loading = false;
       })
       .catch((err: any) => {
         this.errorMessage = err.error.message;
+        this.loading = false;
       });
   }
 
   submitSignUpForm(data: { password: string }): void {
+    this.loading = true;
     this.userPassword = data.password;
-    console.log('Submit form called / Loading');
     this.authService
       .signUp(this.userEmail, this.userPassword, this.username)
       .then(() => {
         this.authService.setUserInfo({ user: this.username });
-        console.log('Submit form called / Done loading');
+        this.loading = false;
       })
       .catch((err: any) => {
         this.errorMessage = err.error.message;
+        this.loading = false;
       });
   }
 }

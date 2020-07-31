@@ -30,6 +30,12 @@
     display: flex;
     margin: 0 auto;
   }
+  &-password-visibility {
+    text-align: left !important;
+    &-icon {
+      font-size: 2rem !important;
+    }
+  }
   // Fade in animation when transitioning the step forms
   &-fadein-animation {
     -webkit-animation: fadein 3s linear forwards;
@@ -80,6 +86,7 @@
   }
 }
 
+// Angular Material classes
 .mat-horizontal-stepper-header-container,
 .mat-form-field-underline {
   display: none !important;
@@ -88,3 +95,13 @@
 .mat-form-field-infix {
   padding: 0 !important;
 }
+
+.mat-form-field-suffix {
+  align-self: flex-end !important;
+  width: 2rem;
+}
+
+.mat-button-disabled {
+  color: #dcd0d0 !important;
+}
+

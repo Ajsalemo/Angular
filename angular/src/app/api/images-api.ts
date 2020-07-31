@@ -18,8 +18,8 @@ export const BACKGROUND_IMAGE_METADATA: {
   },
   {
     id: '3',
-    photoURL: 'https://unsplash.com/photos/x5KGzpzML-M',
-    author: 'Chris-Havard Berge',
+    photoURL: 'https://unsplash.com/photos/ygfYm0C1yrg',
+    author: 'Tevin Trinh',
     backgroundURL: 'wednesday.jpg',
   },
   {

@@ -33,19 +33,24 @@
         class="login-form-group"
         [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 1 }"
       >
-        <h2 *ngIf="!loading" class="login-welcome-display">
+        <h2 class="login-welcome-display">
           What's your email, {{ username }}?
         </h2>
-        <img
-          *ngIf="loading"
-          class="login-loading-image"
-          src="../../../assets//images/searchengine-loader.gif"
-        />
         <input
           matInput
           formControlName="email"
           class="login-stepper-input"
           required
+          [disabled]="loading"
+          type="email"
+        />
+        <span class="login-error-message">{{ errorMessage }}</span>
+        <!-- If the email entered doesn't match Angulars regex validation, display this error -->
+        <span class="login-error-message" *ngIf="emailField.email.errors && emailField.email.errors.email">That is not a valid email address.</span>
+        <img
+          *ngIf="loading"
+          class="login-loading-image"
+          src="../../../assets/images/searchengine-loader.gif"
         />
       </mat-form-field>
       <div>
@@ -81,15 +86,40 @@
           type="password"
           required
           class="login-stepper-input"
+          [disabled]="loading"
+          [type]="hidePassword ? 'password' : 'text'"
         />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+          class="login-password-visibility"
+          disableRipple="true"
+          type="button"
+        >
+          <mat-icon class="login-password-visibility-icon">{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
         <span class="login-error-message">{{ errorMessage }}</span>
+        <img
+          *ngIf="loading"
+          class="login-loading-image"
+          src="../../../assets/images/searchengine-loader.gif"
+        />
       </mat-form-field>
       <div>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-        <button mat-button type="submit">
+        <button mat-button (click)="stepper.reset()" [disabled]="loading">
+          Reset
+        </button>
+        <button mat-button type="submit" [disabled]="loading">
           Submit
         </button>
-        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button matStepperPrevious [disabled]="loading">
+          Previous
+        </button>
       </div>
     </form>
   </mat-step>

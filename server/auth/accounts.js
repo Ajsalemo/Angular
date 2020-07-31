@@ -7,12 +7,14 @@ module.exports = (user) => {
       where: {
         email: req.params.email,
       },
-    }).then((user) => {
-      // Whether or not a user exists, send back the user object
-      // Logic is used to compare the response returned from Postgres to check if this email is already in use
-      if (user || !user) {
-        res.status(200).json({ user: user });
-      }
-    });
+    })
+      .then((user) => {
+        // Whether or not a user exists, send back the user object
+        // Logic is used to compare the response returned from Postgres to check if this email is already in use
+        if (user || !user) {
+          res.status(200).json({ user: user });
+        }
+      })
+      .catch((err) => console.log("Error:", err));
   };
 };

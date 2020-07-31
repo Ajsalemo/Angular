@@ -50,7 +50,7 @@ app.get("/account/:email", findEmailAccount(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     console.log("Postgres has started and synced");
     app.listen(port, () => {
