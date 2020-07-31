@@ -44,9 +44,9 @@
           [disabled]="loading"
           type="email"
         />
-        <span class="login-error-message">{{ errorMessage }}</span>
+        <span class="login-error-message">{{ emailErrorMessage }}</span>
         <!-- If the email entered doesn't match Angulars regex validation, display this error -->
-        <span class="login-error-message" *ngIf="emailField.email.errors && emailField.email.errors.email">That is not a valid email address.</span>
+        <span class="login-error-message" *ngIf="emailField.email.errors && emailField.email.errors.pattern">That is not a valid email address.</span>
         <img
           *ngIf="loading"
           class="login-loading-image"
@@ -103,7 +103,7 @@
             hidePassword ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
-        <span class="login-error-message">{{ errorMessage }}</span>
+        <span class="login-error-message">{{ passwordErrorMessage }}</span>
         <img
           *ngIf="loading"
           class="login-loading-image"

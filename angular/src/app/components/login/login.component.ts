@@ -15,7 +15,8 @@ export class LoginComponent {
   userPassword: string = '';
   emailInUse: boolean = false;
   loading: boolean = false;
-  errorMessage: string = '';
+  emailErrorMessage: string = '';
+  passwordErrorMessage: string = '';
   hidePassword: boolean = true;
 
   constructor(
@@ -36,15 +37,18 @@ export class LoginComponent {
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(255),
-      Validators.email,
+      Validators.pattern(/\S+@\S+\.\S+/),
     ]),
   });
 
   loginGroupThree = new FormGroup({
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(8),
       Validators.maxLength(40),
+      Validators.pattern(
+        /^(?=\P{Ll}*\p{Ll})(?=\P{Lu}*\p{Lu})(?=\P{N}*\p{N})(?=[\p{L}\p{N}]*[^\p{L}\p{N}])[\s\S]{8,}$/
+      ),
     ]),
   });
 
@@ -53,11 +57,18 @@ export class LoginComponent {
     return this.loginGroupTwo.controls;
   }
 
+  // Getter for the password field
+  get passwordField() {
+    console.log(this.loginGroupThree.controls);
+    return this.loginGroupThree.controls;
+  }
+
   submitLoginFormOne(data: { name: string }): void {
     this.username = data.name;
   }
 
   submitLoginFormTwo(data: { email: string }): void {
+    this.emailErrorMessage = '';
     this.loading = true;
     this.userEmail = data.email;
     // On the second step of the form, check if the email account already exists
@@ -75,11 +86,12 @@ export class LoginComponent {
       })
       .catch((err: any) => {
         this.loading = false;
-        this.errorMessage = err.error.message;
+        this.emailErrorMessage = err.error.message;
       });
   }
 
   submitLoginForm(data: { password: string }): void {
+    this.passwordErrorMessage = '';
     this.userPassword = data.password;
     this.authService
       .signIn(this.userEmail, this.userPassword)
@@ -88,7 +100,7 @@ export class LoginComponent {
         this.loading = false;
       })
       .catch((err: any) => {
-        this.errorMessage = err.error.message;
+        this.passwordErrorMessage = err.error.message;
         this.loading = false;
       });
   }
@@ -103,7 +115,8 @@ export class LoginComponent {
         this.loading = false;
       })
       .catch((err: any) => {
-        this.errorMessage = err.error.message;
+        console.log(err)
+        this.passwordErrorMessage = err.error.message;
         this.loading = false;
       });
   }

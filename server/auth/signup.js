@@ -25,12 +25,24 @@ module.exports = (passport, user) => {
           // If the user is found, return done to move on to the next action
           if (user) {
             return done(null, false, {
-              message: "Email is already in use."
+              message: "Email is already in use.",
             });
           } else {
+            const emailCharValidation = /^(?=P{Ll}*p{Ll})(?=P{Lu}*p{Lu})(?=P{N}*p{N})(?=[p{L}p{N}]*[^p{L}p{N}])[sS]{8,}$/;
             // Else, if so no user, create them
             // Hash the password by passing it to the generateHash function
             const userPassword = generateHash(password);
+            console.log(password);
+            if (password.length < 8) {
+              return done(null, false, {
+                message: "Password must be atleast 8 characters.",
+              });
+            } else if (emailCharValidation.test(password) === false) {
+              return done(null, false, {
+                message:
+                  "Password must container atleast one uppercase, lowercase, number and special character.",
+              });
+            }
             // Putting the form information into a named object
             const data = {
               email: email,

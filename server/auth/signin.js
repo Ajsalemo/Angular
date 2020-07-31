@@ -30,9 +30,9 @@ module.exports = (passport, user) => {
 
             if (!isValidPassword(user.password, password)) {
               console.log(password);
-              if (password.length < 6) {
+              if (password.length < 8) {
                 return done(null, false, {
-                  message: "Password must be atleast 6 characters.",
+                  message: "Password must be atleast 8 characters.",
                 });
               } else {
                 return done(null, false, {
