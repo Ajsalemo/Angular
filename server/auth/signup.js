@@ -27,12 +27,18 @@ module.exports = (passport, user) => {
             return done(null, false, {
               message: "Email is already in use.",
             });
-          } else {
-            const emailCharValidation = /^(?=P{Ll}*p{Ll})(?=P{Lu}*p{Lu})(?=P{N}*p{N})(?=[p{L}p{N}]*[^p{L}p{N}])[sS]{8,}$/;
             // Else, if so no user, create them
+          } else {
+            // Regex to match the following -
+            // 1. Atleast a length of 8
+            // 2. Contains atleast one uppercase and lower case letter
+            // 3. Contains atleast one number and symbol
+            const emailCharValidation = new RegExp(
+              '^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*d)(?=.*[!#$%&? "]).*$'
+            );
             // Hash the password by passing it to the generateHash function
             const userPassword = generateHash(password);
-            console.log(password);
+            // If the password length is less than 8 or Regex validation doesn't match, send the error to the client
             if (password.length < 8) {
               return done(null, false, {
                 message: "Password must be atleast 8 characters.",
@@ -40,7 +46,7 @@ module.exports = (passport, user) => {
             } else if (emailCharValidation.test(password) === false) {
               return done(null, false, {
                 message:
-                  "Password must container atleast one uppercase, lowercase, number and special character.",
+                  "Password must contain atleast one uppercase, lowercase, number and special character.",
               });
             }
             // Putting the form information into a named object

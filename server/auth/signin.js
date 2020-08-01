@@ -27,13 +27,14 @@ module.exports = (passport, user) => {
             if (!user) {
               return done(null, false);
             }
-
+            // Check if the password is valid
             if (!isValidPassword(user.password, password)) {
-              console.log(password);
+              // If the password length is less than 8, send the message to the client
               if (password.length < 8) {
                 return done(null, false, {
                   message: "Password must be atleast 8 characters.",
                 });
+                // Else, the password is invalid - send the error to the client
               } else {
                 return done(null, false, {
                   message: "Invalid password or username.",

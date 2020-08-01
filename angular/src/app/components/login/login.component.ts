@@ -27,7 +27,7 @@ export class LoginComponent {
   loginGroupOne = new FormGroup({
     name: new FormControl('', [
       Validators.required,
-      Validators.minLength(1),
+      Validators.minLength(2),
       Validators.maxLength(255),
     ]),
   });
@@ -45,22 +45,19 @@ export class LoginComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      Validators.maxLength(40),
-      Validators.pattern(
-        /^(?=\P{Ll}*\p{Ll})(?=\P{Lu}*\p{Lu})(?=\P{N}*\p{N})(?=[\p{L}\p{N}]*[^\p{L}\p{N}])[\s\S]{8,}$/
-      ),
+      Validators.maxLength(255),
+      Validators.pattern('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$'),
     ]),
   });
+
+  // Getter for the name field
+  get nameField() {
+    return this.loginGroupOne.controls;
+  }
 
   // Getter for the email field
   get emailField() {
     return this.loginGroupTwo.controls;
-  }
-
-  // Getter for the password field
-  get passwordField() {
-    console.log(this.loginGroupThree.controls);
-    return this.loginGroupThree.controls;
   }
 
   submitLoginFormOne(data: { name: string }): void {
@@ -93,6 +90,8 @@ export class LoginComponent {
   submitLoginForm(data: { password: string }): void {
     this.passwordErrorMessage = '';
     this.userPassword = data.password;
+    this.passwordErrorMessage = '';
+    this.loading = false;
     this.authService
       .signIn(this.userEmail, this.userPassword)
       .then(() => {
@@ -108,6 +107,7 @@ export class LoginComponent {
   submitSignUpForm(data: { password: string }): void {
     this.loading = true;
     this.userPassword = data.password;
+    this.passwordErrorMessage = '';
     this.authService
       .signUp(this.userEmail, this.userPassword, this.username)
       .then(() => {
@@ -115,7 +115,6 @@ export class LoginComponent {
         this.loading = false;
       })
       .catch((err: any) => {
-        console.log(err)
         this.passwordErrorMessage = err.error.message;
         this.loading = false;
       });

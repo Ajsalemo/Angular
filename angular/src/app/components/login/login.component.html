@@ -17,7 +17,13 @@
           formControlName="name"
           required
           class="login-stepper-input"
+          type="text"
         />
+        <span
+          class="login-error-message"
+          *ngIf="nameField.name.errors && nameField.name.errors.minlength"
+          >Your name cannot be less than 2 characters.</span
+        >
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
@@ -33,9 +39,14 @@
         class="login-form-group"
         [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 1 }"
       >
-        <h2 class="login-welcome-display">
+        <h2 class="login-welcome-display" *ngIf="!loading">
           What's your email, {{ username }}?
         </h2>
+        <img
+          *ngIf="loading"
+          class="login-loading-image"
+          src="../../../assets/images/searchengine-loader.gif"
+        />
         <input
           matInput
           formControlName="email"
@@ -46,12 +57,11 @@
         />
         <span class="login-error-message">{{ emailErrorMessage }}</span>
         <!-- If the email entered doesn't match Angulars regex validation, display this error -->
-        <span class="login-error-message" *ngIf="emailField.email.errors && emailField.email.errors.pattern">That is not a valid email address.</span>
-        <img
-          *ngIf="loading"
-          class="login-loading-image"
-          src="../../../assets/images/searchengine-loader.gif"
-        />
+        <span
+          class="login-error-message"
+          *ngIf="emailField.email.errors && emailField.email.errors.pattern"
+          >That is not a valid email address.</span
+        >
       </mat-form-field>
       <div>
         <button mat-button matStepperNext [disabled]="loading">Next</button>
@@ -72,14 +82,21 @@
         [ngClass]="{ 'login-fadein-animation': stepper.selectedIndex === 2 }"
       >
         <!-- Show either of the following display texts - depending on if the email is already in use or not -->
-        <h2 class="login-welcome-display" *ngIf="emailInUse; else noAccount">
-          What's your password?
-        </h2>
-        <ng-template #noAccount
-          ><h2 class="login-welcome-display">
-            Please choose your password.
-          </h2></ng-template
-        >
+        <div *ngIf="!loading">
+          <h2 class="login-welcome-display" *ngIf="emailInUse; else noAccount">
+            What's your password?
+          </h2>
+          <ng-template #noAccount
+            ><h2 class="login-welcome-display">
+              Please choose your password.
+            </h2></ng-template
+          >
+        </div>
+        <img
+          *ngIf="loading"
+          class="login-loading-image"
+          src="../../../assets/images/searchengine-loader.gif"
+        />
         <input
           matInput
           formControlName="password"
@@ -96,6 +113,7 @@
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hidePassword"
           class="login-password-visibility"
+          [disabled]="loading"
           disableRipple="true"
           type="button"
         >
@@ -104,11 +122,6 @@
           }}</mat-icon>
         </button>
         <span class="login-error-message">{{ passwordErrorMessage }}</span>
-        <img
-          *ngIf="loading"
-          class="login-loading-image"
-          src="../../../assets/images/searchengine-loader.gif"
-        />
       </mat-form-field>
       <div>
         <button mat-button (click)="stepper.reset()" [disabled]="loading">
