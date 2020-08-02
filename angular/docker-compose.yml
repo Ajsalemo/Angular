@@ -6,15 +6,24 @@ services:
     build: .
     ports:
       - "8080:8080"
-    links:
+    depends_on: 
       - node
-  
+    
   postgres:
     image: postgres:latest
+    container_name: postgres-container
     env_file: "./../server/.env"
+    ports:
+      - "5432:5432"
     
   node:
     container_name: node-container
     build: ./../server/
     ports:
       - "3000:3000"
+    environment:
+      WAIT_HOSTS: postgres:5432
+      WAIT_HOSTS_TIMEOUT: 60
+    depends_on: 
+      - postgres
+  
