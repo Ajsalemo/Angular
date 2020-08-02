@@ -39,7 +39,7 @@ module.exports = (passport, user) => {
             // Hash the password by passing it to the generateHash function
             const userPassword = generateHash(password);
             // If the password length is less than 8 or Regex validation doesn't match, send the error to the client
-            if (password.length < 8) {
+            if (password.length < 8 || !password.length) {
               return done(null, false, {
                 message: "Password must be atleast 8 characters.",
               });

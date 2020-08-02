@@ -35,7 +35,7 @@ export class LoginComponent {
   loginGroupTwo = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.minLength(1),
+      Validators.minLength(3),
       Validators.maxLength(255),
       Validators.pattern(/\S+@\S+\.\S+/),
     ]),
@@ -58,6 +58,11 @@ export class LoginComponent {
   // Getter for the email field
   get emailField() {
     return this.loginGroupTwo.controls;
+  }
+
+  // Getter for the password field
+  get passwordField() {
+    return this.loginGroupThree.controls;
   }
 
   submitLoginFormOne(data: { name: string }): void {

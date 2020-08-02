@@ -26,7 +26,16 @@
         >
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button
+          mat-button
+          matStepperNext
+          [disabled]="
+            (nameField.name.errors && nameField.name.errors.minlength) ||
+            nameField.name.value === ''
+          "
+        >
+          Next
+        </button>
       </div>
     </form>
   </mat-step>
@@ -64,7 +73,20 @@
         >
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext [disabled]="loading">Next</button>
+        <button mat-button matStepperPrevious [disabled]="loading">
+          Previous
+        </button>
+        <button
+          mat-button
+          matStepperNext
+          [disabled]="
+            loading ||
+            emailField.email.value === '' ||
+            (emailField.email.errors && emailField.email.errors.pattern)
+          "
+        >
+          Next
+        </button>
       </div>
     </form>
   </mat-step>
@@ -127,7 +149,7 @@
         <button mat-button (click)="stepper.reset()" [disabled]="loading">
           Reset
         </button>
-        <button mat-button type="submit" [disabled]="loading">
+        <button mat-button type="submit" [disabled]="loading || passwordField.password.value === ''">
           Submit
         </button>
         <button mat-button matStepperPrevious [disabled]="loading">

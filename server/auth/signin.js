@@ -30,7 +30,7 @@ module.exports = (passport, user) => {
             // Check if the password is valid
             if (!isValidPassword(user.password, password)) {
               // If the password length is less than 8, send the message to the client
-              if (password.length < 8) {
+              if (password.length < 8 || !password.length) {
                 return done(null, false, {
                   message: "Password must be atleast 8 characters.",
                 });

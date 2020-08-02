@@ -42,8 +42,8 @@ export const BACKGROUND_IMAGE_METADATA: {
   },
   {
     id: '7',
-    photoURL: 'https://unsplash.com/photos/Xy3lAjAGo3o',
-    author: 'Samuel Ferrara',
+    photoURL: 'https://unsplash.com/photos/ohx4v80mJm8',
+    author: 'Nathan Anderson',
     backgroundURL: 'sunday.jpg',
   },
 ];
