@@ -8,7 +8,7 @@ import { BackgroundImageService } from '../../../services/background-images.serv
   styleUrls: ['./home-background.component.scss'],
   providers: [BackgroundImageService],
 })
-export class HomeBackgroundComponent implements OnInit, OnChanges {
+export class HomeBackgroundComponent implements OnInit {
   backgroundImageMetaData: {
     id: string;
     photoURL: string;

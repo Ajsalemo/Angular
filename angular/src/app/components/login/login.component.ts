@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-component',
@@ -22,6 +23,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private accountService: AccountService,
+    private router: Router
   ) {}
 
   loginGroupOne = new FormGroup({
@@ -104,6 +106,7 @@ export class LoginComponent {
       .then((res: any) => {
         this.authService.setUserInfo({ user: res.user.username });
         this.loading = false;
+        this.router.navigate(['main']);
       })
       .catch((err: any) => {
         this.passwordErrorMessage = err.error.message;
