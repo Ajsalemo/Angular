@@ -8,8 +8,7 @@ import { BackgroundImageService } from '../../../services/background-images.serv
   styleUrls: ['./home-background.component.scss'],
   providers: [BackgroundImageService],
 })
-export class HomeBackgroundComponent implements OnInit {
-  constructor(private backgroundImageService: BackgroundImageService) {}
+export class HomeBackgroundComponent implements OnInit, OnChanges {
   backgroundImageMetaData: {
     id: string;
     photoURL: string;
@@ -18,13 +17,15 @@ export class HomeBackgroundComponent implements OnInit {
   }[];
 
   defaultImage: string = '../../../assets/images/monday.jpg';
-  username: string = ', Anthony.';
   currentDay: string = moment().format('dddd').toLocaleLowerCase();
   imageLocation: string = '../../../assets/images/';
   authorToDisplay: string = '';
   photoURL: string = '';
   backgroundImageToDisplay: string = '';
   currentUser = localStorage.getItem('user');
+
+  constructor(private backgroundImageService: BackgroundImageService) {}
+
   // This method rotates the daily image based on day of the week
   // This method will eventually include 7 images, one used as a fall back
   rotatingDailyImage(): void {
@@ -45,6 +46,7 @@ export class HomeBackgroundComponent implements OnInit {
       }
     }
   }
+
   // On intialization execute the 'rotatingDailyImage' to set the image metaData
   ngOnInit(): void {
     this.rotatingDailyImage();

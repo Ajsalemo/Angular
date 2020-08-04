@@ -21,7 +21,7 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private accountService: AccountService
+    private accountService: AccountService,
   ) {}
 
   loginGroupOne = new FormGroup({
@@ -46,7 +46,9 @@ export class LoginComponent {
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(255),
-      Validators.pattern('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$'),
+      Validators.pattern(
+        '^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*d)(?=.*[!#$%&? "]).*$'
+      ),
     ]),
   });
 
@@ -99,8 +101,8 @@ export class LoginComponent {
     this.loading = false;
     this.authService
       .signIn(this.userEmail, this.userPassword)
-      .then(() => {
-        this.authService.setUserInfo({ user: this.username });
+      .then((res: any) => {
+        this.authService.setUserInfo({ user: res.user.username });
         this.loading = false;
       })
       .catch((err: any) => {
@@ -115,8 +117,8 @@ export class LoginComponent {
     this.passwordErrorMessage = '';
     this.authService
       .signUp(this.userEmail, this.userPassword, this.username)
-      .then(() => {
-        this.authService.setUserInfo({ user: this.username });
+      .then((res: any) => {
+        this.authService.setUserInfo({ user: res.user.username });
         this.loading = false;
       })
       .catch((err: any) => {
