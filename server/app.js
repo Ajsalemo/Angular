@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const models = require("./models");
 const auth = require("./auth/auth");
 const findEmailAccount = require("./auth/accounts");
+const findAccountById = require("./auth/currentuser");
 
 // Initialize express
 const app = express();
@@ -42,11 +43,12 @@ app.post("/signup", auth(passport, "local-signup"), (req, res) => {
 });
 
 app.post("/signin", auth(passport, "local-signin"), (req, res) => {
-  console.log(req)
   res.status(200).json({ user: req.user });
 });
 
 app.get("/account/:email", findEmailAccount(models.User));
+
+app.get("/findUserById/:id", findAccountById(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize

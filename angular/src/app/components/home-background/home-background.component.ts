@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BackgroundImageService } from '../../../services/background-images.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { AccountService } from '../../../services/findaccount.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'component-home-background',
@@ -24,11 +26,14 @@ export class HomeBackgroundComponent implements OnInit {
   photoURL: string = '';
   backgroundImageToDisplay: string = '';
   currentUser = localStorage.getItem('user');
+  currentUserId = localStorage.getItem('userId');
   navigationSubscription: any;
 
   constructor(
     private backgroundImageService: BackgroundImageService,
-    private router: Router
+    private router: Router,
+    private getCurrentUserService: AccountService,
+    private authServiceAuth: AuthService
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
@@ -40,6 +45,15 @@ export class HomeBackgroundComponent implements OnInit {
 
   reIntializeComponent(): void {
     this.currentUser = localStorage.getItem('user');
+    this.currentUserId = localStorage.getItem('userId');
+  }
+
+  retrieveUserAccountInformation() {
+    if (this.authServiceAuth.isAuthenticated() === true) {
+      this.getCurrentUserService
+        .getCurrentUser(this.currentUserId)
+        .then((res: any) => console.log(res));
+    }
   }
 
   // This method rotates the daily image based on day of the week
@@ -66,5 +80,6 @@ export class HomeBackgroundComponent implements OnInit {
   // On intialization execute the 'rotatingDailyImage' to set the image metaData
   ngOnInit(): void {
     this.rotatingDailyImage();
+    this.retrieveUserAccountInformation();
   }
 }

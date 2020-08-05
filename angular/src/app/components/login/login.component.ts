@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-component',
@@ -104,7 +104,7 @@ export class LoginComponent {
     this.authService
       .signIn(this.userEmail, this.userPassword)
       .then((res: any) => {
-        this.authService.setUserInfo({ user: res.user.username });
+        this.authService.setUserInfo(res.user.username, res.user.id);
         this.loading = false;
         this.router.navigate(['']);
       })
@@ -121,7 +121,7 @@ export class LoginComponent {
     this.authService
       .signUp(this.userEmail, this.userPassword, this.username)
       .then((res: any) => {
-        this.authService.setUserInfo({ user: res.user.username });
+        this.authService.setUserInfo(res.user.username, res.user.id);
         this.loading = false;
         this.router.navigate(['']);
       })

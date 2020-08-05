@@ -7,13 +7,28 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  setUserInfo(user: object) {
-    localStorage.setItem('user', user['user']);
+  isAuthenticated(): Boolean {
+    const userName = localStorage.getItem('user');
+    const userId = localStorage.getItem('userId');
+
+    if (userName && userId !== '' && userName && userId) {
+      return true;
+    }
+    return false;
+  }
+
+  setUserInfo(userName: string, userId: string): void {
+    localStorage.setItem('user', userName);
+    localStorage.setItem('userId', userId);
   }
 
   signUp(email: string, password: string, username: string) {
     return this.http
-      .post('/api/signup', { email: email, password: password, username: username })
+      .post('/api/signup', {
+        email: email,
+        password: password,
+        username: username,
+      })
       .toPromise();
   }
 

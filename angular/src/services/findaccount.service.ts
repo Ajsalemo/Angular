@@ -12,4 +12,10 @@ export class AccountService {
       .get(`/api/account/${email}`)
       .toPromise();
   }
+
+  getCurrentUser(id: string) {
+    return this.http
+      .get(`/api/findUserById/${id}`)
+      .toPromise();
+  }
 }
