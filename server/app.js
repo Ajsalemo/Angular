@@ -42,6 +42,7 @@ app.post("/signup", auth(passport, "local-signup"), (req, res) => {
 });
 
 app.post("/signin", auth(passport, "local-signin"), (req, res) => {
+  console.log(req)
   res.status(200).json({ user: req.user });
 });
 

@@ -106,7 +106,7 @@ export class LoginComponent {
       .then((res: any) => {
         this.authService.setUserInfo({ user: res.user.username });
         this.loading = false;
-        this.router.navigate(['main']);
+        this.router.navigate(['']);
       })
       .catch((err: any) => {
         this.passwordErrorMessage = err.error.message;
@@ -123,6 +123,7 @@ export class LoginComponent {
       .then((res: any) => {
         this.authService.setUserInfo({ user: res.user.username });
         this.loading = false;
+        this.router.navigate(['']);
       })
       .catch((err: any) => {
         this.passwordErrorMessage = err.error.message;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BackgroundImageService } from '../../../services/background-images.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'component-home-background',
@@ -23,8 +24,23 @@ export class HomeBackgroundComponent implements OnInit {
   photoURL: string = '';
   backgroundImageToDisplay: string = '';
   currentUser = localStorage.getItem('user');
+  navigationSubscription: any;
 
-  constructor(private backgroundImageService: BackgroundImageService) {}
+  constructor(
+    private backgroundImageService: BackgroundImageService,
+    private router: Router
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.reIntializeComponent();
+      }
+    });
+  }
+
+  reIntializeComponent(): void {
+    this.currentUser = localStorage.getItem('user');
+  }
 
   // This method rotates the daily image based on day of the week
   // This method will eventually include 7 images, one used as a fall back
