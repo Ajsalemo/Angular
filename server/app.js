@@ -46,6 +46,11 @@ app.post("/signin", auth(passport, "local-signin"), (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
+app.get("/logout", (req, res) => {
+  req.logOut();
+  res.sendStatus(204);
+});
+
 app.get("/account/:email", findEmailAccount(models.User));
 
 app.get("/findUserById/:id", findAccountById(models.User));

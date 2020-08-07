@@ -57,7 +57,7 @@ export class HomeBackgroundComponent implements OnInit {
   }
 
   // This method rotates the daily image based on day of the week
-  // This method will eventually include 7 images, one used as a fall back
+  // This method will includes 7 images, one used as a fall back
   rotatingDailyImage(): void {
     // Call the service and set it to a variable
     this.backgroundImageMetaData = this.backgroundImageService.getBackgroundImages();

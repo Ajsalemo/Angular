@@ -10,7 +10,6 @@ export class AuthService {
   isAuthenticated(): Boolean {
     const userName = localStorage.getItem('user');
     const userId = localStorage.getItem('userId');
-
     if (userName && userId !== '' && userName && userId) {
       return true;
     }
@@ -36,5 +35,11 @@ export class AuthService {
     return this.http
       .post('/api/signin', { email: email, password: password })
       .toPromise();
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('userId');
+    return this.http.get('/api/logout').toPromise();
   }
 }
