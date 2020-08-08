@@ -1,6 +1,6 @@
 // SASS imports
-@import '_mixins';
-@import '_variables';
+@import "_mixins";
+@import "_variables";
 
 .footer {
   width: 100%;
@@ -27,6 +27,15 @@
   }
   &-todo-text {
     color: $white-text;
-    @include fontSizeAndWeight(1rem)
+    @include fontSizeAndWeight(1rem);
+  }
+  &-menu {
+    padding: 10rem 10rem 0.4rem 0.9rem;
+    background-color: $main-theme-background !important;
+    color: $white-text;
+    &-login-menu {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

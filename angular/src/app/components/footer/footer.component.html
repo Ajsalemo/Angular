@@ -8,10 +8,31 @@
       >
         <mat-icon class="footer-settings-icon">settings</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <a mat-menu-item>Username</a>
-        <a mat-menu-item>Profile</a>
-        <a mat-menu-item *ngIf="currentUser" (click)="logUserOut()">Logout</a>
+      <mat-menu #menu="matMenu" class="footer-menu">
+        <div class="footer-menu-login-menu">
+          <span>General</span>
+          <mat-menu #subMenu="matMenu" yPosition="above">
+            <button mat-menu-item (click)="logUserOut()">Logout</button>
+          </mat-menu>
+          <button mat-icon-button *ngIf="!currentUser" (click)="logUserIn()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >account_circle</mat-icon
+            >
+            Login
+          </button>
+          <button
+            mat-icon-button
+            *ngIf="currentUser"
+            [matMenuTriggerFor]="subMenu"
+            type="button"
+            (click)="$event.stopPropagation()"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >account_circle</mat-icon
+            >
+            {{ currentUser }}
+          </button>
+        </div>
       </mat-menu>
       <a
         href="{{ photoURL }}"
