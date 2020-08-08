@@ -10,42 +10,35 @@
       </button>
       <mat-menu #menu="matMenu" class="footer-menu">
         <div class="footer-menu-login-menu">
-          <span>General</span>
-          <mat-menu
-            #subMenu="matMenu"
-            yPosition="above"
-            class="footer-menu-logout-menu"
-          >
-            <button
-              mat-menu-item
-              (click)="logUserOut()"
-              class="footer-menu-logout-menu-button"
-            >
-              Logout
-            </button>
-          </mat-menu>
           <button mat-icon-button *ngIf="!currentUser" (click)="logUserIn()">
             <mat-icon aria-hidden="false" aria-label="Account icon"
               >account_circle</mat-icon
             >
             Login
           </button>
-          <button
-            mat-icon-button
-            *ngIf="currentUser"
-            [matMenuTriggerFor]="subMenu"
-            type="button"
+          <mat-expansion-panel
             (click)="$event.stopPropagation()"
-            class="footer-menu-button"
+            class="footer-menu-logout-menu"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+            *ngIf="currentUser"
           >
-            <mat-icon aria-hidden="false" aria-label="Account icon"
-              >account_circle</mat-icon
+            <mat-expansion-panel-header class="footer-menu-logout-menu-header">
+              <mat-panel-title class="footer-menu-logout-menu-user-account">
+                <mat-icon aria-hidden="false" aria-label="Account icon"
+                  >account_circle</mat-icon
+                >
+                {{ currentUser }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button
+              mat-icon-button
+              (click)="logUserOut()"
+              class="footer-menu-logout-menu-user-account-button"
             >
-            {{ currentUser }}
-            <mat-icon aria-hidden="false" aria-label="Expand more or less icon"
-              >{{ panelOpenState ? 'expand_more' : 'expand_less' }}</mat-icon
-            >
-          </button>
+              Logout
+            </button>
+          </mat-expansion-panel>
         </div>
       </mat-menu>
       <a

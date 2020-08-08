@@ -32,19 +32,38 @@
   &-menu {
     padding: 10rem 10rem 0.4rem 0.9rem;
     background-color: $main-theme-background !important;
-    &-button {
-      color: #808080;
-    }
+    color: #808080;
     &-login-menu {
       display: flex;
       flex-direction: column;
+      &:hover {
+        color: $white-text;
+      }
     }
     &-logout-menu {
       background-color: #504545;
       border-radius: 0 !important;
-      &-button {
+      &-header {
+        padding: 0.1rem 2.5rem 0.1rem 0.4rem !important;
+      }
+      &-user-account {
+        @include fontSizeAndWeight(0.8rem);
         color: #c3bdbd;
+        align-items: center;
+        &-button {
+          @extend .footer-menu-logout-menu-user-account;
+          height: 2rem !important;
+          &:hover {
+            color: $white-text;
+          }
+        }
       }
     }
   }
+}
+
+// Expansion panel arrow
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after {
+  color: #c3bdbd;
 }
