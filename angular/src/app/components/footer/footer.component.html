@@ -11,11 +11,21 @@
       <mat-menu #menu="matMenu" class="footer-menu">
         <div class="footer-menu-login-menu">
           <span>General</span>
-          <mat-menu #subMenu="matMenu" yPosition="above">
-            <button mat-menu-item (click)="logUserOut()">Logout</button>
+          <mat-menu
+            #subMenu="matMenu"
+            yPosition="above"
+            class="footer-menu-logout-menu"
+          >
+            <button
+              mat-menu-item
+              (click)="logUserOut()"
+              class="footer-menu-logout-menu-button"
+            >
+              Logout
+            </button>
           </mat-menu>
           <button mat-icon-button *ngIf="!currentUser" (click)="logUserIn()">
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
+            <mat-icon aria-hidden="false" aria-label="Account icon"
               >account_circle</mat-icon
             >
             Login
@@ -26,11 +36,15 @@
             [matMenuTriggerFor]="subMenu"
             type="button"
             (click)="$event.stopPropagation()"
+            class="footer-menu-button"
           >
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
+            <mat-icon aria-hidden="false" aria-label="Account icon"
               >account_circle</mat-icon
             >
             {{ currentUser }}
+            <mat-icon aria-hidden="false" aria-label="Expand more or less icon"
+              >{{ panelOpenState ? 'expand_more' : 'expand_less' }}</mat-icon
+            >
           </button>
         </div>
       </mat-menu>

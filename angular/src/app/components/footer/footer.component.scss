@@ -32,10 +32,19 @@
   &-menu {
     padding: 10rem 10rem 0.4rem 0.9rem;
     background-color: $main-theme-background !important;
-    color: $white-text;
+    &-button {
+      color: #808080;
+    }
     &-login-menu {
       display: flex;
       flex-direction: column;
+    }
+    &-logout-menu {
+      background-color: #504545;
+      border-radius: 0 !important;
+      &-button {
+        color: #c3bdbd;
+      }
     }
   }
 }
