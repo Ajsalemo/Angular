@@ -16,9 +16,18 @@
             >
             Login
           </button>
+          <div>
+            <ul class="footer-menu-login-menu-list">
+              <li class="footer-menu-login-menu-list-item">
+                General
+              </li>
+              <li class="footer-menu-login-menu-list-item">Photos</li>
+            </ul>
+          </div>
           <mat-expansion-panel
             (click)="$event.stopPropagation()"
             class="footer-menu-logout-menu"
+            [ngClass]="{ 'footer-menu-logout-menu-closed': !panelOpenState }"
             (opened)="panelOpenState = true"
             (closed)="panelOpenState = false"
             *ngIf="currentUser"

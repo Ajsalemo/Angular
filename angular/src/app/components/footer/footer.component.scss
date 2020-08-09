@@ -30,21 +30,42 @@
     @include fontSizeAndWeight(1rem);
   }
   &-menu {
-    padding: 10rem 10rem 0.4rem 0.9rem;
+    display: flex;
+    align-items: flex-end;
+    height: 20rem;
+    width: 28rem;
     background-color: $main-theme-background !important;
     color: #808080;
     &-login-menu {
+      height: 100%;
       display: flex;
       flex-direction: column;
-      &:hover {
-        color: $white-text;
+      justify-content: space-between;
+      border-right: 1px solid #504545;
+      &-list {
+        list-style-type: none;
+        padding-left: 0.9rem;
+        &-item {
+          &:hover {
+            color: $white-text;
+            cursor: pointer;
+          }
+        }
       }
+    }
+    .mat-menu-content {
+      height: 100%;
+      padding-bottom: 0 !important;
     }
     &-logout-menu {
       background-color: #504545;
       border-radius: 0 !important;
       &-header {
         padding: 0.1rem 2.5rem 0.1rem 0.4rem !important;
+      }
+      &-closed {
+        background-color: inherit;
+        @extend .footer-menu-logout-menu;
       }
       &-user-account {
         @include fontSizeAndWeight(0.8rem);

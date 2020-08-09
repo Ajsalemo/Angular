@@ -12,7 +12,7 @@ module.exports = (user) => {
         // If the user ID is found, send back the user
         if (user) {
           console.log(user);
-          res.sendStatus(200);
+          res.sendStatus(204);
         } else {
           res.sendStatus(404);
         }
