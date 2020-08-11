@@ -18,7 +18,10 @@
           </button>
           <div>
             <ul class="footer-menu-login-menu-list">
-              <li class="footer-menu-login-menu-list-item">
+              <li
+                class="footer-menu-login-menu-list-item"
+                (click)="toggleGeneralState($event)"
+              >
                 General
               </li>
               <li class="footer-menu-login-menu-list-item">Photos</li>
@@ -48,6 +51,12 @@
               Logout
             </button>
           </mat-expansion-panel>
+        </div>
+        <div *ngIf="generalOpenState" class="footer-menu-general">
+          <div>
+            <h2>General</h2>
+            <h4>Customize your dashboard</h4>
+          </div>
         </div>
       </mat-menu>
       <a

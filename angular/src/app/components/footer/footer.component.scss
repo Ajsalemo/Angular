@@ -33,6 +33,7 @@
     display: flex;
     align-items: flex-end;
     height: 20rem;
+    max-width: none !important;
     width: 28rem;
     background-color: $main-theme-background !important;
     color: #808080;
@@ -56,6 +57,7 @@
     .mat-menu-content {
       height: 100%;
       padding-bottom: 0 !important;
+      display: flex;
     }
     &-logout-menu {
       background-color: #504545;
@@ -78,6 +80,17 @@
             color: $white-text;
           }
         }
+      }
+    }
+    &-general {
+      padding-left: 1rem;
+      h2 {
+        margin-bottom: 0;
+        color: $white-text;
+      }
+      h4 {
+        margin-top: 0.2rem;
+        @include fontSizeAndWeight(initial, 200);
       }
     }
   }

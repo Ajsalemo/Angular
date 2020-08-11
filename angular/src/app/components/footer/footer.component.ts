@@ -13,8 +13,14 @@ export class FooterComponent {
   @Input() photoURL: string;
   @Input() currentUser: string;
   panelOpenState: boolean = false;
+  generalOpenState: boolean = true;
 
   constructor(private authServiceFooter: AuthService, private router: Router) {}
+
+  toggleGeneralState(e: any): void {
+    this.generalOpenState = !this.generalOpenState;
+    e.stopPropagation();
+  }
 
   logUserIn(): void {
     this.router.navigate(['']);
