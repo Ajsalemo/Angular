@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'component-footer',
@@ -14,11 +14,27 @@ export class FooterComponent {
   @Input() currentUser: string;
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
+  photoOpenState: boolean = false;
 
   constructor(private authServiceFooter: AuthService, private router: Router) {}
 
   toggleGeneralState(e: any): void {
+    if (this.generalOpenState === true) {
+      e.stopPropagation();
+      return;
+    }
     this.generalOpenState = !this.generalOpenState;
+    this.photoOpenState = false;
+    e.stopPropagation();
+  }
+
+  togglePhotoState(e: any): void {
+    if (this.photoOpenState === true) {
+      e.stopPropagation();
+      return;
+    }
+    this.photoOpenState = !this.photoOpenState;
+    this.generalOpenState = false;
     e.stopPropagation();
   }
 

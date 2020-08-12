@@ -88,9 +88,16 @@
         margin-bottom: 0;
         color: $white-text;
       }
-      h4 {
-        margin-top: 0.2rem;
+      &-sub-header {
+        margin: 0.2rem 0;
         @include fontSizeAndWeight(initial, 200);
+      }
+      &-show-header {
+        @include fontSizeAndWeight(initial, 700);
+        color: $white-text;
+        border-bottom: 1px solid #504545;
+        margin-top: 0.7rem;
+        padding-bottom: 0.3rem;
       }
     }
   }

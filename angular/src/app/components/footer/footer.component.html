@@ -24,7 +24,12 @@
               >
                 General
               </li>
-              <li class="footer-menu-login-menu-list-item">Photos</li>
+              <li
+                class="footer-menu-login-menu-list-item"
+                (click)="togglePhotoState($event)"
+              >
+                Photos
+              </li>
             </ul>
           </div>
           <mat-expansion-panel
@@ -52,10 +57,24 @@
             </button>
           </mat-expansion-panel>
         </div>
-        <div *ngIf="generalOpenState" class="footer-menu-general">
+        <div
+          *ngIf="!photoOpenState || generalOpenState"
+          class="footer-menu-general"
+        >
           <div>
             <h2>General</h2>
-            <h4>Customize your dashboard</h4>
+            <h4 class="footer-menu-general-sub-header">
+              Customize your dashboard
+            </h4>
+            <div>
+              <h4 class="footer-menu-general-show-header">Show</h4>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="photoOpenState" class="footer-menu-general">
+          <div>
+            <h2>Photos</h2>
+            <h4 class="footer-menu-general-sub-header">See a new photo each day</h4>
           </div>
         </div>
       </mat-menu>
