@@ -66,8 +66,12 @@
             <h4 class="footer-menu-general-sub-header">
               Customize your dashboard
             </h4>
-            <div>
+            <div class="footer-menu-general-toggle-div" (click)="$event.stopPropagation();">
               <h4 class="footer-menu-general-show-header">Show</h4>
+              <mat-slide-toggle class="footer-menu-general-toggle">Links</mat-slide-toggle>
+              <mat-slide-toggle class="footer-menu-general-toggle">Search</mat-slide-toggle>
+              <mat-slide-toggle class="footer-menu-general-toggle">Weather</mat-slide-toggle>
+              <mat-slide-toggle class="footer-menu-general-toggle">Todo</mat-slide-toggle>
             </div>
           </div>
         </div>

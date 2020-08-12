@@ -99,6 +99,19 @@
         margin-top: 0.7rem;
         padding-bottom: 0.3rem;
       }
+      &-toggle-div {
+        display: flex;
+        flex-direction: column;
+      }
+      &-toggle {
+        border-bottom: 1px solid #504545;
+        padding: 0.3rem 0;
+        @include fadeInOut;
+        &:hover {
+          background-color: #504545;
+          @include fadeInOut;
+        }
+      }
     }
   }
 }
