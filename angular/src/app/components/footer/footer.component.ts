@@ -15,6 +15,10 @@ export class FooterComponent {
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
+  isLinks: boolean = false;
+  isSearch: boolean = false;
+  isWeather: boolean = false;
+  isTodo: boolean = false;
 
   constructor(private authServiceFooter: AuthService, private router: Router) {}
 
@@ -36,6 +40,30 @@ export class FooterComponent {
     this.photoOpenState = !this.photoOpenState;
     this.generalOpenState = false;
     e.stopPropagation();
+  }
+
+  toggleGeneralMenuPersonalization(isBoundProperty: string) {
+    console.log(isBoundProperty)
+    switch (isBoundProperty) {
+      case 'isLinks':
+        this.isLinks = !this.isLinks;
+        console.log(this.isLinks);
+        break;
+      case 'isSearch':
+        this.isSearch = !this.isSearch;
+        console.log(this.isSearch);
+        break;
+      case 'isWeather':
+        this.isWeather = !this.isWeather;
+        console.log(this.isWeather);
+        break;
+      case 'isTodo':
+        this.isTodo = !this.isTodo;
+        console.log(this.isTodo);
+        break;
+      default:
+        break;
+    }
   }
 
   logUserIn(): void {

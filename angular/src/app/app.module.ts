@@ -1,22 +1,22 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { OpenWeatherApiService } from '../services/openweatherapi.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClockComponent } from './components/clock/clock.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeBackgroundComponent } from './components/home-background/home-background.component';
+import { LoginComponent } from './components/login/login.component';
 import { NavbarFormComponent } from './components/navbar/navbar-form/navbar-form.component';
 import { NavbarLinksComponent } from './components/navbar/navbar-links/navbar-links.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { MaterialModule } from './material.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
-import { OpenWeatherApiService } from '../services/openweatherapi.service';
 import { WeatherComponent } from './components/weather-component/weather-component.component';
-import { LoginComponent } from './components/login/login.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [OpenWeatherApiService],
   bootstrap: [AppComponent],

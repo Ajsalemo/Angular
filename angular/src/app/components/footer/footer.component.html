@@ -66,19 +66,52 @@
             <h4 class="footer-menu-general-sub-header">
               Customize your dashboard
             </h4>
-            <div class="footer-menu-general-toggle-div" (click)="$event.stopPropagation();">
+            <div
+              class="footer-menu-general-toggle-div"
+              (click)="$event.stopPropagation()"
+            >
               <h4 class="footer-menu-general-show-header">Show</h4>
-              <mat-slide-toggle class="footer-menu-general-toggle">Links</mat-slide-toggle>
-              <mat-slide-toggle class="footer-menu-general-toggle">Search</mat-slide-toggle>
-              <mat-slide-toggle class="footer-menu-general-toggle">Weather</mat-slide-toggle>
-              <mat-slide-toggle class="footer-menu-general-toggle">Todo</mat-slide-toggle>
+              <mat-slide-toggle
+                class="footer-menu-general-toggle"
+                id="links"
+                (click)="toggleGeneralMenuPersonalization('isLinks')"
+                [(ngModel)]="isLinks"
+                [checked]="isLinks"
+                >Links</mat-slide-toggle
+              >
+              <mat-slide-toggle
+                class="footer-menu-general-toggle"
+                id="search"
+                (click)="toggleGeneralMenuPersonalization('isSearch')"
+                [(ngModel)]="isSearch"
+                [checked]="isSearch"
+                >Search</mat-slide-toggle
+              >
+              <mat-slide-toggle
+                class="footer-menu-general-toggle"
+                id="weather"
+                (click)="toggleGeneralMenuPersonalization('isWeather')"
+                [(ngModel)]="isWeather"
+                [checked]="isWeather"
+                >Weather</mat-slide-toggle
+              >
+              <mat-slide-toggle
+                class="footer-menu-general-toggle"
+                id="todo"
+                (click)="toggleGeneralMenuPersonalization('isTodo')"
+                [(ngModel)]="isTodo"
+                [checked]="isTodo"
+                >Todo</mat-slide-toggle
+              >
             </div>
           </div>
         </div>
         <div *ngIf="photoOpenState" class="footer-menu-general">
           <div>
             <h2>Photos</h2>
-            <h4 class="footer-menu-general-sub-header">See a new photo each day</h4>
+            <h4 class="footer-menu-general-sub-header">
+              See a new photo each day
+            </h4>
           </div>
         </div>
       </mat-menu>
