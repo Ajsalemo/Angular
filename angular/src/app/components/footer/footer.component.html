@@ -73,34 +73,30 @@
               <h4 class="footer-menu-general-show-header">Show</h4>
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                id="links"
-                (click)="toggleGeneralMenuPersonalization('isLinks')"
+                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isLinks"
-                [checked]="isLinks"
+                id="isLinks"
                 >Links</mat-slide-toggle
               >
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                id="search"
-                (click)="toggleGeneralMenuPersonalization('isSearch')"
+                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isSearch"
-                [checked]="isSearch"
+                id="isSearch"
                 >Search</mat-slide-toggle
               >
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                id="weather"
-                (click)="toggleGeneralMenuPersonalization('isWeather')"
+                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isWeather"
-                [checked]="isWeather"
+                id="isWeather"
                 >Weather</mat-slide-toggle
               >
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                id="todo"
-                (click)="toggleGeneralMenuPersonalization('isTodo')"
+                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isTodo"
-                [checked]="isTodo"
+                id="isTodo"
                 >Todo</mat-slide-toggle
               >
             </div>

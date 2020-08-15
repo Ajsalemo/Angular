@@ -9,6 +9,7 @@ const models = require("./models");
 const auth = require("./auth/auth");
 const findEmailAccount = require("./auth/accounts");
 const findAccountById = require("./auth/currentuser");
+const updatePreferences = require("./auth/accountpreferences");
 
 // Initialize express
 const app = express();
@@ -52,8 +53,8 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/account/:email", findEmailAccount(models.User));
-
 app.get("/findUserById/:id", findAccountById(models.User));
+app.get("/updatePreferences/:id", updatePreferences(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize

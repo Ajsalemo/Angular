@@ -52,7 +52,13 @@ export class HomeBackgroundComponent implements OnInit {
     if (this.authServiceAuth.isAuthenticated() === true) {
       this.getCurrentUserService
         .getCurrentUser(this.currentUserId)
-        .then((res: any) => console.log(res));
+        .then((res: any) => console.log(res))
+        .catch((err: any) => {
+          if (err.status === 404) {
+            this.authServiceAuth.logout();
+            this.router.navigate(['']);
+          }
+        });
     }
   }
 

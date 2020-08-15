@@ -1,6 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { AccountService } from '../../../services/findaccount.service';
 
 @Component({
   selector: 'component-footer',
@@ -12,6 +13,7 @@ export class FooterComponent {
   @Input() authorToDisplay: string;
   @Input() photoURL: string;
   @Input() currentUser: string;
+  @Input() currentUserId: number;
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
@@ -20,7 +22,11 @@ export class FooterComponent {
   isWeather: boolean = false;
   isTodo: boolean = false;
 
-  constructor(private authServiceFooter: AuthService, private router: Router) {}
+  constructor(
+    private authServiceFooter: AuthService,
+    private accountServiceFooter: AccountService,
+    private router: Router
+  ) {}
 
   toggleGeneralState(e: any): void {
     if (this.generalOpenState === true) {
@@ -42,24 +48,25 @@ export class FooterComponent {
     e.stopPropagation();
   }
 
-  toggleGeneralMenuPersonalization(isBoundProperty: string) {
-    console.log(isBoundProperty)
-    switch (isBoundProperty) {
+  toggleGeneralMenuPersonalization(isBoundProperty: any) {
+    const toggleSourceId = isBoundProperty.source.id;
+    const isChecked = isBoundProperty.checked;
+    switch (toggleSourceId) {
       case 'isLinks':
-        this.isLinks = !this.isLinks;
-        console.log(this.isLinks);
+        this.isLinks = isChecked;
+        this.accountServiceFooter.setAccountDashboardPreferences(
+          this.isLinks,
+          this.currentUserId
+        );
         break;
       case 'isSearch':
-        this.isSearch = !this.isSearch;
-        console.log(this.isSearch);
+        this.isSearch = isChecked;
         break;
       case 'isWeather':
-        this.isWeather = !this.isWeather;
-        console.log(this.isWeather);
+        this.isWeather = isChecked;
         break;
       case 'isTodo':
-        this.isTodo = !this.isTodo;
-        console.log(this.isTodo);
+        this.isTodo = isChecked;
         break;
       default:
         break;
