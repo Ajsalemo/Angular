@@ -47,6 +47,8 @@ app.post("/signin", auth(passport, "local-signin"), (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
+app.post("/updatePreferences", updatePreferences(models.User));
+
 app.get("/logout", (req, res) => {
   req.logOut();
   res.sendStatus(204);
@@ -54,7 +56,6 @@ app.get("/logout", (req, res) => {
 
 app.get("/account/:email", findEmailAccount(models.User));
 app.get("/findUserById/:id", findAccountById(models.User));
-app.get("/updatePreferences/:id", updatePreferences(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize

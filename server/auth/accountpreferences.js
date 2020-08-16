@@ -1,24 +1,21 @@
 module.exports = (user) => {
-    const User = user;
-  
-    return (req, res) => {
-      // Search for the user by pulling the ID of the params on the GET request
-      User.findOne({
+  const User = user;
+
+  return (req, res) => {
+    console.log(req.body.accountPreferences);
+    const getUpdatedAccountPreferences = req.body.accountPreferences;
+    User.update(
+      {
+        showLinks: getUpdatedAccountPreferences.links,
+        showSearch: getUpdatedAccountPreferences.search,
+        showWeather: getUpdatedAccountPreferences.weather,
+        showTodo: getUpdatedAccountPreferences.todo,
+      },
+      {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
-      })
-        .then((user) => {
-            console.log(req)
-          // If the user ID is found, send back the user
-          if (user) {
-            console.log(user);
-            res.sendStatus(204);
-          } else {
-            res.sendStatus(404);
-          }
-        })
-        .catch((err) => console.log("Error:", err));
-    };
+      }
+    );
   };
-  
+};

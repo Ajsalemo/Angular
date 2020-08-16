@@ -1,5 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
 
@@ -13,20 +14,27 @@ export class FooterComponent {
   @Input() authorToDisplay: string;
   @Input() photoURL: string;
   @Input() currentUser: string;
-  @Input() currentUserId: number;
+  @Input() currentUserId: string;
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
-  isLinks: boolean = false;
-  isSearch: boolean = false;
-  isWeather: boolean = false;
-  isTodo: boolean = false;
+  isLinks: boolean = true;
+  isSearch: boolean = true;
+  isWeather: boolean = true;
+  isTodo: boolean = true;
 
   constructor(
     private authServiceFooter: AuthService,
     private accountServiceFooter: AccountService,
     private router: Router
   ) {}
+
+  slideToggleGroup = new FormGroup({
+    links: new FormControl(''),
+    search: new FormControl(''),
+    weather: new FormControl(''),
+    todo: new FormControl(''),
+  });
 
   toggleGeneralState(e: any): void {
     if (this.generalOpenState === true) {
@@ -48,29 +56,16 @@ export class FooterComponent {
     e.stopPropagation();
   }
 
-  toggleGeneralMenuPersonalization(isBoundProperty: any) {
-    const toggleSourceId = isBoundProperty.source.id;
-    const isChecked = isBoundProperty.checked;
-    switch (toggleSourceId) {
-      case 'isLinks':
-        this.isLinks = isChecked;
-        this.accountServiceFooter.setAccountDashboardPreferences(
-          this.isLinks,
-          this.currentUserId
-        );
-        break;
-      case 'isSearch':
-        this.isSearch = isChecked;
-        break;
-      case 'isWeather':
-        this.isWeather = isChecked;
-        break;
-      case 'isTodo':
-        this.isTodo = isChecked;
-        break;
-      default:
-        break;
-    }
+  submitAccountPreferences(data: {
+    links: boolean;
+    search: boolean;
+    weather: boolean;
+    todo: boolean;
+  }) {
+    console.log(data);
+    this.accountServiceFooter
+      .setAccountDashboardPreferences(data, this.currentUserId)
+      .then((res: any) => console.log(res));
   }
 
   logUserIn(): void {

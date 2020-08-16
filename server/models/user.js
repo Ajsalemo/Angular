@@ -16,10 +16,22 @@ module.exports = (sequelize, DataTypes) => {
       username: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      showLinks: DataTypes.BOOLEAN,
-      showSearch: DataTypes.BOOLEAN,
-      showWeather: DataTypes.BOOLEAN,
-      showTodo: DataTypes.BOOLEAN,
+      showLinks: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      showSearch: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      showWeather: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      showTodo: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       sequelize,

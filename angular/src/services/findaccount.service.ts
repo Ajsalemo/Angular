@@ -15,9 +15,14 @@ export class AccountService {
     return this.http.get(`/api/findUserById/${id}`).toPromise();
   }
 
-  setAccountDashboardPreferences(accountPreferences: boolean, id: number) {
+  setAccountDashboardPreferences(accountPreferences: object, id: string) {
     console.log(accountPreferences);
     console.log(id);
-    return this.http.get(`/api/updatePreferences/${id}`).toPromise()
+    return this.http
+      .post('/api/updatePreferences', {
+        accountPreferences: accountPreferences,
+        id: id,
+      })
+      .toPromise();
   }
 }

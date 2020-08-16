@@ -66,40 +66,41 @@
             <h4 class="footer-menu-general-sub-header">
               Customize your dashboard
             </h4>
-            <div
+            <form
               class="footer-menu-general-toggle-div"
               (click)="$event.stopPropagation()"
+              [formGroup]="slideToggleGroup"
             >
               <h4 class="footer-menu-general-show-header">Show</h4>
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isLinks"
-                id="isLinks"
+                formControlName="links"
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Links</mat-slide-toggle
               >
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isSearch"
-                id="isSearch"
+                formControlName="search"
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Search</mat-slide-toggle
               >
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isWeather"
-                id="isWeather"
+                formControlName="weather"
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Weather</mat-slide-toggle
               >
               <mat-slide-toggle
                 class="footer-menu-general-toggle"
-                (change)="toggleGeneralMenuPersonalization($event)"
                 [(ngModel)]="isTodo"
-                id="isTodo"
+                formControlName="todo"
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Todo</mat-slide-toggle
               >
-            </div>
+            </form>
           </div>
         </div>
         <div *ngIf="photoOpenState" class="footer-menu-general">
