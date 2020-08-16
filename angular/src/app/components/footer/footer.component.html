@@ -5,6 +5,7 @@
         mat-icon-button
         aria-label="Settings widget"
         [matMenuTriggerFor]="menu"
+        (menuOpened)="getAccountPreferences()"
       >
         <mat-icon class="footer-settings-icon">settings</mat-icon>
       </button>
