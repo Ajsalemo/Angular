@@ -39,6 +39,7 @@ export class HomeBackgroundComponent implements OnInit {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
         this.reIntializeComponent();
+        this.retrieveUserAccountInformation();
       }
     });
   }
@@ -52,7 +53,7 @@ export class HomeBackgroundComponent implements OnInit {
     if (this.authServiceAuth.isAuthenticated() === true) {
       this.getCurrentUserService
         .getCurrentUser(this.currentUserId)
-        .then((res: any) => console.log(res))
+        .then(() => {})
         .catch((err: any) => {
           if (err.status === 404) {
             this.authServiceAuth.logout();

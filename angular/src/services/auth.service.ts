@@ -14,9 +14,6 @@ export class AuthService {
     if (userName && userId !== '' && userName && userId) {
       return true;
     }
-    // If the userName or userId is empty(such as being deleted), then log the user out
-    this.logout();
-    this.router.navigate(['']);
     return false;
   }
 

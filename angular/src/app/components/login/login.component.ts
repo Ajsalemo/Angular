@@ -100,7 +100,7 @@ export class LoginComponent {
     this.passwordErrorMessage = '';
     this.userPassword = data.password;
     this.passwordErrorMessage = '';
-    this.loading = false;
+    this.loading = true;
     this.authService
       .signIn(this.userEmail, this.userPassword)
       .then((res: any) => {

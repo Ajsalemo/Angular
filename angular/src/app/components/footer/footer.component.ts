@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
@@ -10,7 +10,7 @@ import { AccountService } from '../../../services/findaccount.service';
   styleUrls: ['./footer.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   @Input() authorToDisplay: string;
   @Input() photoURL: string;
   @Input() currentUser: string;
@@ -18,10 +18,10 @@ export class FooterComponent {
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
-  isLinks: boolean = true;
-  isSearch: boolean = true;
-  isWeather: boolean = true;
-  isTodo: boolean = true;
+  isLinks: boolean;
+  isSearch: boolean;
+  isWeather: boolean;
+  isTodo: boolean;
 
   constructor(
     private authServiceFooter: AuthService,
@@ -62,19 +62,44 @@ export class FooterComponent {
     weather: boolean;
     todo: boolean;
   }) {
-    console.log(data);
     this.accountServiceFooter
       .setAccountDashboardPreferences(data, this.currentUserId)
-      .then((res: any) => console.log(res))
+      .then((res: any) => {
+        console.log(res);
+        this.isLinks = res.user.updatedLinks;
+        this.isSearch = res.user.updatedSearch;
+        this.isWeather = res.user.updatedWeather;
+        this.isTodo = res.user.updatedTodo;
+      })
       .catch((err: any) => console.log(err));
   }
 
+  getAccountPreferences(): void {
+    if (this.authServiceFooter.isAuthenticated() === true) {
+      this.accountServiceFooter
+        .getCurrentUser(this.currentUserId)
+        .then((res: any) => {
+          this.isLinks = res.user.showLinks;
+          this.isSearch = res.user.showSearch;
+          this.isWeather = res.user.showWeather;
+          this.isTodo = res.user.showTodo;
+        })
+        .catch((err: any) => console.log(err));
+    }
+  }
+
   logUserIn(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['']).then(() => {
+      this.getAccountPreferences();
+    });
   }
 
   logUserOut(): void {
     this.authServiceFooter.logout();
     this.router.navigate(['']);
+  }
+
+  ngOnInit(): void {
+    this.getAccountPreferences();
   }
 }

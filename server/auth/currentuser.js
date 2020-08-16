@@ -11,7 +11,7 @@ module.exports = (user) => {
       .then((user) => {
         // If the user ID is found, send back the user
         if (user) {
-          res.sendStatus(204);
+          res.status(200).json({ user: user });
         } else {
           res.sendStatus(404);
         }
