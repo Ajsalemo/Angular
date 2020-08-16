@@ -59,7 +59,7 @@ app.get("/findUserById/:id", findAccountById(models.User));
 
 // Create and sync the database through Sequelize
 models.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     console.log("Postgres has started and synced");
     app.listen(port, () => {

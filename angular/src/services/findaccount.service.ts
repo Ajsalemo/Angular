@@ -16,8 +16,6 @@ export class AccountService {
   }
 
   setAccountDashboardPreferences(accountPreferences: object, id: string) {
-    console.log(accountPreferences);
-    console.log(id);
     return this.http
       .post('/api/updatePreferences', {
         accountPreferences: accountPreferences,

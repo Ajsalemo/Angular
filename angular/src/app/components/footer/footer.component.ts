@@ -65,7 +65,8 @@ export class FooterComponent {
     console.log(data);
     this.accountServiceFooter
       .setAccountDashboardPreferences(data, this.currentUserId)
-      .then((res: any) => console.log(res));
+      .then((res: any) => console.log(res))
+      .catch((err: any) => console.log(err));
   }
 
   logUserIn(): void {
