@@ -112,6 +112,9 @@
           @include fadeInOut;
         }
       }
+      &-toggle-loader {
+        width: 2rem;
+      }
     }
   }
 }

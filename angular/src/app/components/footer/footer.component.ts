@@ -18,6 +18,7 @@ export class FooterComponent {
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
+  isLoading: boolean = false;
   isLinks: boolean;
   isSearch: boolean;
   isWeather: boolean;
@@ -68,7 +69,6 @@ export class FooterComponent {
     this.accountServiceFooter
       .setAccountDashboardPreferences(data, this.currentUserId)
       .then((res: any) => {
-        console.log(res);
         this.isLinks = res.user.updatedLinks;
         this.isSearch = res.user.updatedSearch;
         this.isWeather = res.user.updatedWeather;
@@ -79,7 +79,6 @@ export class FooterComponent {
 
   // Retreive account preferences to keep synced with what is updated
   getAccountPreferences(): void {
-    console.log('Loading');
     if (this.authServiceFooter.isAuthenticated() === true) {
       this.accountServiceFooter
         .getCurrentUser(this.currentUserId)
@@ -88,9 +87,12 @@ export class FooterComponent {
           this.isSearch = res.user.showSearch;
           this.isWeather = res.user.showWeather;
           this.isTodo = res.user.showTodo;
-          console.log('Done loading');
+          this.isLoading = false;
         })
-        .catch((err: any) => console.log(err));
+        .catch((err: any) => {
+          console.log(err)
+          this.isLoading = false;
+        });
     }
   }
 

@@ -17,6 +17,7 @@ import { NavbarLinksComponent } from './components/navbar/navbar-links/navbar-li
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { WeatherComponent } from './components/weather-component/weather-component.component';
 import { MaterialModule } from './material.module';
+import { FooterLoadingIndicator } from '../app/components/footer/footer-loading-indicator/footer-loading-indicator.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MaterialModule } from './material.module';
     NavbarLinksComponent,
     WeatherComponent,
     LoginComponent,
+    FooterLoadingIndicator,
   ],
   imports: [
     BrowserModule,

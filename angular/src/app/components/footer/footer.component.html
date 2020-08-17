@@ -74,33 +74,49 @@
             >
               <h4 class="footer-menu-general-show-header">Show</h4>
               <mat-slide-toggle
+                *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isLinks"
                 formControlName="links"
                 (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Links</mat-slide-toggle
               >
+              <footer-loading-indicator
+                [isLoading]="isLoading"
+              ></footer-loading-indicator>
               <mat-slide-toggle
+                *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isSearch"
                 formControlName="search"
                 (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Search</mat-slide-toggle
               >
+              <footer-loading-indicator
+                [isLoading]="isLoading"
+              ></footer-loading-indicator>
               <mat-slide-toggle
+                *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isWeather"
                 formControlName="weather"
                 (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Weather</mat-slide-toggle
               >
+              <footer-loading-indicator
+                [isLoading]="isLoading"
+              ></footer-loading-indicator>
               <mat-slide-toggle
+                *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isTodo"
                 formControlName="todo"
                 (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Todo</mat-slide-toggle
               >
+              <footer-loading-indicator
+                [isLoading]="isLoading"
+              ></footer-loading-indicator>
             </form>
           </div>
         </div>
