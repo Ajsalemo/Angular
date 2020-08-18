@@ -10,8 +10,16 @@
         <mat-icon class="footer-settings-icon">settings</mat-icon>
       </button>
       <mat-menu #menu="matMenu" class="footer-menu">
-        <div class="footer-menu-login-menu">
-          <button mat-icon-button *ngIf="!currentUser" (click)="logUserIn()">
+        <div
+          class="footer-menu-login-menu"
+          [ngClass]="{ 'footer-menu-login-menu-no-user': !currentUser }"
+        >
+          <button
+            mat-icon-button
+            *ngIf="!currentUser"
+            (click)="logUserIn()"
+            class="footer-menu-login-menu-no-user-btn"
+          >
             <mat-icon aria-hidden="false" aria-label="Account icon"
               >account_circle</mat-icon
             >
@@ -78,7 +86,11 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isLinks"
                 formControlName="links"
-                (change)="submitAccountPreferences(slideToggleGroup.value)"
+                (change)="
+                  currentUser
+                    ? submitAccountPreferences(slideToggleGroup.value)
+                    : !isLinks
+                "
                 >Links</mat-slide-toggle
               >
               <footer-loading-indicator
@@ -89,7 +101,11 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isSearch"
                 formControlName="search"
-                (change)="submitAccountPreferences(slideToggleGroup.value)"
+                (change)="
+                  currentUser
+                    ? submitAccountPreferences(slideToggleGroup.value)
+                    : !isSearch
+                "
                 >Search</mat-slide-toggle
               >
               <footer-loading-indicator
@@ -100,7 +116,11 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isWeather"
                 formControlName="weather"
-                (change)="submitAccountPreferences(slideToggleGroup.value)"
+                (change)="
+                  currentUser
+                    ? submitAccountPreferences(slideToggleGroup.value)
+                    : !isWeather
+                "
                 >Weather</mat-slide-toggle
               >
               <footer-loading-indicator
@@ -111,7 +131,11 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="isTodo"
                 formControlName="todo"
-                (change)="submitAccountPreferences(slideToggleGroup.value)"
+                (change)="
+                  currentUser
+                    ? submitAccountPreferences(slideToggleGroup.value)
+                    : !isTodo
+                "
                 >Todo</mat-slide-toggle
               >
               <footer-loading-indicator

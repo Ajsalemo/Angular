@@ -19,10 +19,10 @@ export class FooterComponent {
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
   isLoading: boolean = false;
-  isLinks: boolean;
-  isSearch: boolean;
-  isWeather: boolean;
-  isTodo: boolean;
+  isLinks: boolean = true;
+  isSearch: boolean = true;
+  isWeather: boolean = true;
+  isTodo: boolean = true;
 
   constructor(
     private authServiceFooter: AuthService,
@@ -103,5 +103,9 @@ export class FooterComponent {
   logUserOut(): void {
     this.authServiceFooter.logout();
     this.router.navigate(['']);
+    this.isLinks = true;
+    this.isSearch = true;
+    this.isWeather = true;
+    this.isTodo = true;
   }
 }

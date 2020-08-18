@@ -53,6 +53,14 @@
           }
         }
       }
+      &-no-user {
+        @extend .footer-menu-login-menu;
+        flex-direction: column-reverse;
+        width: 7rem;
+        &-btn {
+          padding-left: 1rem !important;
+        }
+      }
     }
     .mat-menu-content {
       height: 100%;
