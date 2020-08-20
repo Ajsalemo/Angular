@@ -28,6 +28,10 @@ export class HomeBackgroundComponent implements OnInit {
   currentUser = localStorage.getItem('user');
   currentUserId = localStorage.getItem('userId');
   navigationSubscription: any;
+  parentIsLinks: boolean;
+  parentIsSearch: boolean;
+  parentIsWeather: boolean;
+  parentIsTodo: boolean;
 
   constructor(
     private backgroundImageService: BackgroundImageService,
@@ -53,7 +57,13 @@ export class HomeBackgroundComponent implements OnInit {
     if (this.authServiceAuth.isAuthenticated() === true) {
       this.getCurrentUserService
         .getCurrentUser(this.currentUserId)
-        .then(() => {})
+        .then((res: any) => {
+          this.parentIsLinks = res.user.showLinks;
+          this.parentIsSearch = res.user.showSearch;
+          this.parentIsWeather = res.user.showWeather;
+          this.parentIsTodo = res.user.showTodo;
+          console.log(this.parentIsLinks)
+        })
         .catch((err: any) => {
           if (err.status === 404) {
             this.authServiceAuth.logout();

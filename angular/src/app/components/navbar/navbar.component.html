@@ -2,7 +2,7 @@
 <p class="navbar-wrapper-p">
   <mat-toolbar color="primary" class="navbar-mat-toolbar">
     <span class="navbar-link-span">
-      <navbar-links-component></navbar-links-component>
+      <navbar-links-component *ngIf="showLinks"></navbar-links-component>
     </span>
     <navbar-form-component></navbar-form-component>
   </mat-toolbar>

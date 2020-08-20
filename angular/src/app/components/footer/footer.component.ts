@@ -80,6 +80,7 @@ export class FooterComponent {
   // Retreive account preferences to keep synced with what is updated
   getAccountPreferences(): void {
     if (this.authServiceFooter.isAuthenticated() === true) {
+      this.isLoading = true;
       this.accountServiceFooter
         .getCurrentUser(this.currentUserId)
         .then((res: any) => {
@@ -90,7 +91,7 @@ export class FooterComponent {
           this.isLoading = false;
         })
         .catch((err: any) => {
-          console.log(err)
+          console.log(err);
           this.isLoading = false;
         });
     }

@@ -1,4 +1,3 @@
-<component-navbar></component-navbar>
 <mat-grid-list
   class="home-background"
   cols="1"
@@ -6,6 +5,7 @@
   [lazyLoad]="backgroundImageToDisplay"
   rowHeight="100vh"
 >
+  <component-navbar [showLinks]="parentIsLinks"></component-navbar>
   <mat-grid-tile>
     <div class="home-username-div-wrapper">
       <span class="home-username-time" *ngIf="!currentUser"
