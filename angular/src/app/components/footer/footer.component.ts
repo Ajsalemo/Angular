@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
 
@@ -15,20 +15,27 @@ export class FooterComponent {
   @Input() photoURL: string;
   @Input() currentUser: string;
   @Input() currentUserId: string;
+  @Input() parentIsLinks: boolean;
+  @Input() parentIsSearch: boolean;
+  @Input() parentIsWeather: boolean;
+  @Input() parentIsTodo: boolean;
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
   isLoading: boolean = false;
-  isLinks: boolean = true;
-  isSearch: boolean = true;
-  isWeather: boolean = true;
-  isTodo: boolean = true;
+  navigationSubscription: any;
 
   constructor(
     private authServiceFooter: AuthService,
     private accountServiceFooter: AccountService,
     private router: Router
-  ) {}
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+      }
+    });
+  }
 
   slideToggleGroup = new FormGroup({
     links: new FormControl(''),
@@ -68,11 +75,8 @@ export class FooterComponent {
   }) {
     this.accountServiceFooter
       .setAccountDashboardPreferences(data, this.currentUserId)
-      .then((res: any) => {
-        this.isLinks = res.user.updatedLinks;
-        this.isSearch = res.user.updatedSearch;
-        this.isWeather = res.user.updatedWeather;
-        this.isTodo = res.user.updatedTodo;
+      .then(() => {
+        this.router.navigate(['']);
       })
       .catch((err: any) => console.log(err));
   }
@@ -83,15 +87,10 @@ export class FooterComponent {
       this.isLoading = true;
       this.accountServiceFooter
         .getCurrentUser(this.currentUserId)
-        .then((res: any) => {
-          this.isLinks = res.user.showLinks;
-          this.isSearch = res.user.showSearch;
-          this.isWeather = res.user.showWeather;
-          this.isTodo = res.user.showTodo;
+        .then(() => {
           this.isLoading = false;
         })
         .catch((err: any) => {
-          console.log(err);
           this.isLoading = false;
         });
     }
@@ -104,9 +103,9 @@ export class FooterComponent {
   logUserOut(): void {
     this.authServiceFooter.logout();
     this.router.navigate(['']);
-    this.isLinks = true;
-    this.isSearch = true;
-    this.isWeather = true;
-    this.isTodo = true;
+    this.parentIsLinks = true;
+    this.parentIsSearch = true;
+    this.parentIsWeather = true;
+    this.parentIsTodo = true;
   }
 }

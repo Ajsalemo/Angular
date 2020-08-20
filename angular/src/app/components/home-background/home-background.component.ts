@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import * as moment from 'moment';
-import { BackgroundImageService } from '../../../services/background-images.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { AccountService } from '../../../services/findaccount.service';
 import { AuthService } from '../../../services/auth.service';
+import { BackgroundImageService } from '../../../services/background-images.service';
+import { AccountService } from '../../../services/findaccount.service';
 
 @Component({
   selector: 'component-home-background',
@@ -28,10 +28,10 @@ export class HomeBackgroundComponent implements OnInit {
   currentUser = localStorage.getItem('user');
   currentUserId = localStorage.getItem('userId');
   navigationSubscription: any;
-  parentIsLinks: boolean;
-  parentIsSearch: boolean;
-  parentIsWeather: boolean;
-  parentIsTodo: boolean;
+  parentIsLinks: boolean = true;
+  parentIsSearch: boolean = true;
+  parentIsWeather: boolean = true;
+  parentIsTodo: boolean = true;
 
   constructor(
     private backgroundImageService: BackgroundImageService,
@@ -62,7 +62,6 @@ export class HomeBackgroundComponent implements OnInit {
           this.parentIsSearch = res.user.showSearch;
           this.parentIsWeather = res.user.showWeather;
           this.parentIsTodo = res.user.showTodo;
-          console.log(this.parentIsLinks)
         })
         .catch((err: any) => {
           if (err.status === 404) {

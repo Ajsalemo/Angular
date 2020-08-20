@@ -84,12 +84,12 @@
               <mat-slide-toggle
                 *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
-                [(ngModel)]="isLinks"
+                [(ngModel)]="parentIsLinks"
                 formControlName="links"
                 (change)="
                   currentUser
                     ? submitAccountPreferences(slideToggleGroup.value)
-                    : !isLinks
+                    : !parentIsLinks
                 "
                 >Links</mat-slide-toggle
               >
@@ -99,12 +99,12 @@
               <mat-slide-toggle
                 *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
-                [(ngModel)]="isSearch"
+                [(ngModel)]="parentIsSearch"
                 formControlName="search"
                 (change)="
                   currentUser
                     ? submitAccountPreferences(slideToggleGroup.value)
-                    : !isSearch
+                    : !parentIsSearch
                 "
                 >Search</mat-slide-toggle
               >
@@ -114,12 +114,12 @@
               <mat-slide-toggle
                 *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
-                [(ngModel)]="isWeather"
+                [(ngModel)]="parentIsWeather"
                 formControlName="weather"
                 (change)="
                   currentUser
                     ? submitAccountPreferences(slideToggleGroup.value)
-                    : !isWeather
+                    : !parentIsWeather
                 "
                 >Weather</mat-slide-toggle
               >
@@ -129,12 +129,12 @@
               <mat-slide-toggle
                 *ngIf="!isLoading"
                 class="footer-menu-general-toggle"
-                [(ngModel)]="isTodo"
+                [(ngModel)]="parentIsTodo"
                 formControlName="todo"
                 (change)="
                   currentUser
                     ? submitAccountPreferences(slideToggleGroup.value)
-                    : !isTodo
+                    : !parentIsTodo
                 "
                 >Todo</mat-slide-toggle
               >
