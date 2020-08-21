@@ -17,7 +17,12 @@
     class="navbar-full-width navbar-form-select-field"
     [ngClass]="{'navbar-form-select-field-show': searchGroup.value.search}"
   >
-    <input matInput formControlName="search" type="text" />
+    <input
+      matInput
+      formControlName="search"
+      type="text"
+      class="navbar-form-dropdown-input"
+    />
   </mat-form-field>
   <mat-form-field
     class="navbar-form-select-dropdown navbar-form-select-field"

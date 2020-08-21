@@ -14,7 +14,7 @@
     &-input {
       @include fontSizeAndWeight(4rem, 200);
       text-align: center !important;
-      border-bottom: 3px solid #fff;
+      border-bottom: 3px solid #fff !important;
     }
   }
   &-error-message {

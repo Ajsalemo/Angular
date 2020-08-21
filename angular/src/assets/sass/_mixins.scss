@@ -6,7 +6,7 @@
 // Fonts
 @mixin fontSizeAndWeight($fontSize: initial, $fontWeight: initial) {
   font-size: $fontSize !important;
-  font-weight: $fontWeight;
+  font-weight: $fontWeight !important;
 }
 
 // Fades

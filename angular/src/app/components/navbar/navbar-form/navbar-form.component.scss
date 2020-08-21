@@ -54,6 +54,9 @@
       @include fontSizeAndWeight(1.1rem, 200);
     }
   }
+  &-dropdown-input {
+    border-bottom: 1px solid #fff !important;
+  }
 }
 
 // Overriding the default class for selected mat-option components
