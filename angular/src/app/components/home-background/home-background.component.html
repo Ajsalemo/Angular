@@ -5,7 +5,11 @@
   [lazyLoad]="backgroundImageToDisplay"
   rowHeight="100vh"
 >
-  <component-navbar [showLinks]="parentIsLinks"></component-navbar>
+  <component-navbar
+    [parentIsLinks]="parentIsLinks"
+    [parentIsSearch]="parentIsSearch"
+    [parentIsWeather]="parentIsWeather"
+  ></component-navbar>
   <mat-grid-tile>
     <div class="home-username-div-wrapper">
       <span class="home-username-time" *ngIf="!currentUser"

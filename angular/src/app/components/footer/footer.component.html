@@ -161,6 +161,6 @@
         >{{ authorToDisplay }} / Unsplash</a
       >
     </div>
-    <span class="footer-todo-text">Todo</span>
+    <span class="footer-todo-text" *ngIf="parentIsTodo" [@fadeInOut]>Todo</span>
   </mat-toolbar>
 </p>
