@@ -51,6 +51,15 @@ export class HomeBackgroundComponent implements OnInit {
   reIntializeComponent(): void {
     this.currentUser = localStorage.getItem('user');
     this.currentUserId = localStorage.getItem('userId');
+    // If there is no curent user, then set the booleans for the slider preferences back to true(which is the default)
+    // This is to reset them upon logout of a user
+    // Doing this only when a user is logged in also prevents the sliders from 'flapping' when changing preferences when logged in
+    if (!this.currentUser || this.currentUser === '') {
+      this.parentIsLinks = true;
+      this.parentIsSearch = true;
+      this.parentIsWeather = true;
+      this.parentIsTodo = true;
+    }
   }
 
   retrieveUserAccountInformation() {
