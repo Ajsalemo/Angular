@@ -7,11 +7,20 @@
   max-width: 500px;
   width: 100%;
   &-placeholder {
-    background: url('../../../../assets/images/google.svg') no-repeat;
+    background: url("../../../../assets/images/google.svg") no-repeat;
     height: 1rem;
   }
   &-full-width {
-    width: 100%;
+    width: 50%;
+    @media (min-width: $xs-breakpoint) {
+      width: 75%;
+    }
+    @media (min-width: $x-sm-breakpoint) {
+      width: 85%;
+    }
+    @media (min-width: $sm-breakpoint) {
+      width: 100%;
+    }
   }
   &-submit-disabled {
     color: red;
@@ -54,9 +63,6 @@
       @include fontSizeAndWeight(1.1rem, 200);
     }
   }
-  &-dropdown-input {
-    border-bottom: 1px solid #fff !important;
-  }
 }
 
 // Overriding the default class for selected mat-option components
@@ -64,5 +70,3 @@
   background-color: $main-theme-background !important;
   color: $white-text !important;
 }
-
-

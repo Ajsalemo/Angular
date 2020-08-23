@@ -4,7 +4,11 @@
 .navbar-links {
   &-parent-text {
     color: $white-text;
+    padding: 0 0 0 0.2rem;
     @include fontSizeAndWeight(1rem);
+    @media (min-width: $sm-breakpoint) {
+      padding-left: 2rem;
+    }
   }
   &-menu {
     background-color: $main-theme-background;

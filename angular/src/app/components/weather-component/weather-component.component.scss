@@ -12,6 +12,9 @@
   &-parent-div {
     text-align: right;
     padding: 0.5rem 0.5rem 0 0;
+    @media (min-width: $sm-breakpoint) {
+      padding: 1rem 1rem 0 0;
+    }
     &:hover {
       cursor: pointer;
     }

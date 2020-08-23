@@ -3,6 +3,9 @@
 
 .clock {
   &-username-text {
-    @include loginAndGenericDisplay(3.7rem, 400);
+    @include loginAndGenericDisplay(2rem, 400);
+    @media (min-width: $x-sm-breakpoint) {
+      @include loginAndGenericDisplay(3.7rem, 400);
+    }
   }
 }
