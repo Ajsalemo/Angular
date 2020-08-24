@@ -1,0 +1,14 @@
+<button
+  mat-icon-button
+  aria-label="Todo menu"
+  class="footer-todo-text"
+  *ngIf="parentIsTodo"
+  [@fadeInOut]
+  [matMenuTriggerFor]="todoMenu"
+>
+  Todo
+</button>
+
+<mat-menu #todoMenu="matMenu">
+  <div>a menu</div>
+</mat-menu>

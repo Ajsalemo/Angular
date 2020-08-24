@@ -3,26 +3,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
-import { style, animate, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'component-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        // :enter is alias to 'void => *'
-        style({ opacity: 0 }),
-        animate(500, style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        // :leave is alias to '* => void'
-        animate(500, style({ opacity: 0 })),
-      ]),
-    ]),
-  ],
 })
 export class FooterComponent {
   @Input() authorToDisplay: string;
