@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { style, animate, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'component-todo-footer',
   templateUrl: './footer-todo-menu.component.html',
   styleUrls: ['./footer-todo-menu.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [

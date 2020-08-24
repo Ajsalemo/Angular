@@ -1,0 +1,28 @@
+// SASS imports
+@import "_mixins";
+@import "_variables";
+
+.footer-todo {
+  &-text {
+    color: $white-text;
+    @include fontSizeAndWeight(1rem);
+  }
+  &-menu {
+    display: flex;
+    align-items: flex-end;
+    height: 15rem;
+    max-width: none !important;
+    width: 20rem;
+    background-color: $main-theme-background !important;
+    color: #808080;
+
+    .mat-menu-content {
+      height: 100%;
+    }
+  }
+  &-header {
+    color: $white-text;
+    @include fontSizeAndWeight(1.3rem);
+    padding: 1rem;
+  }
+}

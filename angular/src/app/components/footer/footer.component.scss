@@ -25,10 +25,6 @@
     color: $white-text;
     text-decoration: none;
   }
-  &-todo-text {
-    color: $white-text;
-    @include fontSizeAndWeight(1rem);
-  }
   &-menu {
     display: flex;
     align-items: flex-end;

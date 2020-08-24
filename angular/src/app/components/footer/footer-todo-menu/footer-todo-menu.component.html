@@ -9,6 +9,33 @@
   Todo
 </button>
 
-<mat-menu #todoMenu="matMenu">
-  <div>a menu</div>
+<mat-menu
+  #todoMenu="matMenu"
+  class="footer-todo-menu"
+  (click)="$event.stopPropagation()"
+>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="subTodoMenu"
+    aria-label="Recent tasks"
+    class="footer-todo-header"
+    (click)="$event.stopPropagation()"
+  >
+    Today
+    <mat-icon>expand_more</mat-icon>
+</button>
+  <mat-menu #subTodoMenu="matMenu" (click)="$event.stopPropagation()">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Check voice mail</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
 </mat-menu>
