@@ -18,6 +18,19 @@
 
     .mat-menu-content {
       height: 100%;
+      width: 100%;
+    }
+    &-todo-button {
+      background-color: #585858;
+      color: $white-text;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    &-parent-div {
+      height: 70%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
     }
   }
   &-header {
@@ -29,7 +42,7 @@
     background-color: #403c3c;
     width: 12rem;
     &-text {
-      color: #fff;
+      color: $white-text;
       height: 2rem;
       display: flex;
       align-items: center;

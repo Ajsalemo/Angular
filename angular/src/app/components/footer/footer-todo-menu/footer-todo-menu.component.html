@@ -24,6 +24,18 @@
     Today
     <mat-icon>expand_more</mat-icon>
   </button>
+  <div class="footer-todo-menu-parent-div">
+    <button
+      mat-raised-button
+      class="footer-todo-menu-todo-button"
+      (click)="addTodoView = !addTodoView; $event.stopPropagation()"
+    >
+      <span *ngIf="!addTodoView">Add todo</span>
+      <span *ngIf="addTodoView">Switch to today</span>
+    </button>
+  </div>
+  <!-- Filler form/input for now -->
+  <form *ngIf="addTodoView"><input type="text" /></form>
   <mat-menu
     #subTodoMenu="matMenu"
     (click)="$event.stopPropagation()"

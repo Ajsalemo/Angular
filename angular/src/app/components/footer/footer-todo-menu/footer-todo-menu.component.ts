@@ -22,4 +22,5 @@ import { style, animate, transition, trigger } from '@angular/animations';
 })
 export class ComponentTodoMenuFooter {
   @Input() parentIsTodo: boolean;
+  addTodoView: boolean = false;
 }
