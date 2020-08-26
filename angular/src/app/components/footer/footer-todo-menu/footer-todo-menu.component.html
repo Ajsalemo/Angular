@@ -23,19 +23,13 @@
   >
     Today
     <mat-icon>expand_more</mat-icon>
-</button>
-  <mat-menu #subTodoMenu="matMenu" (click)="$event.stopPropagation()">
-    <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <mat-icon>voicemail</mat-icon>
-      <span>Check voice mail</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon>
-      <span>Disable alerts</span>
-    </button>
+  </button>
+  <mat-menu
+    #subTodoMenu="matMenu"
+    (click)="$event.stopPropagation()"
+    class="footer-todo-sub-menu"
+  >
+    <button mat-menu-item class="footer-todo-sub-menu-text">Today</button>
+    <button mat-menu-item class="footer-todo-sub-menu-text">Done</button>
   </mat-menu>
 </mat-menu>

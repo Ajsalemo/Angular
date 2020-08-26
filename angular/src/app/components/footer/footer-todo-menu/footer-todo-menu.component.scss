@@ -25,4 +25,17 @@
     @include fontSizeAndWeight(1.3rem);
     padding: 1rem;
   }
+  &-sub-menu {
+    background-color: #403c3c;
+    width: 12rem;
+    &-text {
+      color: #fff;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      &:hover {
+        background-color: #585858 !important;
+      }
+    }
+  }
 }
