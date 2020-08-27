@@ -20,14 +20,34 @@
       height: 100%;
       width: 100%;
     }
+    .mat-form-field {
+      color: $white-text;
+      padding-left: 1rem;
+      &-label {
+        color: $white-text !important;
+      }
+      &-flex {
+        align-items: flex-end;
+      }
+    }
     &-todo-button {
       background-color: #585858;
       color: $white-text;
       width: fit-content;
       margin: 0 auto;
     }
+    &-send-btn {
+      display: flex;
+      align-items: flex-end;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &-menu-submit-icon {
+      color: $white-text !important;
+    }
     &-parent-div {
-      height: 70%;
+      height: 50%;
       display: flex;
       justify-content: center;
       flex-direction: column;

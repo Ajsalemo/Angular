@@ -1,5 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { style, animate, transition, trigger } from '@angular/animations';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'component-todo-footer',
@@ -23,4 +24,17 @@ import { style, animate, transition, trigger } from '@angular/animations';
 export class ComponentTodoMenuFooter {
   @Input() parentIsTodo: boolean;
   addTodoView: boolean = false;
+
+  todoGroup = new FormGroup({
+    todo: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(255),
+    ]),
+  });
+
+  submitTodoForm(data: { todo: string }) {
+    const todoValue: string = data.todo;
+    console.log(todoValue);
+  }
 }

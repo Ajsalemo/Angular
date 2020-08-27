@@ -35,7 +35,30 @@
     </button>
   </div>
   <!-- Filler form/input for now -->
-  <form *ngIf="addTodoView"><input type="text" /></form>
+  <form
+    *ngIf="addTodoView"
+    (click)="$event.stopPropagation()"
+    [formGroup]="todoGroup"
+    (ngSubmit)="submitTodoForm(todoGroup.value)"
+  >
+    <mat-form-field appearance="none">
+      <mat-label>New Todo</mat-label>
+      <input
+        matInput
+        placeholder="New Todo"
+        formControlName="todo"
+        class="footer-todo-menu-input"
+      />
+      <button
+        mat-menu-item
+        matSuffix
+        type="submit"
+        class="footer-todo-menu-send-btn"
+      >
+        <mat-icon class="footer-todo-menu-menu-submit-icon">send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
   <mat-menu
     #subTodoMenu="matMenu"
     (click)="$event.stopPropagation()"
