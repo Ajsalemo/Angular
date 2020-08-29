@@ -1,6 +1,7 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { style, animate, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TodoService } from '../../../../services/todo.service';
 
 @Component({
   selector: 'component-todo-footer',
@@ -23,7 +24,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ComponentTodoMenuFooter {
   @Input() parentIsTodo: boolean;
+  @Input() currentUserId: string;
   addTodoView: boolean = false;
+
+  constructor(private todoService: TodoService) {}
 
   todoGroup = new FormGroup({
     todo: new FormControl('', [
@@ -36,5 +40,9 @@ export class ComponentTodoMenuFooter {
   submitTodoForm(data: { todo: string }) {
     const todoValue: string = data.todo;
     console.log(todoValue);
+    console.log(this.currentUserId);
+    this.todoService
+      .addTodo(todoValue, this.currentUserId)
+      .then(() => console.log('Added a new task/todo'));
   }
 }
