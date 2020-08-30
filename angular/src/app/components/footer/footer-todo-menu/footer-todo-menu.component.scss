@@ -52,6 +52,10 @@
       justify-content: center;
       flex-direction: column;
     }
+    &-todos {
+      list-style-type: none;
+      padding: 0 0 0.2rem 1rem;
+    }
   }
   &-header {
     color: $white-text;

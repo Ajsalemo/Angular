@@ -11,6 +11,7 @@ const findEmailAccount = require("./auth/accounts");
 const findAccountById = require("./auth/currentuser");
 const updatePreferences = require("./auth/accountpreferences");
 const addTodo = require("./auth/posttodos");
+const getTodo = require("./auth/gettodos");
 
 // Initialize express
 const app = express();
@@ -66,6 +67,8 @@ app.get("/logout", (req, res) => {
   req.logOut();
   res.sendStatus(204);
 });
+// Get all todos/tasks related to a user
+app.get("/getTodo/:id", getTodo(models.User, models.Todos));
 // Check against Postgres to see if this email already exsists - find email by params passed in the URL
 app.get("/account/:email", findEmailAccount(models.User));
 // Check against Postgres to see if this user exists - find id by params passed through the URL

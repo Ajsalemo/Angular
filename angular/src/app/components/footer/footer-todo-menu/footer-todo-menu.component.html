@@ -5,6 +5,7 @@
   *ngIf="parentIsTodo"
   [@fadeInOut]
   [matMenuTriggerFor]="todoMenu"
+  (click)="retrieveAllTodos()"
 >
   Todo
 </button>
@@ -29,14 +30,22 @@
       mat-raised-button
       class="footer-todo-menu-todo-button"
       (click)="addTodoView = !addTodoView; $event.stopPropagation()"
+      *ngIf="todos.length < 1"
     >
       <span *ngIf="!addTodoView">Add todo</span>
       <span *ngIf="addTodoView">Switch to today</span>
     </button>
+    <div>
+      <ul class="footer-todo-menu-todos">
+        <li *ngFor="let todo of todos">
+          {{ todo.todoName }}
+        </li>
+      </ul>
+    </div>
   </div>
   <!-- Filler form/input for now -->
   <form
-    *ngIf="addTodoView"
+    *ngIf="addTodoView || todos.length > 0"
     (click)="$event.stopPropagation()"
     [formGroup]="todoGroup"
     (ngSubmit)="submitTodoForm(todoGroup.value)"

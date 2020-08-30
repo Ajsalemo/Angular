@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../../../../services/todo.service';
 
@@ -22,10 +22,11 @@ import { TodoService } from '../../../../services/todo.service';
     ]),
   ],
 })
-export class ComponentTodoMenuFooter {
+export class ComponentTodoMenuFooter implements OnInit {
   @Input() parentIsTodo: boolean;
   @Input() currentUserId: string;
   addTodoView: boolean = false;
+  todos: any[] = [];
 
   constructor(private todoService: TodoService) {}
 
@@ -37,12 +38,23 @@ export class ComponentTodoMenuFooter {
     ]),
   });
 
+  retrieveAllTodos(): void {
+    if (this.currentUserId !== '' && this.currentUserId) {
+      this.todoService.getTodo(this.currentUserId).then((res: any) => {
+        this.todos = res.todos;
+      });
+    }
+  }
+
   submitTodoForm(data: { todo: string }) {
     const todoValue: string = data.todo;
-    console.log(todoValue);
-    console.log(this.currentUserId);
-    this.todoService
-      .addTodo(todoValue, this.currentUserId)
-      .then(() => console.log('Added a new task/todo'));
+    this.todoService.addTodo(todoValue, this.currentUserId).then(() => {
+      console.log('Added a task/todo');
+      this.retrieveAllTodos();
+    });
+  }
+
+  ngOnInit(): void {
+    console.log(this.todos)
   }
 }

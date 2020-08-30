@@ -15,4 +15,8 @@ export class TodoService {
       })
       .toPromise();
   }
+
+  getTodo(userId: string) {
+    return this.http.get(`/api/gettodo/${userId}`).toPromise();
+  }
 }
