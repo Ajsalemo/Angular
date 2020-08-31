@@ -30,17 +30,20 @@
       mat-raised-button
       class="footer-todo-menu-todo-button"
       (click)="addTodoView = !addTodoView; $event.stopPropagation()"
-      *ngIf="todos.length < 1"
+      *ngIf="todos.length < 1 && !isLoading"
     >
       <span *ngIf="!addTodoView">Add todo</span>
       <span *ngIf="addTodoView">Switch to today</span>
     </button>
-    <div>
-      <ul class="footer-todo-menu-todos">
+    <div [ngClass]="{ 'footer-todo-menu-sub-div': isLoading }">
+      <ul class="footer-todo-menu-todos" *ngIf="!isLoading">
         <li *ngFor="let todo of todos">
           {{ todo.todoName }}
         </li>
       </ul>
+      <footer-loading-indicator
+        [isLoading]="isLoading"
+      ></footer-loading-indicator>
     </div>
   </div>
   <!-- Filler form/input for now -->
@@ -63,8 +66,14 @@
         matSuffix
         type="submit"
         class="footer-todo-menu-send-btn"
+        [disabled]="isLoading"
       >
-        <mat-icon class="footer-todo-menu-menu-submit-icon">send</mat-icon>
+        <mat-icon class="footer-todo-menu-menu-submit-icon" *ngIf="!isLoading"
+          >send</mat-icon
+        >
+        <footer-loading-indicator
+          [isLoading]="isLoading"
+        ></footer-loading-indicator>
       </button>
     </mat-form-field>
   </form>

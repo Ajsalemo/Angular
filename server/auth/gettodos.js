@@ -16,7 +16,6 @@ module.exports = (user, todos) => {
               UserId: req.params.id,
             },
           }).then((todos) => {
-            console.log(todos);
             res.status(200).json({ todos: todos });
           });
         } else {

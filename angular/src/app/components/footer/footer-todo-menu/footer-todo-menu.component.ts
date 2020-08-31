@@ -26,6 +26,7 @@ export class ComponentTodoMenuFooter implements OnInit {
   @Input() parentIsTodo: boolean;
   @Input() currentUserId: string;
   addTodoView: boolean = false;
+  isLoading: boolean = false;
   todos: any[] = [];
 
   constructor(private todoService: TodoService) {}
@@ -40,21 +41,36 @@ export class ComponentTodoMenuFooter implements OnInit {
 
   retrieveAllTodos(): void {
     if (this.currentUserId !== '' && this.currentUserId) {
-      this.todoService.getTodo(this.currentUserId).then((res: any) => {
-        this.todos = res.todos;
-      });
+      this.isLoading = true;
+      this.todoService
+        .getTodo(this.currentUserId)
+        .then((res: any) => {
+          this.todos = res.todos;
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.isLoading = false;
+        });
     }
   }
 
   submitTodoForm(data: { todo: string }) {
-    const todoValue: string = data.todo;
-    this.todoService.addTodo(todoValue, this.currentUserId).then(() => {
-      console.log('Added a task/todo');
-      this.retrieveAllTodos();
-    });
+    let todoValue: string = data.todo;
+    this.todoService
+      .addTodo(todoValue, this.currentUserId)
+      .then(() => {
+        this.retrieveAllTodos();
+        // Reset the form after a submittion
+        this.todoGroup.reset();
+      })
+      .catch((err) => {
+        console.log(err);
+        this.isLoading = false;
+      });
   }
 
   ngOnInit(): void {
-    console.log(this.todos)
+    console.log(this.todos);
   }
 }

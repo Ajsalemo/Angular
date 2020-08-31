@@ -52,6 +52,10 @@
       justify-content: center;
       flex-direction: column;
     }
+    // This is used to center the loading indicator when data is loading during GET/POST requests for the Todos/Tasks
+    &-sub-div {
+      text-align: center;
+    }
     &-todos {
       list-style-type: none;
       padding: 0 0 0.2rem 1rem;
