@@ -52,6 +52,9 @@
       justify-content: center;
       flex-direction: column;
     }
+    &-checkbox {
+      color: $white-text
+    }
     // This is used to center the loading indicator when data is loading during GET/POST requests for the Todos/Tasks
     &-sub-div {
       text-align: center;

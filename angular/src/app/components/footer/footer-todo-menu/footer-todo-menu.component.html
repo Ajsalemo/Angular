@@ -10,11 +10,7 @@
   Todo
 </button>
 
-<mat-menu
-  #todoMenu="matMenu"
-  class="footer-todo-menu"
-  (click)="$event.stopPropagation()"
->
+<mat-menu #todoMenu="matMenu" class="footer-todo-menu">
   <button
     mat-icon-button
     [matMenuTriggerFor]="subTodoMenu"
@@ -38,7 +34,11 @@
     <div [ngClass]="{ 'footer-todo-menu-sub-div': isLoading }">
       <ul class="footer-todo-menu-todos" *ngIf="!isLoading">
         <li *ngFor="let todo of todos">
-          {{ todo.todoName }}
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            class="footer-todo-menu-checkbox"
+            >{{ todo.todoName }}</mat-checkbox
+          >
         </li>
       </ul>
       <footer-loading-indicator
@@ -52,7 +52,7 @@
     [formGroup]="todoGroup"
     (ngSubmit)="submitTodoForm(todoGroup.value)"
   >
-    <mat-form-field appearance="none">
+    <mat-form-field>
       <mat-label>New Todo</mat-label>
       <input
         matInput
