@@ -37,6 +37,7 @@ export class ComponentTodoMenuFooter implements OnInit {
       Validators.minLength(1),
       Validators.maxLength(255),
     ]),
+    completed: new FormControl(false),
   });
 
   retrieveAllTodos(): void {
@@ -53,6 +54,10 @@ export class ComponentTodoMenuFooter implements OnInit {
           this.isLoading = false;
         });
     }
+  }
+
+  submitTaskUpdateStatus(data: any) {
+    console.log(data);
   }
 
   submitTodoForm(data: { todo: string }) {

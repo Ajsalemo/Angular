@@ -53,7 +53,12 @@
       flex-direction: column;
     }
     &-checkbox {
-      color: $white-text
+      color: $white-text;
+      padding-right: 0.2rem;
+      &-form {
+        display: flex;
+        align-items: center;
+      }
     }
     // This is used to center the loading indicator when data is loading during GET/POST requests for the Todos/Tasks
     &-sub-div {

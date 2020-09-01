@@ -34,11 +34,20 @@
     <div [ngClass]="{ 'footer-todo-menu-sub-div': isLoading }">
       <ul class="footer-todo-menu-todos" *ngIf="!isLoading">
         <li *ngFor="let todo of todos">
-          <mat-checkbox
-            (click)="$event.stopPropagation()"
-            class="footer-todo-menu-checkbox"
-            >{{ todo.todoName }}</mat-checkbox
+          <form
+            [formGroup]="todoGroup"
+            (ngSubmit)="submitTaskUpdateStatus($event)"
+            class="footer-todo-menu-checkbox-form"
+            #todoGroupForm="ngForm"
           >
+            <mat-checkbox
+              (change)="todoGroupForm.ngSubmit.emit($event.checked)"
+              (click)="$event.stopPropagation()"
+              class="footer-todo-menu-checkbox"
+              formControlName="completed"
+            ></mat-checkbox>
+            {{ todo.todoName }}
+          </form>
         </li>
       </ul>
       <footer-loading-indicator
