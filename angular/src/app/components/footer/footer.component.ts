@@ -19,6 +19,7 @@ export class FooterComponent {
   @Input() parentIsSearch: boolean;
   @Input() parentIsWeather: boolean;
   @Input() parentIsTodo: boolean;
+  @Input() todos: any[] = [];
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
@@ -103,9 +104,11 @@ export class FooterComponent {
   logUserOut(): void {
     this.authServiceFooter.logout();
     this.router.navigate(['']);
+    // After logout, reset these values back to their initial states
     this.parentIsLinks = true;
     this.parentIsSearch = true;
     this.parentIsWeather = true;
     this.parentIsTodo = true;
+    this.todos = [];
   }
 }

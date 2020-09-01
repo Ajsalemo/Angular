@@ -25,9 +25,9 @@ import { TodoService } from '../../../../services/todo.service';
 export class ComponentTodoMenuFooter implements OnInit {
   @Input() parentIsTodo: boolean;
   @Input() currentUserId: string;
+  @Input() todos: any[] = [];
   addTodoView: boolean = false;
   isLoading: boolean = false;
-  todos: any[] = [];
 
   constructor(private todoService: TodoService) {}
 

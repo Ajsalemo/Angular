@@ -32,6 +32,7 @@ export class HomeBackgroundComponent implements OnInit {
   parentIsSearch: boolean = true;
   parentIsWeather: boolean = true;
   parentIsTodo: boolean = true;
+  todos: any[] = [];
 
   constructor(
     private backgroundImageService: BackgroundImageService,
@@ -59,6 +60,7 @@ export class HomeBackgroundComponent implements OnInit {
       this.parentIsSearch = true;
       this.parentIsWeather = true;
       this.parentIsTodo = true;
+      this.todos = [];
     }
   }
 
