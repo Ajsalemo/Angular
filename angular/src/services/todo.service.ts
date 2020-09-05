@@ -19,4 +19,14 @@ export class TodoService {
   getTodo(userId: string) {
     return this.http.get(`/api/gettodo/${userId}`).toPromise();
   }
+
+  completeTodo(userId: string, todoId: string, completed: boolean) {
+    return this.http
+      .post('/api/completetodo', {
+        userId: userId,
+        completed: completed,
+        todoId: todoId,
+      })
+      .toPromise();
+  }
 }

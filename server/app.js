@@ -12,6 +12,7 @@ const findAccountById = require("./auth/currentuser");
 const updatePreferences = require("./auth/accountpreferences");
 const addTodo = require("./auth/posttodos");
 const getTodo = require("./auth/gettodos");
+const completeTodo = require("./auth/completetodo");
 
 // Initialize express
 const app = express();
@@ -62,6 +63,8 @@ app.post("/signin", auth(passport, "local-signin"), (req, res) => {
 app.post("/updatePreferences", updatePreferences(models.User));
 // Add a daily task/todo
 app.post("/addTodo", addTodo(models.User, models.Todos));
+// Complete a daily task/todo
+app.post("/completetodo", completeTodo(models.User, models.Todos));
 // Log out after being authenticated
 app.get("/logout", (req, res) => {
   req.logOut();

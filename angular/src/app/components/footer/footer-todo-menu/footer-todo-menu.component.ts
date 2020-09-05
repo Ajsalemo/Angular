@@ -56,8 +56,10 @@ export class ComponentTodoMenuFooter implements OnInit {
     }
   }
 
-  submitTaskUpdateStatus(data: any) {
-    console.log(data);
+  submitTaskUpdateStatus(completed: any, todoId: string) {
+    this.todoService
+      .completeTodo(this.currentUserId, todoId, completed)
+      .then((res) => console.log(res));
   }
 
   submitTodoForm(data: { todo: string }) {

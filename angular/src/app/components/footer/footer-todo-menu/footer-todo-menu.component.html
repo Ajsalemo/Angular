@@ -36,7 +36,7 @@
         <li *ngFor="let todo of todos">
           <form
             [formGroup]="todoGroup"
-            (ngSubmit)="submitTaskUpdateStatus($event)"
+            (ngSubmit)="submitTaskUpdateStatus($event, todo.id)"
             class="footer-todo-menu-checkbox-form"
             #todoGroupForm="ngForm"
           >
@@ -45,6 +45,7 @@
               (click)="$event.stopPropagation()"
               class="footer-todo-menu-checkbox"
               formControlName="completed"
+              [(ngModel)]="todo.completed"
             ></mat-checkbox>
             {{ todo.todoName }}
           </form>
