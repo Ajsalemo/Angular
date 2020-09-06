@@ -36,8 +36,7 @@ export class ComponentTodoMenuFooter implements OnInit {
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(255),
-    ]),
-    completed: new FormControl(false),
+    ])
   });
 
   retrieveAllTodos(): void {

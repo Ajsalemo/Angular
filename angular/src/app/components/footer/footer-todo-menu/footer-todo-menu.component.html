@@ -44,8 +44,7 @@
               (change)="todoGroupForm.ngSubmit.emit($event.checked)"
               (click)="$event.stopPropagation()"
               class="footer-todo-menu-checkbox"
-              formControlName="completed"
-              [(ngModel)]="todo.completed"
+              [checked]="todo.completed === true"
             ></mat-checkbox>
             {{ todo.todoName }}
           </form>
