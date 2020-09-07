@@ -31,7 +31,10 @@
       <span *ngIf="!addTodoView">Add todo</span>
       <span *ngIf="addTodoView">Switch to today</span>
     </button>
-    <div [ngClass]="{ 'footer-todo-menu-sub-div': isLoading }">
+    <div
+      [ngClass]="{ 'footer-todo-menu-sub-div': isLoading }"
+      class="footer-todo-menu-overflow-div"
+    >
       <ul class="footer-todo-menu-todos" *ngIf="!isLoading">
         <li *ngFor="let todo of todos">
           <form
