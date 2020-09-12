@@ -36,7 +36,10 @@
       class="footer-todo-menu-overflow-div"
     >
       <ul class="footer-todo-menu-todos" *ngIf="!isLoading">
-        <li *ngFor="let todo of todos">
+        <li
+          *ngFor="let todo of todos"
+          class="footer-todo-menu-todos-list-items"
+        >
           <form
             [formGroup]="todoGroup"
             (ngSubmit)="submitTaskUpdateStatus($event, todo.id)"
@@ -49,11 +52,48 @@
               class="footer-todo-menu-checkbox"
               [checked]="todo.completed === true"
             ></mat-checkbox>
+            <!-- If a task/todo is marked as completed, display a strikethrough on the name -->
             <span *ngIf="todo.completed == true; else notCompleted"
               ><s>{{ todo.todoName }}</s></span
             >
             <ng-template #notCompleted>{{ todo.todoName }}</ng-template>
           </form>
+          <!-- Button for the dropdown to edit and delete a task/todo -->
+          <div>
+            <button
+              mat-button
+              class="footer-todo-menu-todos-delete-btn"
+              aria-label="delete todo"
+              (click)="$event.stopPropagation()"
+              [matMenuTriggerFor]="deleteAndEditMenu"
+            >
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <!-- Menu to edit or delete a task/todo -->
+            <mat-menu
+              #deleteAndEditMenu="matMenu"
+              (click)="$event.stopPropagation()"
+              class="footer-todo-del-menu"
+            >
+              <button
+                mat-menu-item
+                class="footer-todo-sub-menu-text"
+                type="submit"
+                (click)="$event.stopPropagation()"
+              >
+                Edit
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                mat-menu-item
+                class="footer-todo-sub-menu-text"
+                type="submit"
+                (click)="$event.stopPropagation()"
+              >
+                Delete
+              </button>
+            </mat-menu>
+          </div>
         </li>
       </ul>
       <footer-loading-indicator

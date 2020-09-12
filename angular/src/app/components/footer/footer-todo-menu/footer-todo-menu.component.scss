@@ -79,6 +79,19 @@
     &-todos {
       list-style-type: none;
       padding: 0 0 0.2rem 1rem;
+      &-list-items {
+        display: flex;
+        justify-content: space-between;
+        height: 2rem;
+        &:hover {
+          .footer-todo-menu-todos-delete-btn {
+            display: initial;
+          }
+        }
+      }
+      &-delete-btn {
+        display: initial;
+      }
     }
   }
   &-header {
@@ -98,5 +111,9 @@
         background-color: #585858 !important;
       }
     }
+  }
+  &-del-menu {
+    @extend .footer-todo-sub-menu;
+    width: auto;
   }
 }
