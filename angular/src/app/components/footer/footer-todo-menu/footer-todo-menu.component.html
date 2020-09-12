@@ -49,7 +49,10 @@
               class="footer-todo-menu-checkbox"
               [checked]="todo.completed === true"
             ></mat-checkbox>
-            {{ todo.todoName }}
+            <span *ngIf="todo.completed == true; else notCompleted"
+              ><s>{{ todo.todoName }}</s></span
+            >
+            <ng-template #notCompleted>{{ todo.todoName }}</ng-template>
           </form>
         </li>
       </ul>

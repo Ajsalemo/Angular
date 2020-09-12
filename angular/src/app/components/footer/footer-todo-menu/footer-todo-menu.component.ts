@@ -36,7 +36,7 @@ export class ComponentTodoMenuFooter implements OnInit {
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(255),
-    ])
+    ]),
   });
 
   retrieveAllTodos(): void {
@@ -58,7 +58,9 @@ export class ComponentTodoMenuFooter implements OnInit {
   submitTaskUpdateStatus(completed: any, todoId: string) {
     this.todoService
       .completeTodo(this.currentUserId, todoId, completed)
-      .then((res) => console.log(res));
+      .then(() => {
+        this.retrieveAllTodos();
+      });
   }
 
   submitTodoForm(data: { todo: string }) {
