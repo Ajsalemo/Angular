@@ -6,13 +6,14 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const models = require("./models");
-const auth = require("./auth/auth");
-const findEmailAccount = require("./auth/accounts");
-const findAccountById = require("./auth/currentuser");
-const updatePreferences = require("./auth/accountpreferences");
-const addTodo = require("./auth/posttodos");
-const getTodo = require("./auth/gettodos");
-const completeTodo = require("./auth/completetodo");
+const auth = require("./controllers/auth");
+const findEmailAccount = require("./controllers/accounts");
+const findAccountById = require("./controllers/currentuser");
+const updatePreferences = require("./controllers/accountpreferences");
+const addTodo = require("./controllers/posttodos");
+const getTodo = require("./controllers/gettodos");
+const completeTodo = require("./controllers/completetodo");
+const deleteTodo = require("./controllers/deletetodo");
 
 // Initialize express
 const app = express();
@@ -43,9 +44,9 @@ app.use(morgan("dev"));
 // ----------------------------- Load the local-signup strategy from passport ---------------------------------- //
 // ----------------------------------------------------------------------------- //
 // Load the local-signin strategy from passport
-require("./auth/signup")(passport, models.User);
+require("./controllers/signup")(passport, models.User);
 // Load the local-signin strategy from passport
-require("./auth/signin")(passport, models.User);
+require("./controllers/signin")(passport, models.User);
 // ----------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------- //
 
@@ -65,6 +66,8 @@ app.post("/updatePreferences", updatePreferences(models.User));
 app.post("/addTodo", addTodo(models.User, models.Todos));
 // Complete a daily task/todo
 app.post("/completetodo", completeTodo(models.User, models.Todos));
+// Delete a daily task/todo
+app.post("/deletetodo", deleteTodo(models.User, models.Todos));
 // Log out after being authenticated
 app.get("/logout", (req, res) => {
   req.logOut();

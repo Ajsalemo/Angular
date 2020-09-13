@@ -29,4 +29,13 @@ export class TodoService {
       })
       .toPromise();
   }
+
+  deleteTodo(userId: string, todoId: string) {
+    return this.http
+      .post('/api/deletetodo', {
+        userId: userId,
+        todoId: todoId,
+      })
+      .toPromise();
+  }
 }

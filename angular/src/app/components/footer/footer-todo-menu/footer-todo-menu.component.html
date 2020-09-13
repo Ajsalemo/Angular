@@ -75,23 +75,27 @@
               (click)="$event.stopPropagation()"
               class="footer-todo-del-menu"
             >
-              <button
-                mat-menu-item
-                class="footer-todo-sub-menu-text"
-                type="submit"
-                (click)="$event.stopPropagation()"
-              >
-                Edit
-              </button>
+              <form>
+                <button
+                  mat-menu-item
+                  class="footer-todo-sub-menu-text"
+                  type="submit"
+                  (click)="$event.stopPropagation()"
+                >
+                  Edit
+                </button>
+              </form>
               <mat-divider></mat-divider>
-              <button
-                mat-menu-item
-                class="footer-todo-sub-menu-text"
-                type="submit"
-                (click)="$event.stopPropagation()"
-              >
-                Delete
-              </button>
+              <form (ngSubmit)="deleteTodo(todo.id)">
+                <button
+                  mat-menu-item
+                  class="footer-todo-sub-menu-text"
+                  type="submit"
+                  (click)="$event.stopPropagation()"
+                >
+                  Delete
+                </button>
+              </form>
             </mat-menu>
           </div>
         </li>

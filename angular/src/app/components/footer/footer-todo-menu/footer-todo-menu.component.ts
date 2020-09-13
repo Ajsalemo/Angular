@@ -63,6 +63,13 @@ export class ComponentTodoMenuFooter implements OnInit {
       });
   }
 
+  deleteTodo(todoId: string) {
+    this.todoService.deleteTodo(this.currentUserId, todoId).then((res) => {
+      console.log(res);
+      this.retrieveAllTodos();
+    });
+  }
+
   submitTodoForm(data: { todo: string }) {
     let todoValue: string = data.todo;
     this.todoService
