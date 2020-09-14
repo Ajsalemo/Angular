@@ -28,6 +28,7 @@ export class ComponentTodoMenuFooter implements OnInit {
   @Input() todos: any[] = [];
   addTodoView: boolean = false;
   isLoading: boolean = false;
+  todoErrorMessage: string = '';
 
   constructor(private todoService: TodoService) {}
 
@@ -45,6 +46,8 @@ export class ComponentTodoMenuFooter implements OnInit {
       this.todoService
         .getTodo(this.currentUserId)
         .then((res: any) => {
+          // Set the todo error message field back to empty after the promise completes
+          this.todoErrorMessage = '';
           this.todos = res.todos;
           this.isLoading = false;
         })
@@ -53,6 +56,11 @@ export class ComponentTodoMenuFooter implements OnInit {
           this.isLoading = false;
         });
     }
+  }
+
+  // Getter for the todo field
+  get todoField() {
+    return this.todoGroup.controls;
   }
 
   submitTaskUpdateStatus(completed: any, todoId: string) {
@@ -71,6 +79,7 @@ export class ComponentTodoMenuFooter implements OnInit {
   }
 
   submitTodoForm(data: { todo: string }) {
+    this.todoErrorMessage = '';
     let todoValue: string = data.todo;
     this.todoService
       .addTodo(todoValue, this.currentUserId)
@@ -80,8 +89,8 @@ export class ComponentTodoMenuFooter implements OnInit {
         this.todoGroup.reset();
       })
       .catch((err) => {
-        console.log(err);
         this.isLoading = false;
+        this.todoErrorMessage = err.error.message;
       });
   }
 

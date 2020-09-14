@@ -92,6 +92,18 @@
       &-delete-btn {
         display: initial;
       }
+      &-error-span {
+        font-size: 0.7rem;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 1rem;
+        color: #ff0000;
+      }
+      &-mat-form-field {
+        .mat-form-field-wrapper {
+          padding-bottom: 0.9rem;
+        }
+      }
     }
   }
   &-header {
