@@ -29,6 +29,8 @@ export class ComponentTodoMenuFooter implements OnInit {
   addTodoView: boolean = false;
   isLoading: boolean = false;
   todoErrorMessage: string = '';
+  todoBoolean: boolean = true;
+  doneTodosBoolean: boolean = false;
 
   constructor(private todoService: TodoService) {}
 
@@ -56,6 +58,28 @@ export class ComponentTodoMenuFooter implements OnInit {
           this.isLoading = false;
         });
     }
+  }
+
+  // Toggles the visibility of the 'General' section within the personalization popup menu
+  toggleTodoViewState(e: any): void {
+    if (this.todoBoolean === true) {
+      e.stopPropagation();
+      return;
+    }
+    this.todoBoolean = !this.todoBoolean;
+    this.doneTodosBoolean = false;
+    e.stopPropagation();
+  }
+
+  // Toggles the visibility of the 'Photo' section within the personalization popup menu
+  toggleCompletedViewState(e: any): void {
+    if (this.doneTodosBoolean === true) {
+      e.stopPropagation();
+      return;
+    }
+    this.doneTodosBoolean = !this.doneTodosBoolean;
+    this.todoBoolean = false;
+    e.stopPropagation();
   }
 
   // Getter for the todo field

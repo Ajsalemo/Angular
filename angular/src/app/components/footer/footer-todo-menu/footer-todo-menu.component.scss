@@ -58,6 +58,8 @@
       &-form {
         display: flex;
         align-items: center;
+        word-break: break-all;
+        height: fit-content;
       }
     }
     // This is used to center the loading indicator when data is loading during GET/POST requests for the Todos/Tasks
@@ -82,7 +84,6 @@
       &-list-items {
         display: flex;
         justify-content: space-between;
-        height: 2rem;
         &:hover {
           .footer-todo-menu-todos-delete-btn {
             display: initial;
@@ -127,5 +128,6 @@
   &-del-menu {
     @extend .footer-todo-sub-menu;
     width: auto;
+    min-height: auto !important;
   }
 }

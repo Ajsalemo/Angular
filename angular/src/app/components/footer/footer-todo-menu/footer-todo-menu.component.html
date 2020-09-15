@@ -9,7 +9,6 @@
 >
   Todo
 </button>
-
 <mat-menu #todoMenu="matMenu" class="footer-todo-menu">
   <button
     mat-icon-button
@@ -46,20 +45,31 @@
             class="footer-todo-menu-checkbox-form"
             #todoGroupForm="ngForm"
           >
-            <mat-checkbox
-              (change)="todoGroupForm.ngSubmit.emit($event.checked)"
-              (click)="$event.stopPropagation()"
-              class="footer-todo-menu-checkbox"
-              [checked]="todo.completed === true"
-            ></mat-checkbox>
-            <!-- If a task/todo is marked as completed, display a strikethrough on the name -->
-            <span *ngIf="todo.completed == true; else notCompleted"
-              ><s>{{ todo.todoName }}</s></span
-            >
-            <ng-template #notCompleted>{{ todo.todoName }}</ng-template>
+            <div>
+              <mat-checkbox
+                (change)="todoGroupForm.ngSubmit.emit($event.checked)"
+                (click)="$event.stopPropagation()"
+                class="footer-todo-menu-checkbox"
+                [checked]="todo.completed === true"
+                *ngIf="
+                  (todo.completed === true && doneTodosBoolean) || todoBoolean
+                "
+              ></mat-checkbox>
+              <!-- If a task/todo is marked as completed, display a strikethrough on the name -->
+              <span *ngIf="todo.completed == true; else notCompleted"
+                ><s>{{ todo.todoName }}</s></span
+              >
+              <ng-template #notCompleted
+                ><span *ngIf="todoBoolean">
+                  {{ todo.todoName }}
+                </span></ng-template
+              >
+            </div>
           </form>
           <!-- Button for the dropdown to edit and delete a task/todo -->
-          <div>
+          <div
+            *ngIf="(todo.completed === true && doneTodosBoolean) || todoBoolean"
+          >
             <button
               mat-button
               class="footer-todo-menu-todos-delete-btn"
@@ -75,17 +85,6 @@
               (click)="$event.stopPropagation()"
               class="footer-todo-del-menu"
             >
-              <form>
-                <button
-                  mat-menu-item
-                  class="footer-todo-sub-menu-text"
-                  type="submit"
-                  (click)="$event.stopPropagation()"
-                >
-                  Edit
-                </button>
-              </form>
-              <mat-divider></mat-divider>
               <form (ngSubmit)="deleteTodo(todo.id)">
                 <button
                   mat-menu-item
@@ -145,7 +144,19 @@
     (click)="$event.stopPropagation()"
     class="footer-todo-sub-menu"
   >
-    <button mat-menu-item class="footer-todo-sub-menu-text">Today</button>
-    <button mat-menu-item class="footer-todo-sub-menu-text">Done</button>
+    <button
+      mat-menu-item
+      class="footer-todo-sub-menu-text"
+      (click)="toggleTodoViewState($event)"
+    >
+      Today
+    </button>
+    <button
+      mat-menu-item
+      class="footer-todo-sub-menu-text"
+      (click)="toggleCompletedViewState($event)"
+    >
+      Done
+    </button>
   </mat-menu>
 </mat-menu>
