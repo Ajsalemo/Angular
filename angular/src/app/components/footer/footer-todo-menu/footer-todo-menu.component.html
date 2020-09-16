@@ -17,7 +17,7 @@
     class="footer-todo-header"
     (click)="$event.stopPropagation()"
   >
-    Today
+    {{ currentSelectedTodoFilter }}
     <mat-icon>expand_more</mat-icon>
   </button>
   <div class="footer-todo-menu-parent-div">
@@ -139,22 +139,18 @@
       >{{ todoErrorMessage }}</span
     >
   </form>
-  <mat-menu
-    #subTodoMenu="matMenu"
-    (click)="$event.stopPropagation()"
-    class="footer-todo-sub-menu"
-  >
+  <mat-menu #subTodoMenu="matMenu" class="footer-todo-sub-menu">
     <button
       mat-menu-item
       class="footer-todo-sub-menu-text"
-      (click)="toggleTodoViewState($event)"
+      (click)="toggleTodoViewState($event); $event.stopPropagation()"
     >
       Today
     </button>
     <button
       mat-menu-item
       class="footer-todo-sub-menu-text"
-      (click)="toggleCompletedViewState($event)"
+      (click)="toggleCompletedViewState($event); $event.stopPropagation()"
     >
       Done
     </button>

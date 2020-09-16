@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../../../../services/todo.service';
 
@@ -22,13 +22,14 @@ import { TodoService } from '../../../../services/todo.service';
     ]),
   ],
 })
-export class ComponentTodoMenuFooter implements OnInit {
+export class ComponentTodoMenuFooter {
   @Input() parentIsTodo: boolean;
   @Input() currentUserId: string;
   @Input() todos: any[] = [];
   addTodoView: boolean = false;
   isLoading: boolean = false;
   todoErrorMessage: string = '';
+  currentSelectedTodoFilter: string = 'Today';
   todoBoolean: boolean = true;
   doneTodosBoolean: boolean = false;
 
@@ -54,7 +55,6 @@ export class ComponentTodoMenuFooter implements OnInit {
           this.isLoading = false;
         })
         .catch((err) => {
-          console.log(err);
           this.isLoading = false;
         });
     }
@@ -63,23 +63,21 @@ export class ComponentTodoMenuFooter implements OnInit {
   // Toggles the visibility of the 'General' section within the personalization popup menu
   toggleTodoViewState(e: any): void {
     if (this.todoBoolean === true) {
-      e.stopPropagation();
       return;
     }
     this.todoBoolean = !this.todoBoolean;
+    this.currentSelectedTodoFilter = 'Today';
     this.doneTodosBoolean = false;
-    e.stopPropagation();
   }
 
   // Toggles the visibility of the 'Photo' section within the personalization popup menu
   toggleCompletedViewState(e: any): void {
     if (this.doneTodosBoolean === true) {
-      e.stopPropagation();
       return;
     }
     this.doneTodosBoolean = !this.doneTodosBoolean;
+    this.currentSelectedTodoFilter = 'Done';
     this.todoBoolean = false;
-    e.stopPropagation();
   }
 
   // Getter for the todo field
@@ -97,7 +95,6 @@ export class ComponentTodoMenuFooter implements OnInit {
 
   deleteTodo(todoId: string) {
     this.todoService.deleteTodo(this.currentUserId, todoId).then((res) => {
-      console.log(res);
       this.retrieveAllTodos();
     });
   }
@@ -116,9 +113,5 @@ export class ComponentTodoMenuFooter implements OnInit {
         this.isLoading = false;
         this.todoErrorMessage = err.error.message;
       });
-  }
-
-  ngOnInit(): void {
-    console.log(this.todos);
   }
 }
