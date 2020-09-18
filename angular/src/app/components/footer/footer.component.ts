@@ -15,6 +15,7 @@ export class FooterComponent {
   @Input() photoURL: string;
   @Input() currentUser: string;
   @Input() currentUserId: string;
+  @Input() optionalUsername: string;
   @Input() parentIsLinks: boolean;
   @Input() parentIsSearch: boolean;
   @Input() parentIsWeather: boolean;

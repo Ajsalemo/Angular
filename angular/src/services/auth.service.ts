@@ -16,6 +16,10 @@ export class AuthService {
     return false;
   }
 
+  setOptionUserInfo(optionalUsername: string): void {
+    localStorage.setItem('optionalUsername', optionalUsername);
+  }
+
   setUserInfo(userName: string, userId: string): void {
     localStorage.setItem('user', userName);
     localStorage.setItem('userId', userId);
@@ -40,6 +44,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('userId');
+    localStorage.removeItem('optionalUsername');
     return this.http.get('/api/logout').toPromise();
   }
 }

@@ -27,6 +27,7 @@ export class HomeBackgroundComponent implements OnInit {
   backgroundImageToDisplay: string = '';
   currentUser = localStorage.getItem('user');
   currentUserId = localStorage.getItem('userId');
+  optionalUsername = localStorage.getItem('optionalUsername');
   navigationSubscription: any;
   parentIsLinks: boolean = true;
   parentIsSearch: boolean = true;
@@ -52,6 +53,7 @@ export class HomeBackgroundComponent implements OnInit {
   reIntializeComponent(): void {
     this.currentUser = localStorage.getItem('user');
     this.currentUserId = localStorage.getItem('userId');
+    this.optionalUsername = localStorage.getItem('optionalUsername');
     // If there is no curent user, then set the booleans for the slider preferences back to true(which is the default)
     // This is to reset them upon logout of a user
     // Doing this only when a user is logged in also prevents the sliders from 'flapping' when changing preferences when logged in

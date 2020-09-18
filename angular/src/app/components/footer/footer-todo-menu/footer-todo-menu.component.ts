@@ -25,6 +25,7 @@ import { TodoService } from '../../../../services/todo.service';
 export class ComponentTodoMenuFooter {
   @Input() parentIsTodo: boolean;
   @Input() currentUserId: string;
+  @Input() currentUser: string;
   @Input() todos: any[] = [];
   addTodoView: boolean = false;
   isLoading: boolean = false;

@@ -21,11 +21,21 @@
     <mat-icon>expand_more</mat-icon>
   </button>
   <div class="footer-todo-menu-parent-div">
+    <!-- This will display if the user is NOT logged in -->
+    <button
+      mat-raised-button
+      class="footer-todo-menu-todo-button"
+      (click)="$event.stopPropagation()"
+      *ngIf="!currentUser || !currentUserId"
+    >
+      <span>Log in to add Todo's</span>
+    </button>
+    <!-- This will display if the user IS logged in -->
     <button
       mat-raised-button
       class="footer-todo-menu-todo-button"
       (click)="addTodoView = !addTodoView; $event.stopPropagation()"
-      *ngIf="todos.length < 1 && !isLoading"
+      *ngIf="todos.length < 1 && !isLoading && currentUser && currentUserId"
     >
       <span *ngIf="!addTodoView">Add todo</span>
       <span *ngIf="addTodoView">Switch to today</span>

@@ -36,6 +36,16 @@
         >
           Next
         </button>
+        <button
+          mat-button
+          (click)="continueWithoutLoggingIn(loginGroupOne.value)"
+          [disabled]="
+            (nameField.name.errors && nameField.name.errors.minlength) ||
+            nameField.name.value === ''
+          "
+        >
+          Continue without logging in
+        </button>
       </div>
     </form>
   </mat-step>
@@ -149,7 +159,11 @@
         <button mat-button (click)="stepper.reset()" [disabled]="loading">
           Reset
         </button>
-        <button mat-button type="submit" [disabled]="loading || passwordField.password.value === ''">
+        <button
+          mat-button
+          type="submit"
+          [disabled]="loading || passwordField.password.value === ''"
+        >
           Submit
         </button>
         <button mat-button matStepperPrevious [disabled]="loading">

@@ -62,6 +62,10 @@ app.post("/signin", auth(passport, "local-signin"), (req, res) => {
 });
 // Update account preferences - aka. show/hide UI elements for the user
 app.post("/updatePreferences", updatePreferences(models.User));
+// Update nnauthenticated user preferences - aka. show/hide UI elements for the nnauthenticated user
+app.post("/unauthenticatedUpdatePreferences", (req, res) => {
+  res.status(200).json({ preferences: req.body })
+});
 // Add a daily task/todo
 app.post("/addTodo", addTodo(models.User, models.Todos));
 // Complete a daily task/todo

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
 
@@ -19,12 +19,19 @@ export class LoginComponent {
   emailErrorMessage: string = '';
   passwordErrorMessage: string = '';
   hidePassword: boolean = true;
+  navigationSubscription: any;
 
   constructor(
     private authService: AuthService,
     private accountService: AccountService,
     private router: Router
-  ) {}
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+      }
+    });
+  }
 
   loginGroupOne = new FormGroup({
     name: new FormControl('', [
@@ -67,6 +74,11 @@ export class LoginComponent {
   // Getter for the password field
   get passwordField() {
     return this.loginGroupThree.controls;
+  }
+
+  continueWithoutLoggingIn(data: { name: string }): void {
+    this.authService.setOptionUserInfo(data.name);
+    this.router.navigate(['']);
   }
 
   submitLoginFormOne(data: { name: string }): void {
