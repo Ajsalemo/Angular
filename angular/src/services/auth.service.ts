@@ -1,11 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  navigationSubscription: any;
+  constructor(private http: HttpClient, private router: Router) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+      }
+    });
+  }
 
   isAuthenticated(): Boolean {
     const userName = localStorage.getItem('user');
@@ -39,6 +47,13 @@ export class AuthService {
     return this.http
       .post('/api/signin', { email: email, password: password })
       .toPromise();
+  }
+
+  logUserIn() {
+    // This removes the non-signed in user's Username from local storage - if it exists - so the login stepform can appear again
+    // For the user to choose whether or not to signup/login or continue as is
+    localStorage.removeItem('optionalUsername');
+    this.router.navigate(['']);
   }
 
   logout() {

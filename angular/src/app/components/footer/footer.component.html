@@ -17,7 +17,7 @@
           <button
             mat-icon-button
             *ngIf="!currentUser"
-            (click)="logUserIn()"
+            (click)="conditionalFooterLoginIn()"
             class="footer-menu-login-menu-no-user-btn"
           >
             <mat-icon aria-hidden="false" aria-label="Account icon"

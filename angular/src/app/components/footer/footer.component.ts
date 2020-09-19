@@ -98,8 +98,10 @@ export class FooterComponent {
     }
   }
 
-  logUserIn(): void {
-    this.router.navigate(['']);
+  conditionalFooterLoginIn(): void {
+    // This removes the non-signed in user's Username from local storage - if it exists - so the login stepform can appear again
+    // For the user to choose whether or not to signup/login or continue as is
+    this.authServiceFooter.logUserIn();
   }
 
   logUserOut(): void {

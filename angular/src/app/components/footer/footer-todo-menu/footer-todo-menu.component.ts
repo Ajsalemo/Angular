@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../../../../services/todo.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'component-todo-footer',
@@ -34,7 +35,10 @@ export class ComponentTodoMenuFooter {
   todoBoolean: boolean = true;
   doneTodosBoolean: boolean = false;
 
-  constructor(private todoService: TodoService) {}
+  constructor(
+    private todoService: TodoService,
+    private authService: AuthService
+  ) {}
 
   todoGroup = new FormGroup({
     todo: new FormControl('', [
@@ -72,7 +76,7 @@ export class ComponentTodoMenuFooter {
   }
 
   // Toggles the visibility of the 'Photo' section within the personalization popup menu
-  toggleCompletedViewState(e: any): void {
+  toggleCompletedViewState(): void {
     if (this.doneTodosBoolean === true) {
       return;
     }
@@ -86,7 +90,11 @@ export class ComponentTodoMenuFooter {
     return this.todoGroup.controls;
   }
 
-  submitTaskUpdateStatus(completed: any, todoId: string) {
+  conditionalFooterMenuLogin(): void {
+    this.authService.logUserIn();
+  }
+
+  submitTaskUpdateStatus(completed: any, todoId: string): void {
     this.todoService
       .completeTodo(this.currentUserId, todoId, completed)
       .then(() => {
@@ -94,13 +102,13 @@ export class ComponentTodoMenuFooter {
       });
   }
 
-  deleteTodo(todoId: string) {
-    this.todoService.deleteTodo(this.currentUserId, todoId).then((res) => {
+  deleteTodo(todoId: string): void {
+    this.todoService.deleteTodo(this.currentUserId, todoId).then(() => {
       this.retrieveAllTodos();
     });
   }
 
-  submitTodoForm(data: { todo: string }) {
+  submitTodoForm(data: { todo: string }): void {
     this.todoErrorMessage = '';
     let todoValue: string = data.todo;
     this.todoService
