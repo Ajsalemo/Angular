@@ -66,7 +66,7 @@ export class ComponentTodoMenuFooter {
   }
 
   // Toggles the visibility of the 'General' section within the personalization popup menu
-  toggleTodoViewState(e: any): void {
+  toggleTodoViewState(): void {
     if (this.todoBoolean === true) {
       return;
     }

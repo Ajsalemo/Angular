@@ -25,7 +25,7 @@
           >Your name cannot be less than 2 characters.</span
         >
       </mat-form-field>
-      <div>
+      <div class="login-parent-btn-div">
         <button
           mat-button
           matStepperNext
@@ -82,7 +82,7 @@
           >That is not a valid email address.</span
         >
       </mat-form-field>
-      <div>
+      <div class="login-parent-btn-div">
         <button mat-button matStepperPrevious [disabled]="loading">
           Previous
         </button>
@@ -155,7 +155,7 @@
         </button>
         <span class="login-error-message">{{ passwordErrorMessage }}</span>
       </mat-form-field>
-      <div>
+      <div class="login-parent-btn-div">
         <button mat-button (click)="stepper.reset()" [disabled]="loading">
           Reset
         </button>
