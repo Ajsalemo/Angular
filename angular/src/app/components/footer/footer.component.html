@@ -86,11 +86,7 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="parentIsLinks"
                 formControlName="links"
-                (change)="
-                  currentUser
-                    ? submitAccountPreferences(slideToggleGroup.value)
-                    : !parentIsLinks
-                "
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Links</mat-slide-toggle
               >
               <footer-loading-indicator
@@ -101,11 +97,7 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="parentIsSearch"
                 formControlName="search"
-                (change)="
-                  currentUser
-                    ? submitAccountPreferences(slideToggleGroup.value)
-                    : !parentIsSearch
-                "
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Search</mat-slide-toggle
               >
               <footer-loading-indicator
@@ -116,11 +108,7 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="parentIsWeather"
                 formControlName="weather"
-                (change)="
-                  currentUser
-                    ? submitAccountPreferences(slideToggleGroup.value)
-                    : !parentIsWeather
-                "
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Weather</mat-slide-toggle
               >
               <footer-loading-indicator
@@ -131,11 +119,7 @@
                 class="footer-menu-general-toggle"
                 [(ngModel)]="parentIsTodo"
                 formControlName="todo"
-                (change)="
-                  currentUser
-                    ? submitAccountPreferences(slideToggleGroup.value)
-                    : !parentIsTodo
-                "
+                (change)="submitAccountPreferences(slideToggleGroup.value)"
                 >Todo</mat-slide-toggle
               >
               <footer-loading-indicator

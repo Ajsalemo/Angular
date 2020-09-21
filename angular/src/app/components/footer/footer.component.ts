@@ -75,12 +75,22 @@ export class FooterComponent {
     weather: boolean;
     todo: boolean;
   }) {
-    this.accountServiceFooter
-      .setAccountDashboardPreferences(data, this.currentUserId)
-      .then(() => {
-        this.router.navigate(['']);
-      })
-      .catch((err: any) => console.log(err));
+    // If the user is NOT logged in either by account or optional/temporary, persist their changes by localStorage
+    if (this.currentUserId === '' || !this.currentUserId) {
+      localStorage.setItem('parentIsLinks', data.links.toString());
+      localStorage.setItem('parentIsSearch', data.search.toString());
+      localStorage.setItem('parentIsWeather', data.weather.toString());
+      localStorage.setItem('parentIsTodo', data.todo.toString());
+      this.router.navigate(['']);
+    } else {
+      // Else make an API call to Postgres to retreieve the logged in users account preferences
+      this.accountServiceFooter
+        .setAccountDashboardPreferences(data, this.currentUserId)
+        .then(() => {
+          this.router.navigate(['']);
+        })
+        .catch((err: any) => console.log(err));
+    }
   }
 
   // Retreive account preferences to keep synced with what is updated
@@ -108,6 +118,10 @@ export class FooterComponent {
     this.authServiceFooter.logout();
     this.router.navigate(['']);
     // After logout, reset these values back to their initial states
+    localStorage.removeItem('parentIsLinks');
+    localStorage.removeItem('parentIsSearch');
+    localStorage.removeItem('parentIsWeather');
+    localStorage.removeItem('parentIsTodo');
     this.parentIsLinks = true;
     this.parentIsSearch = true;
     this.parentIsWeather = true;

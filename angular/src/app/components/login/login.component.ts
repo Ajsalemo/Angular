@@ -117,6 +117,13 @@ export class LoginComponent {
       .signIn(this.userEmail, this.userPassword)
       .then((res: any) => {
         this.authService.setUserInfo(res.user.username, res.user.id);
+        // Remove localStorage settings when logging in
+        // These are to persist UI/account preferences for non-authenticated users
+        // After logging in and removing the below items, a call to express/postgres is made to pull user preferences from the database
+        localStorage.removeItem('parentIsLinks');
+        localStorage.removeItem('parentIsSearch');
+        localStorage.removeItem('parentIsWeather');
+        localStorage.removeItem('parentIsTodo');
         this.loading = false;
         this.router.navigate(['']);
       })
@@ -134,6 +141,13 @@ export class LoginComponent {
       .signUp(this.userEmail, this.userPassword, this.username)
       .then((res: any) => {
         this.authService.setUserInfo(res.user.username, res.user.id);
+        // Remove localStorage settings when logging in
+        // These are to persist UI/account preferences for non-authenticated users
+        // After logging in and removing the below items, a call to express/postgres is made to pull user preferences from the database
+        localStorage.removeItem('parentIsLinks');
+        localStorage.removeItem('parentIsSearch');
+        localStorage.removeItem('parentIsWeather');
+        localStorage.removeItem('parentIsTodo');
         this.loading = false;
         this.router.navigate(['']);
       })

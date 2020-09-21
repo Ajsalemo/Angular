@@ -54,14 +54,22 @@ export class HomeBackgroundComponent implements OnInit {
     this.currentUser = localStorage.getItem('user');
     this.currentUserId = localStorage.getItem('userId');
     this.optionalUsername = localStorage.getItem('optionalUsername');
-    // If there is no curent user, then set the booleans for the slider preferences back to true(which is the default)
+    // If the respective localStorage item doesn't exist, then set the booleans for the slider preferences back to true(which is the default)
     // This is to reset them upon logout of a user
     // Doing this only when a user is logged in also prevents the sliders from 'flapping' when changing preferences when logged in
-    if (!this.currentUser || this.currentUser === '') {
-      this.parentIsLinks = true;
-      this.parentIsSearch = true;
-      this.parentIsWeather = true;
-      this.parentIsTodo = true;
+    if (!this.currentUserId || this.currentUserId === '') {
+      this.parentIsLinks = !localStorage.getItem('parentIsLinks')
+        ? true
+        : localStorage.getItem('parentIsLinks') === 'true';
+      this.parentIsSearch = !localStorage.getItem('parentIsSearch')
+        ? true
+        : localStorage.getItem('parentIsSearch') === 'true';
+      this.parentIsWeather = !localStorage.getItem('parentIsWeather')
+        ? true
+        : localStorage.getItem('parentIsWeather') === 'true';
+      this.parentIsTodo = !localStorage.getItem('parentIsTodo')
+        ? true
+        : localStorage.getItem('parentIsLinks') === 'true';
       this.todos = [];
     }
   }
@@ -82,6 +90,23 @@ export class HomeBackgroundComponent implements OnInit {
             this.router.navigate(['']);
           }
         });
+    } else {
+      // If the respective localStorage item doesn't exist, then set the booleans for the slider preferences back to true(which is the default)
+      // This is to reset them upon logout of a user
+      // Doing this only when a user is logged in also prevents the sliders from 'flapping' when changing preferences when logged in
+
+      this.parentIsLinks = !localStorage.getItem('parentIsLinks')
+        ? true
+        : localStorage.getItem('parentIsLinks') === 'true';
+      this.parentIsSearch = !localStorage.getItem('parentIsSearch')
+        ? true
+        : localStorage.getItem('parentIsSearch') === 'true';
+      this.parentIsWeather = !localStorage.getItem('parentIsWeather')
+        ? true
+        : localStorage.getItem('parentIsWeather') === 'true';
+      this.parentIsTodo = !localStorage.getItem('parentIsTodo')
+        ? true
+        : localStorage.getItem('parentIsLinks') === 'true';
     }
   }
 
