@@ -2,11 +2,22 @@
   {{ navbarMenuText }}
 </button>
 <mat-menu #menu="matMenu" class="navbar-links-menu">
-  <a mat-menu-item class="navbar-links-menu-item" href="#"
-    ><fa-icon [icon]="faChrome" class="navbar-links-menu-icons"></fa-icon>Chrome
+  <a
+    mat-menu-item
+    class="navbar-links-menu-item"
+    href="https://www.google.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    ><fa-icon [icon]="faChrome" class="navbar-links-menu-icons"></fa-icon>New
     tab</a
   >
-  <a mat-menu-item class="navbar-links-menu-item" href="#">
+  <a
+    mat-menu-item
+    class="navbar-links-menu-item"
+    href="https://about.google/intl/en/products/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     <fa-icon [icon]="faTh" class="navbar-links-menu-icons"></fa-icon>Apps
   </a>
 </mat-menu>

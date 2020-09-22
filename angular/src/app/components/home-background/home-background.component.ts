@@ -69,7 +69,7 @@ export class HomeBackgroundComponent implements OnInit {
         : localStorage.getItem('parentIsWeather') === 'true';
       this.parentIsTodo = !localStorage.getItem('parentIsTodo')
         ? true
-        : localStorage.getItem('parentIsLinks') === 'true';
+        : localStorage.getItem('parentIsTodo') === 'true';
       this.todos = [];
     }
   }
@@ -106,7 +106,7 @@ export class HomeBackgroundComponent implements OnInit {
         : localStorage.getItem('parentIsWeather') === 'true';
       this.parentIsTodo = !localStorage.getItem('parentIsTodo')
         ? true
-        : localStorage.getItem('parentIsLinks') === 'true';
+        : localStorage.getItem('parentIsTodo') === 'true';
     }
   }
 
