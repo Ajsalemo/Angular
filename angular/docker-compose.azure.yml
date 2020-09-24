@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  angular:
+    image: ansalemocontainerregistry.azurecr.io/angular-frontend:latest
+    ports:
+      - "8080:8080"
+    
+  postgres:
+    container_name: postgres-container
+    env_file: "./../server/.env"
+    ports:
+      - "5432:5432"
+    
+  node:
+    image: ansalemocontainerregistry.azurecr.io/node-container:latest
+    ports:
+      - "3000:3000"
+    environment:
+      WAIT_HOSTS: postgres:5432
+      WAIT_HOSTS_TIMEOUT: 60
