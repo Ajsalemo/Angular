@@ -19,7 +19,7 @@ export class HomeBackgroundComponent implements OnInit {
     backgroundURL: string;
   }[];
 
-  defaultImage: string = '../../../assets/images/monday.jpg';
+  defaultImage: string = '../../../assets/images/blur.jpg';
   currentDay: string = moment().format('dddd').toLocaleLowerCase();
   imageLocation: string = '../../../assets/images/';
   authorToDisplay: string = '';
