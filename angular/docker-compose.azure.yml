@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     
   postgres:
-    container_name: postgres-container
+    image: postgres:latest
     env_file: "./../server/.env"
     ports:
       - "5432:5432"

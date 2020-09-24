@@ -91,7 +91,7 @@ app.get("/findUserById/:id", findAccountById(models.User));
 // Create and sync the database through Sequelize
 // Afterwards, start the express server
 models.sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     console.log("Postgres has started and synced");
     app.listen(port, () => {
