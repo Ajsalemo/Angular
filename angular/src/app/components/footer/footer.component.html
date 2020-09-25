@@ -134,6 +134,22 @@
             <h4 class="footer-menu-general-sub-header">
               See a new photo each day
             </h4>
+            <div>
+              <ul>
+                <li
+                  *ngFor="let backgroundImages of backgroundImagesAvailable"
+                  class="footer-photos"
+                >
+                  <img
+                    height="75"
+                    width="100"
+                    src="{{ backgroundImagePath }}{{
+                      backgroundImages.backgroundURL
+                    }}"
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </mat-menu>

@@ -1,8 +1,9 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AccountService } from '../../../services/findaccount.service';
+import { BackgroundImageService } from '../../../services/background-images.service';
 
 @Component({
   selector: 'component-footer',
@@ -26,11 +27,14 @@ export class FooterComponent {
   photoOpenState: boolean = false;
   isLoading: boolean = false;
   navigationSubscription: any;
+  backgroundImagesAvailable: any;
+  backgroundImagePath: string = '../../../assets/images/';
 
   constructor(
     private authServiceFooter: AuthService,
     private accountServiceFooter: AccountService,
-    private router: Router
+    private router: Router,
+    private backgroundImageService: BackgroundImageService
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
@@ -45,6 +49,11 @@ export class FooterComponent {
     weather: new FormControl(''),
     todo: new FormControl(''),
   });
+
+  displayAllBackgroundImages(): void {
+    this.backgroundImagesAvailable = this.backgroundImageService.getBackgroundImages();
+    console.log(this.backgroundImagesAvailable);
+  }
 
   // Toggles the visibility of the 'General' section within the personalization popup menu
   toggleGeneralState(e: any): void {
@@ -127,5 +136,9 @@ export class FooterComponent {
     this.parentIsWeather = true;
     this.parentIsTodo = true;
     this.todos = [];
+  }
+
+  ngOnInit(): void {
+    this.displayAllBackgroundImages();
   }
 }
