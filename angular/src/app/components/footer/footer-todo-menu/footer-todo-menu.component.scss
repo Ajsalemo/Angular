@@ -4,21 +4,17 @@
 
 .footer-todo {
   &-text {
-    color: $white-text;
     @include fontSizeAndWeight(1rem);
+    color: $white-text;
   }
   &-menu {
-    display: flex;
-    align-items: flex-end;
-    height: 15rem;
+    @include flexBoxMixin($alignItems: flex-end);
+    @include heightAndWidth(15rem, 20rem);
     max-width: none !important;
-    width: 20rem;
     background-color: $main-theme-background !important;
     color: #808080;
-
     .mat-menu-content {
-      height: 100%;
-      width: 100%;
+      @include heightAndWidth(100%, 100%);
     }
     .mat-form-field {
       color: $white-text;
@@ -27,7 +23,7 @@
         color: $white-text !important;
       }
       &-flex {
-        align-items: flex-end;
+        @include flexBoxMixin($alignItems: flex-end);
       }
     }
     &-todo-button {
@@ -37,8 +33,7 @@
       margin: 0 auto;
     }
     &-send-btn {
-      display: flex;
-      align-items: flex-end;
+      @include flexBoxMixin($alignItems: flex-end);
       &:hover {
         cursor: pointer;
       }
@@ -47,17 +42,14 @@
       color: $white-text !important;
     }
     &-parent-div {
+      @include flexBoxMixin($justifyContent: center, $flexDirection: column);
       height: 50%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
     }
     &-checkbox {
       color: $white-text;
       padding-right: 0.2rem;
       &-form {
-        display: flex;
-        align-items: center;
+        @include flexBoxMixin($alignItems: center);
         word-break: break-all;
         height: fit-content;
       }
@@ -82,8 +74,7 @@
       list-style-type: none;
       padding: 0 0 0.2rem 1rem;
       &-list-items {
-        display: flex;
-        justify-content: space-between;
+        @include flexBoxMixin($justifyContent: space-between);
         &:hover {
           .footer-todo-menu-todos-delete-btn {
             display: initial;
@@ -94,9 +85,8 @@
         display: initial;
       }
       &-error-span {
+        @include flexBoxMixin($justifyContent: flex-start);
         font-size: 0.7rem;
-        display: flex;
-        justify-content: flex-start;
         padding-left: 1rem;
         color: #ff0000;
       }
@@ -111,18 +101,17 @@
     }
   }
   &-header {
-    color: $white-text;
     @include fontSizeAndWeight(1.3rem);
+    color: $white-text;
     padding: 1rem;
   }
   &-sub-menu {
     background-color: #403c3c;
     width: 12rem;
     &-text {
+      @include flexBoxMixin($alignItems: center);
       color: $white-text;
       height: 2rem;
-      display: flex;
-      align-items: center;
       &:hover {
         background-color: #585858 !important;
       }

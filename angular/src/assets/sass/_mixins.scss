@@ -35,3 +35,19 @@
   margin: 0;
   color: $white-text;
 }
+
+@mixin flexBoxMixin(
+  $flexDirection: initial,
+  $justifyContent: initial,
+  $alignItems: initial
+) {
+  display: flex;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+@mixin heightAndWidth($height, $width) {
+  height: $height;
+  width: $width;
+}

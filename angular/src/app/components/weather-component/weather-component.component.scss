@@ -45,8 +45,7 @@
     background-color: $main-theme-background;
     padding: 0 1rem;
     &-loc-div {
-      display: flex;
-      flex-direction: column;
+      @include flexBoxMixin($flexDirection: column);
       color: $white-text;
       text-align: left;
     }
@@ -57,28 +56,26 @@
       @include fontSizeAndWeight(1.2rem, 200);
     }
     &-weather-image {
-      margin-top: 1rem;
       @include weatherImageDisplay(2.8rem);
+      margin-top: 1rem;
     }
     &-temperature {
+      @include fontSizeAndWeight(3.8rem, 400);
       color: $white-text;
       padding-left: 0.7rem;
-      @include fontSizeAndWeight(3.8rem, 400);
     }
     &-fiveday {
       &-temp {
-        color: $white-text;
         @include fontSizeAndWeight(0.7rem, 200);
+        color: $white-text;
       }
       &-icon {
         height: 1.5rem;
       }
       &-forecast-div {
-        padding: 0.5rem;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        @include flexBoxMixin($flexDirection: row, $alignItems: center);
         @include fadeInOut;
+        padding: 0.5rem;
         &:hover {
           background-color: #797979;
           cursor: pointer;
