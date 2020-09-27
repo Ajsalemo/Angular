@@ -139,13 +139,16 @@
                 <li
                   *ngFor="let backgroundImages of backgroundImagesAvailable"
                   class="footer-photos-images"
+                  (click)="$event.stopPropagation()"
                 >
                   <img
                     height="75"
                     width="100"
-                    src="{{ backgroundImagePath }}{{
+                    lazyLoad="{{ backgroundImagePath }}{{
                       backgroundImages.backgroundURL
                     }}"
+                    defaultImage="{{ backgroundImagePath }}blur.jpg"
+                    (click)="setTodaysBackgroundImage($event)"
                   />
                 </li>
               </ul>

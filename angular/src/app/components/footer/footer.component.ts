@@ -52,7 +52,10 @@ export class FooterComponent {
 
   displayAllBackgroundImages(): void {
     this.backgroundImagesAvailable = this.backgroundImageService.getBackgroundImages();
-    console.log(this.backgroundImagesAvailable);
+  }
+
+  setTodaysBackgroundImage(e): void {
+    console.log(e.target.attributes[4].value)
   }
 
   // Toggles the visibility of the 'General' section within the personalization popup menu
