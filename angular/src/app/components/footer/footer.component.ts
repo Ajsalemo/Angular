@@ -22,6 +22,7 @@ export class FooterComponent {
   @Input() parentIsWeather: boolean;
   @Input() parentIsTodo: boolean;
   @Input() todos: any[] = [];
+  customBackgroundImageCheck = localStorage.getItem('customBackgroundImageURL');
   panelOpenState: boolean = false;
   generalOpenState: boolean = true;
   photoOpenState: boolean = false;
@@ -59,6 +60,14 @@ export class FooterComponent {
   setTodaysBackgroundImage(e: any): void {
     const customBackgroundImageURL = e.target.attributes[4].value;
     localStorage.setItem('customBackgroundImageURL', customBackgroundImageURL);
+    this.customBackgroundImageCheck = localStorage.getItem('customBackgroundImageURL');
+    // Reinitialize the component
+    this.router.navigate(['']);
+  }
+
+  removeCustomBackgroundImage(): void {
+    localStorage.removeItem('customBackgroundImageURL');
+    this.customBackgroundImageCheck = '';
     // Reinitialize the component
     this.router.navigate(['']);
   }

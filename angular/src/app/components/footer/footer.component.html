@@ -134,6 +134,14 @@
             <h4 class="footer-menu-general-sub-header">
               See a new photo each day
             </h4>
+            <button
+              mat-button
+              (click)="removeCustomBackgroundImage(); $event.stopPropagation()"
+              (change)="customBackgroundImageCheck"
+              *ngIf="customBackgroundImageCheck"
+            >
+              Remove the current custom background
+            </button>
             <div class="footer-photos-div">
               <ul>
                 <li
