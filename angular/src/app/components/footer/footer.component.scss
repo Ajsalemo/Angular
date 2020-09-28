@@ -143,6 +143,9 @@
       list-style-type: none;
       display: inline-flex;
       padding-left: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

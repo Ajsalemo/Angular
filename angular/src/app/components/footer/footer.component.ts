@@ -54,8 +54,13 @@ export class FooterComponent {
     this.backgroundImagesAvailable = this.backgroundImageService.getBackgroundImages();
   }
 
-  setTodaysBackgroundImage(e): void {
-    console.log(e.target.attributes[4].value)
+  // Function to pull and set the personal background image URL
+  // The home-background component will pull this value for localStorage to set for the background for the user
+  setTodaysBackgroundImage(e: any): void {
+    const customBackgroundImageURL = e.target.attributes[4].value;
+    localStorage.setItem('customBackgroundImageURL', customBackgroundImageURL);
+    // Reinitialize the component
+    this.router.navigate(['']);
   }
 
   // Toggles the visibility of the 'General' section within the personalization popup menu

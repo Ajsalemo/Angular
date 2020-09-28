@@ -28,6 +28,9 @@ export class HomeBackgroundComponent implements OnInit {
   currentUser = localStorage.getItem('user');
   currentUserId = localStorage.getItem('userId');
   optionalUsername = localStorage.getItem('optionalUsername');
+  customBackgroundImageToDisplay = localStorage.getItem(
+    'customBackgroundImageURL'
+  );
   navigationSubscription: any;
   parentIsLinks: boolean = true;
   parentIsSearch: boolean = true;
@@ -46,6 +49,7 @@ export class HomeBackgroundComponent implements OnInit {
       if (e instanceof NavigationEnd) {
         this.reIntializeComponent();
         this.retrieveUserAccountInformation();
+        this.rotatingDailyImage();
       }
     });
   }
@@ -115,18 +119,27 @@ export class HomeBackgroundComponent implements OnInit {
   rotatingDailyImage(): void {
     // Call the service and set it to a variable
     this.backgroundImageMetaData = this.backgroundImageService.getBackgroundImages();
-
-    // The current day of the week is grabbed and converted to lowercase through the 'currentDay' variable
-    // The 'currentDay' variable is compared to the image names in the 'defaultImageArray'
-    // If these two strings match, the loop returns with the matching image name and sets it for that day
-    for (let i = 0; i < this.backgroundImageMetaData.length; i++) {
-      if (
-        `${this.currentDay}.jpg` ===
-        this.backgroundImageMetaData[i].backgroundURL
-      ) {
-        this.authorToDisplay = this.backgroundImageMetaData[i].author;
-        this.photoURL = this.backgroundImageMetaData[i].photoURL;
-        this.backgroundImageToDisplay = `${this.imageLocation}/${this.backgroundImageMetaData[i].backgroundURL}`;
+    const customBackgroundImageToDisplay = localStorage.getItem(
+      'customBackgroundImageURL'
+    );
+    // If the user chooses a custom background image in the footer menu
+    // Then display that image
+    if (customBackgroundImageToDisplay) {
+      this.backgroundImageToDisplay = customBackgroundImageToDisplay;
+    } else {
+      // Else, if the custom users the 24hour rotation image - then do the following
+      // The current day of the week is grabbed and converted to lowercase through the 'currentDay' variable
+      // The 'currentDay' variable is compared to the image names in the 'defaultImageArray'
+      // If these two strings match, the loop returns with the matching image name and sets it for that day
+      for (let i = 0; i < this.backgroundImageMetaData.length; i++) {
+        if (
+          `${this.currentDay}.jpg` ===
+          this.backgroundImageMetaData[i].backgroundURL
+        ) {
+          this.authorToDisplay = this.backgroundImageMetaData[i].author;
+          this.photoURL = this.backgroundImageMetaData[i].photoURL;
+          this.backgroundImageToDisplay = `${this.imageLocation}/${this.backgroundImageMetaData[i].backgroundURL}`;
+        }
       }
     }
   }
