@@ -126,19 +126,27 @@ export class HomeBackgroundComponent implements OnInit {
     // Then display that image
     if (customBackgroundImageToDisplay) {
       this.backgroundImageToDisplay = customBackgroundImageToDisplay;
+      // Loop through the backgroundImage meta data to compare if the current background photo matches the photo metadata
+      for (let i = 0; i < this.backgroundImageMetaData.length; i++) {
+        // If there is a match, set the author to the correct photo
+        // This while only execute if the user is manually selecting a background image
+        if (customBackgroundImageToDisplay.includes(this.backgroundImageMetaData[i].backgroundURL)) {
+          this.authorToDisplay = this.backgroundImageMetaData[i].author;
+        }
+      }
     } else {
       // Else, if the custom users the 24hour rotation image - then do the following
       // The current day of the week is grabbed and converted to lowercase through the 'currentDay' variable
       // The 'currentDay' variable is compared to the image names in the 'defaultImageArray'
       // If these two strings match, the loop returns with the matching image name and sets it for that day
-      for (let i = 0; i < this.backgroundImageMetaData.length; i++) {
+      for (let j = 0; j < this.backgroundImageMetaData.length; j++) {
         if (
           `${this.currentDay}.jpg` ===
-          this.backgroundImageMetaData[i].backgroundURL
+          this.backgroundImageMetaData[j].backgroundURL
         ) {
-          this.authorToDisplay = this.backgroundImageMetaData[i].author;
-          this.photoURL = this.backgroundImageMetaData[i].photoURL;
-          this.backgroundImageToDisplay = `${this.imageLocation}/${this.backgroundImageMetaData[i].backgroundURL}`;
+          this.authorToDisplay = this.backgroundImageMetaData[j].author;
+          this.photoURL = this.backgroundImageMetaData[j].photoURL;
+          this.backgroundImageToDisplay = `${this.imageLocation}/${this.backgroundImageMetaData[j].backgroundURL}`;
         }
       }
     }
