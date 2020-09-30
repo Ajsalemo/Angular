@@ -51,7 +51,7 @@
       }
       &-no-user {
         @extend .footer-menu-login-menu;
-        @include flexBoxMixin($flexDirection: column-reverse);
+        @include flexBoxMixin($flexDirection: column-reverse, $justifyContent: space-between);
         width: 7rem;
         &-btn {
           padding-left: 1rem !important;
