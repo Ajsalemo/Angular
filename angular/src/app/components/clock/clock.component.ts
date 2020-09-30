@@ -9,6 +9,7 @@ export class ClockComponent implements OnInit {
   @Input() username: string;
   currentTimeToDisplay: Date = new Date();
   timeOfDayGreeting: string = '';
+  isNameEditable: boolean = false;
   // Update the component every minute
   constructor() {
     setInterval(() => {
@@ -43,6 +44,11 @@ export class ClockComponent implements OnInit {
     }
     // Between 6PM and 3AM say 'Good evening'
     return (this.timeOfDayGreeting = 'Good evening');
+  }
+
+  editUsername(): void {
+    this.isNameEditable = !this.isNameEditable;
+    console.log(this.isNameEditable)
   }
 
   ngOnInit(): void {

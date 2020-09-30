@@ -1,2 +1,12 @@
-{{ currentTimeToDisplay | date:'h:mm' }}
-<h1 class="clock-username-text">{{ timeOfDayGreeting }}{{ username }}</h1>
+{{ currentTimeToDisplay | date: "h:mm" }}
+<h1 class="clock-username-text">
+  {{ timeOfDayGreeting }}
+  <span *ngIf="!isNameEditable">{{ username}}</span>
+  <!-- ------------------------ TODO ----------------------------- -->
+  <!-- Change this so the form styling matches the normal text of the username when the form is editable -->
+  <!-- Change the form to a angular reactive-form -->
+  <form *ngIf="isNameEditable">
+      <input value="{{ username }}" type="text" />
+  </form>
+  <button mat-button><mat-icon (click)="editUsername()">more_horiz</mat-icon></button>
+</h1>
