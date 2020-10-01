@@ -16,6 +16,8 @@
         type="text"
         class="clock-editable-username"
         formControlName="editUsername"
+        (blur)="submitEditUsernameForm(usernameGroup.value)"
+        (keyup.enter)="submitEditUsernameForm(usernameGroup.value)"
       />
     </mat-form-field>
   </form>

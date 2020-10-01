@@ -60,7 +60,10 @@ export class ClockComponent implements OnInit {
 
   editUsername(): void {
     this.isNameEditable = !this.isNameEditable;
-    console.log(this.isNameEditable);
+  }
+
+  submitEditUsernameForm(data: { editUsername: string }): void {
+    console.log(data.editUsername)
   }
 
   ngOnInit(): void {
