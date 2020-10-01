@@ -8,4 +8,20 @@
       @include loginAndGenericDisplay(3.7rem, 400);
     }
   }
+  &-editable {
+    &-form {
+      display: inline-flex;
+    }
+    &-username {
+      background-color: transparent;
+      border: 0;
+      color: #fff;
+    }
+  }
 }
+
+.mat-form-field-infix {
+  border-top: 0 !important;
+  padding: 0 !important;
+}
+

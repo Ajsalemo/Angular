@@ -1,12 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'clock-component',
   templateUrl: './clock.component.html',
   styleUrls: ['./clock.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ClockComponent implements OnInit {
-  @Input() username: string;
+  @Input() username: any;
+  defaultCurrentUsernameValue = localStorage.getItem('user');
+  defaultOptionalUsernameValue = localStorage.getItem('optionalUsername');
   currentTimeToDisplay: Date = new Date();
   timeOfDayGreeting: string = '';
   isNameEditable: boolean = false;
@@ -16,6 +20,14 @@ export class ClockComponent implements OnInit {
       this.currentTimeToDisplay = new Date();
     }, 10000);
   }
+
+  usernameGroup = new FormGroup({
+    editUsername: new FormControl(
+      this.defaultCurrentUsernameValue || this.defaultOptionalUsernameValue,
+      [Validators.required, Validators.minLength(2), Validators.maxLength(255)]
+    ),
+  });
+
   // A Date function which accepts an argument to set 'hours' for the Date constructor
   checkTimeOfDay(hours: number) {
     return new Date(
@@ -34,21 +46,21 @@ export class ClockComponent implements OnInit {
       this.currentTimeToDisplay > this.checkTimeOfDay(4) &&
       this.currentTimeToDisplay < this.checkTimeOfDay(11)
     ) {
-      return (this.timeOfDayGreeting = 'Good morning');
+      return (this.timeOfDayGreeting = 'Good morning,');
       // If the time is between 11AM and 6PM, say 'Good afternoon'
     } else if (
       this.currentTimeToDisplay > this.checkTimeOfDay(11) &&
       this.currentTimeToDisplay < this.checkTimeOfDay(18)
     ) {
-      return (this.timeOfDayGreeting = 'Good afternoon');
+      return (this.timeOfDayGreeting = 'Good afternoon,');
     }
     // Between 6PM and 3AM say 'Good evening'
-    return (this.timeOfDayGreeting = 'Good evening');
+    return (this.timeOfDayGreeting = 'Good evening,');
   }
 
   editUsername(): void {
     this.isNameEditable = !this.isNameEditable;
-    console.log(this.isNameEditable)
+    console.log(this.isNameEditable);
   }
 
   ngOnInit(): void {

@@ -12,18 +12,14 @@
   ></component-navbar>
   <mat-grid-tile>
     <div class="home-username-div-wrapper">
-      <span
-        class="home-username-time"
-        *ngIf="!currentUser && !optionalUsername"
+      <span class="home-username-time" *ngIf="!currentUser && !optionalUsername"
         ><login-component></login-component
       ></span>
       <span class="home-username-time" *ngIf="currentUser"
-        ><clock-component username=", {{ currentUser }}"></clock-component
+        ><clock-component username=" {{ currentUser }}"></clock-component
       ></span>
       <span class="home-username-time" *ngIf="optionalUsername"
-        ><clock-component
-          username=", {{ optionalUsername }}"
-        ></clock-component
+        ><clock-component username=" {{ optionalUsername }}"></clock-component
       ></span>
     </div>
   </mat-grid-tile>
