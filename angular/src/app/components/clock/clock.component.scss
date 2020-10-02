@@ -3,14 +3,22 @@
 
 .clock {
   &-username-text {
+    display: flex;
+    flex-direction: column;
     @include loginAndGenericDisplay(2rem, 400);
     @media (min-width: $x-sm-breakpoint) {
       @include loginAndGenericDisplay(3.7rem, 400);
     }
+    @media (min-width: $x-lg-breakpoint) {
+      display: block;
+    }
   }
   &-editable {
     &-form {
-      display: inline-flex;
+      @include flexBoxMixin($justifyContent: center);
+      @media (min-width: $x-lg-breakpoint) {
+        display: inline-flex;
+      }
     }
     &-username {
       background-color: transparent;
@@ -24,4 +32,3 @@
   border-top: 0 !important;
   padding: 0 !important;
 }
-

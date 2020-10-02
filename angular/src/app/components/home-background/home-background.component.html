@@ -16,7 +16,10 @@
         ><login-component></login-component
       ></span>
       <span class="home-username-time" *ngIf="currentUser"
-        ><clock-component username=" {{ currentUser }}"></clock-component
+        ><clock-component
+          username=" {{ currentUser }}"
+          [currentUserId]="currentUserId"
+        ></clock-component
       ></span>
       <span class="home-username-time" *ngIf="optionalUsername"
         ><clock-component username=" {{ optionalUsername }}"></clock-component

@@ -98,7 +98,6 @@ export class HomeBackgroundComponent implements OnInit {
       // If the respective localStorage item doesn't exist, then set the booleans for the slider preferences back to true(which is the default)
       // This is to reset them upon logout of a user
       // Doing this only when a user is logged in also prevents the sliders from 'flapping' when changing preferences when logged in
-
       this.parentIsLinks = !localStorage.getItem('parentIsLinks')
         ? true
         : localStorage.getItem('parentIsLinks') === 'true';

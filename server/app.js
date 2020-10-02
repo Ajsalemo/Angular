@@ -14,6 +14,7 @@ const addTodo = require("./controllers/posttodos");
 const getTodo = require("./controllers/gettodos");
 const completeTodo = require("./controllers/completetodo");
 const deleteTodo = require("./controllers/deletetodo");
+const changeUsername = require("./controllers/changeusername");
 
 // Initialize express
 const app = express();
@@ -72,6 +73,8 @@ app.post("/addTodo", addTodo(models.User, models.Todos));
 app.post("/completetodo", completeTodo(models.User, models.Todos));
 // Delete a daily task/todo
 app.post("/deletetodo", deleteTodo(models.User, models.Todos));
+// Change the current user's name
+app.post("/changeusername", changeUsername(models.User));
 // Log out after being authenticated
 app.get("/logout", (req, res) => {
   req.logOut();

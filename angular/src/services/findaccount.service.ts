@@ -23,4 +23,13 @@ export class AccountService {
       })
       .toPromise();
   }
+
+  changeUsername(username: string, id: string) {
+    return this.http
+      .post('/api/changeusername', {
+        username: username,
+        id: id,
+      })
+      .toPromise();
+  }
 }

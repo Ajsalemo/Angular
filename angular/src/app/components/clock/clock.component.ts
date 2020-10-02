@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../../../services/findaccount.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'clock-component',
@@ -9,16 +11,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ClockComponent implements OnInit {
   @Input() username: any;
+  @Input() currentUserId: any;
   defaultCurrentUsernameValue = localStorage.getItem('user');
   defaultOptionalUsernameValue = localStorage.getItem('optionalUsername');
   currentTimeToDisplay: Date = new Date();
   timeOfDayGreeting: string = '';
   isNameEditable: boolean = false;
+  navigationSubscription: any;
+
   // Update the component every minute
-  constructor() {
+  constructor(private accountService: AccountService, private router: Router) {
     setInterval(() => {
       this.currentTimeToDisplay = new Date();
     }, 10000);
+
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+      }
+    });
   }
 
   usernameGroup = new FormGroup({
@@ -58,12 +69,25 @@ export class ClockComponent implements OnInit {
     return (this.timeOfDayGreeting = 'Good evening,');
   }
 
+  // Boolean to switch between the form being editable or not
   editUsername(): void {
     this.isNameEditable = !this.isNameEditable;
   }
 
+  // Change the current users display name/username
+  // Then set the new name to localStorage and change the edit-form boolean to false
   submitEditUsernameForm(data: { editUsername: string }): void {
-    console.log(data.editUsername)
+    this.accountService
+      .changeUsername(data.editUsername, this.currentUserId)
+      .then(() => {
+        this.accountService
+          .getCurrentUser(this.currentUserId)
+          .then((res: any) => {
+            localStorage.setItem('user', res.user.username);
+            this.isNameEditable = false;
+            this.router.navigate(['']);
+          });
+      });
   }
 
   ngOnInit(): void {
