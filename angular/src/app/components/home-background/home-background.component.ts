@@ -129,7 +129,11 @@ export class HomeBackgroundComponent implements OnInit {
       for (let i = 0; i < this.backgroundImageMetaData.length; i++) {
         // If there is a match, set the author to the correct photo
         // This while only execute if the user is manually selecting a background image
-        if (customBackgroundImageToDisplay.includes(this.backgroundImageMetaData[i].backgroundURL)) {
+        if (
+          customBackgroundImageToDisplay.includes(
+            this.backgroundImageMetaData[i].backgroundURL
+          )
+        ) {
           this.authorToDisplay = this.backgroundImageMetaData[i].author;
         }
       }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../../services/findaccount.service';
+import { AuthService } from '../../../services/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -20,7 +21,11 @@ export class ClockComponent implements OnInit {
   navigationSubscription: any;
 
   // Update the component every minute
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(
+    private accountService: AccountService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     setInterval(() => {
       this.currentTimeToDisplay = new Date();
     }, 10000);
@@ -77,17 +82,23 @@ export class ClockComponent implements OnInit {
   // Change the current users display name/username
   // Then set the new name to localStorage and change the edit-form boolean to false
   submitEditUsernameForm(data: { editUsername: string }): void {
-    this.accountService
-      .changeUsername(data.editUsername, this.currentUserId)
-      .then(() => {
-        this.accountService
-          .getCurrentUser(this.currentUserId)
-          .then((res: any) => {
-            localStorage.setItem('user', res.user.username);
-            this.isNameEditable = false;
-            this.router.navigate(['']);
-          });
-      });
+    if (this.authService.isAuthenticated()) {
+      this.accountService
+        .changeUsername(data.editUsername, this.currentUserId)
+        .then(() => {
+          this.accountService
+            .getCurrentUser(this.currentUserId)
+            .then((res: any) => {
+              localStorage.setItem('user', res.user.username);
+              this.isNameEditable = false;
+              this.router.navigate(['']);
+            });
+        });
+    } else {
+      localStorage.setItem('optionalUsername', data.editUsername);
+      this.isNameEditable = false;
+      this.router.navigate(['']);
+    }
   }
 
   ngOnInit(): void {

@@ -18,7 +18,14 @@ export class AuthService {
   isAuthenticated(): Boolean {
     const userName = localStorage.getItem('user');
     const userId = localStorage.getItem('userId');
-    if (userName && userId !== '' && userName && userId) {
+    if (
+      userName &&
+      userId !== '' &&
+      userName !== null &&
+      userId !== null &&
+      localStorage.hasOwnProperty('user') &&
+      localStorage.hasOwnProperty('userId')
+    ) {
       return true;
     }
     return false;
