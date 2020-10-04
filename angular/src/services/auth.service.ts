@@ -23,8 +23,6 @@ export class AuthService {
       userId !== '' &&
       userName !== null &&
       userId !== null &&
-      localStorage.hasOwnProperty('user') &&
-      localStorage.hasOwnProperty('userId')
     ) {
       return true;
     }
