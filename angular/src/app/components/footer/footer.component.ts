@@ -58,7 +58,7 @@ export class FooterComponent {
   // Function to pull and set the personal background image URL
   // The home-background component will pull this value for localStorage to set for the background for the user
   setTodaysBackgroundImage(e: any): void {
-    const customBackgroundImageURL = e.target.attributes[4].value;
+    const customBackgroundImageURL = e.target.attributes.src.value;
     localStorage.setItem('customBackgroundImageURL', customBackgroundImageURL);
     this.customBackgroundImageCheck = localStorage.getItem('customBackgroundImageURL');
     // Reinitialize the component
