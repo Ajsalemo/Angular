@@ -9,6 +9,11 @@ const routes: Routes = [
     pathMatch: 'full',
     runGuardsAndResolvers: 'always' 
   },
+  { 
+    // Fallback route for non matching routes
+    path: '**', 
+    redirectTo: ''
+  },
 ];
 
 @NgModule({
