@@ -12,7 +12,9 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres-container
-    env_file: "./../server/.env"
+    environment: 
+      POSTGRES_USER: ${AZURE_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${AZURE_POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     
