@@ -156,7 +156,7 @@
         <span class="login-error-message">{{ passwordErrorMessage }}</span>
       </mat-form-field>
       <div class="login-parent-btn-div">
-        <button mat-button (click)="stepper.reset()" [disabled]="loading">
+        <button mat-button (click)="stepper.reset()" [disabled]="loading" type="button">
           Reset
         </button>
         <button
@@ -166,7 +166,7 @@
         >
           Submit
         </button>
-        <button mat-button matStepperPrevious [disabled]="loading">
+        <button mat-button matStepperPrevious [disabled]="loading" type="button">
           Previous
         </button>
       </div>
