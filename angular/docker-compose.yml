@@ -13,8 +13,9 @@ services:
     image: postgres:latest
     container_name: postgres-container
     environment: 
-      POSTGRES_USER: ${AZURE_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${AZURE_POSTGRES_PASSWORD}
+      POSTGRES_USER: $${AZURE_POSTGRES_USER}
+      POSTGRES_PASSWORD: $${AZURE_POSTGRES_PASSWORD}
+      POSTGRES_DB: $${AZURE_POSTGRES_DB}
     ports:
       - "5432:5432"
     
